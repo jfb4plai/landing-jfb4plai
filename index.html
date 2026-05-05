@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jean-François Beguin — Outils pédagogiques PLAI</title>
+  <meta name="description" content="Des outils numériques fondés sur la recherche, conçus pour les enseignants de la Fédération Wallonie-Bruxelles. Par Jean-François Beguin, PLAI." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand:    #0a9370;
+      --brand-dk: #0c765b;
+      --brand-lt: #ccfbef;
+      --brand-bg: #f0fdf9;
+      --accent:   #f97316;
+      --gray-50:  #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--gray-800);
+      background: #fff;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--gray-100);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-logo span { font-weight: 700; color: var(--gray-900); font-size: 1rem; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a { font-size: 0.875rem; color: var(--gray-500); font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--brand); }
+    .btn-nav {
+      background: var(--brand); color: #fff;
+      padding: 0.5rem 1.25rem; border-radius: 8px;
+      font-size: 0.875rem; font-weight: 600;
+      transition: background .2s;
+    }
+    .btn-nav:hover { background: var(--brand-dk); }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--brand-bg) 0%, #fff 60%);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--brand-lt); color: var(--brand-dk);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+      padding: 0.35rem 0.9rem; border-radius: 999px; margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 800; line-height: 1.15;
+      color: var(--gray-900); max-width: 780px; margin: 0 auto 1.25rem;
+    }
+    .hero h1 em { font-style: normal; color: var(--brand); }
+    .hero p {
+      font-size: 1.125rem; color: var(--gray-500);
+      max-width: 600px; margin: 0 auto 2.5rem; line-height: 1.7;
+    }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--brand); color: #fff;
+      padding: .875rem 2rem; border-radius: 10px;
+      font-weight: 600; font-size: 1rem;
+      transition: background .2s, transform .15s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: var(--brand-dk); transform: translateY(-1px); }
+    .btn-secondary {
+      background: #fff; color: var(--gray-700);
+      border: 1.5px solid var(--gray-200);
+      padding: .875rem 2rem; border-radius: 10px;
+      font-weight: 600; font-size: 1rem;
+      transition: border-color .2s, transform .15s;
+    }
+    .btn-secondary:hover { border-color: var(--brand); color: var(--brand); transform: translateY(-1px); }
+
+    /* ── SECTION ── */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--brand); margin-bottom: .75rem;
+    }
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 700;
+      color: var(--gray-900); margin-bottom: .75rem;
+    }
+    .section-sub { font-size: 1rem; color: var(--gray-500); max-width: 520px; line-height: 1.7; }
+
+    /* ── APPROCHE ── */
+    .approche { background: var(--gray-50); }
+    .approche-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .approche-card {
+      background: #fff; border: 1px solid var(--gray-200);
+      border-radius: 14px; padding: 1.5rem;
+    }
+    .approche-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: var(--brand-bg); display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; margin-bottom: 1rem;
+    }
+    .approche-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: .5rem; }
+    .approche-card p { font-size: 0.875rem; color: var(--gray-500); line-height: 1.6; }
+
+    /* ── OUTILS ── */
+    .outils-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+    .outil-card {
+      border: 1.5px solid var(--gray-200); border-radius: 16px;
+      padding: 2rem; transition: box-shadow .2s, border-color .2s;
+      position: relative; overflow: hidden;
+    }
+    .outil-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.08); border-color: var(--brand-lt); }
+    .outil-card.featured { border-color: var(--brand); background: var(--brand-bg); }
+    .outil-badge {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      padding: .25rem .7rem; border-radius: 999px; margin-bottom: 1rem;
+      display: inline-block;
+    }
+    .badge-live { background: var(--brand-lt); color: var(--brand-dk); }
+    .badge-dev  { background: var(--gray-100); color: var(--gray-500); }
+    .outil-icon { font-size: 2rem; margin-bottom: .75rem; }
+    .outil-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: .5rem; }
+    .outil-card p  { font-size: 0.875rem; color: var(--gray-500); line-height: 1.65; margin-bottom: 1.25rem; }
+    .outil-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+    .tag {
+      font-size: 0.7rem; font-weight: 500;
+      background: #fff; border: 1px solid var(--gray-200);
+      padding: .2rem .6rem; border-radius: 999px; color: var(--gray-500);
+    }
+    .outil-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.875rem; font-weight: 600; color: var(--brand);
+    }
+    .outil-link:hover { text-decoration: underline; }
+    .outil-link-disabled { color: var(--gray-400); cursor: default; font-size: 0.875rem; font-weight: 500; }
+
+    /* ── ABOUT ── */
+    .about { background: linear-gradient(135deg, #0e4e3d 0%, var(--brand-dk) 100%); color: #fff; }
+    .about-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .about .section-label { color: var(--brand-lt); }
+    .about .section-title { color: #fff; }
+    .about p { color: rgba(255,255,255,0.8); line-height: 1.75; margin-bottom: 1rem; font-size: 0.95rem; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+    .about-stat { text-align: center; background: rgba(255,255,255,.1); border-radius: 12px; padding: 1.25rem; }
+    .about-stat .num { font-size: 1.75rem; font-weight: 800; color: var(--brand-lt); }
+    .about-stat .lbl { font-size: 0.75rem; color: rgba(255,255,255,.6); margin-top: .25rem; }
+    .about-riss {
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+      border-radius: 12px; padding: 1.25rem;
+    }
+    .about-riss .label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--brand-lt); margin-bottom: .5rem; }
+    .about-riss p { font-size: 0.8rem; color: rgba(255,255,255,.7); margin: 0; }
+
+    /* ── CONTACT ── */
+    .contact-box {
+      max-width: 600px; margin: 3rem auto 0;
+      background: var(--brand-bg); border: 1.5px solid var(--brand-lt);
+      border-radius: 16px; padding: 2rem; text-align: center;
+    }
+    .contact-box h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
+    .contact-box p { font-size: 0.875rem; color: var(--gray-500); margin-bottom: 1.25rem; }
+    .contact-email {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--brand); color: #fff;
+      padding: .75rem 1.5rem; border-radius: 8px; font-weight: 600; font-size: 0.9rem;
+      transition: background .2s;
+    }
+    .contact-email:hover { background: var(--brand-dk); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--gray-900); color: var(--gray-400);
+      padding: 2.5rem; text-align: center; font-size: 0.8rem;
+    }
+    footer strong { color: var(--gray-200); }
+    footer a { color: var(--brand-lt); }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-inner { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <img src="https://retro-actif.vercel.app/plai-logo.jpg" alt="PLAI" />
+      <span>jfb4plai</span>
+    </div>
+    <div class="nav-links">
+      <a href="#approche">L'approche</a>
+      <a href="#outils">Nos outils</a>
+      <a href="#about">À propos</a>
+      <a href="#contact">Contact</a>
+      <a href="https://retroactif.jfb4plai.com" class="btn-nav">Accéder à RetroActif →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">
+    <span>🔬</span> Fondé sur la recherche — Corpus RISS validé
+  </div>
+  <h1>Des outils numériques pour <em>enseigner autrement</em></h1>
+  <p>
+    Des applications conçues avec et pour les enseignants de la Fédération Wallonie-Bruxelles,
+    ancrées dans la recherche scientifique francophone et pensées pour les élèves qui en ont le plus besoin.
+  </p>
+  <div class="hero-cta">
+    <a href="https://retroactif.jfb4plai.com" class="btn-primary">
+      ✨ Découvrir RetroActif
+    </a>
+    <a href="#approche" class="btn-secondary">En savoir plus</a>
+  </div>
+</div>
+
+<!-- APPROCHE -->
+<section class="approche" id="approche">
+  <div class="section-inner">
+    <div class="section-label">L'approche</div>
+    <h2 class="section-title">Des outils qui partent du terrain</h2>
+    <p class="section-sub">Pas des outils conçus dans un laboratoire pour être testés en classe. Des outils construits depuis les questions réelles des enseignants.</p>
+
+    <div class="approche-grid">
+      <div class="approche-card">
+        <div class="approche-icon">📐</div>
+        <h3>Fondés sur la recherche</h3>
+        <p>Chaque fonctionnalité s'appuie sur des articles scientifiques validés dans le corpus RISS (522 000+ articles francophones). Les références sont accessibles directement dans chaque outil.</p>
+      </div>
+      <div class="approche-card">
+        <div class="approche-icon">🎯</div>
+        <h3>Pensés pour la différenciation</h3>
+        <p>Les élèves en difficulté, porteurs de troubles DYS, TDAH ou en décrochage sont au centre de la réflexion. Ces outils cherchent à réduire les inégalités, pas à les ignorer.</p>
+      </div>
+      <div class="approche-card">
+        <div class="approche-icon">🤝</div>
+        <h3>Conçus avec les enseignants</h3>
+        <p>Les fonctionnalités émergent des formations et des échanges avec les équipes éducatives. Rien n'est ajouté pour faire "moderne" — chaque choix répond à un besoin concret.</p>
+      </div>
+      <div class="approche-card">
+        <div class="approche-icon">🤖</div>
+        <h3>L'IA au service de l'enseignant</h3>
+        <p>L'intelligence artificielle propose, l'enseignant décide. La règle : 80% d'assistance, 20% de personnalisation. L'IA ne remplace pas le jugement professionnel — elle le libère des tâches répétitives.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTILS -->
+<section id="outils">
+  <div class="section-inner">
+    <div class="section-label">Nos outils</div>
+    <h2 class="section-title">Ce qui est disponible — et ce qui vient</h2>
+    <p class="section-sub">Des applications indépendantes, chacune centrée sur une compétence professionnelle spécifique.</p>
+
+    <div class="outils-grid">
+
+      <!-- RetroActif -->
+      <div class="outil-card featured">
+        <span class="outil-badge badge-live">● Disponible</span>
+        <div class="outil-icon">✏️</div>
+        <h3>RetroActif</h3>
+        <p>
+          Construire, vérifier et suivre des rétroactions activables.
+          Générer des commentaires de bulletin cohérents avec l'historique de l'élève.
+          Développer sa propre littératie à la rétroaction — de débutant à expert.
+        </p>
+        <div class="outil-tags">
+          <span class="tag">Rétroaction formative</span>
+          <span class="tag">Bulletins</span>
+          <span class="tag">Suivi élève</span>
+          <span class="tag">IA déclaudisée</span>
+          <span class="tag">Carless &amp; Boud 2018</span>
+        </div>
+        <a href="https://retroactif.jfb4plai.com" class="outil-link">
+          Accéder à l'application →
+        </a>
+      </div>
+
+      <!-- Outil 2 — En développement -->
+      <div class="outil-card">
+        <span class="outil-badge badge-dev">En développement</span>
+        <div class="outil-icon">🧠</div>
+        <h3>DiffActif <span style="font-weight:400;color:#9ca3af;font-size:.9rem;">(à venir)</span></h3>
+        <p>
+          Adapter une séquence d'apprentissage en fonction des profils d'élèves identifiés.
+          Différenciation pédagogique outillée, ancrée dans les données de la classe.
+        </p>
+        <div class="outil-tags">
+          <span class="tag">Différenciation</span>
+          <span class="tag">Profils DYS / TDAH</span>
+          <span class="tag">Conception universelle</span>
+        </div>
+        <span class="outil-link-disabled">Prochainement disponible</span>
+      </div>
+
+      <!-- Outil 3 — En développement -->
+      <div class="outil-card">
+        <span class="outil-badge badge-dev">En développement</span>
+        <div class="outil-icon">📋</div>
+        <h3>EvalActif <span style="font-weight:400;color:#9ca3af;font-size:.9rem;">(à venir)</span></h3>
+        <p>
+          Concevoir des évaluations accessibles sans réduire les exigences du programme.
+          Adapter la forme des questions pour les élèves en difficulté — QCM, associations, amorces.
+        </p>
+        <div class="outil-tags">
+          <span class="tag">Évaluation adaptée</span>
+          <span class="tag">Secondaire FWB</span>
+          <span class="tag">Accessibilité</span>
+        </div>
+        <span class="outil-link-disabled">Prochainement disponible</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div>
+      <div class="section-label">À propos</div>
+      <h2 class="section-title">Jean-François Beguin</h2>
+      <p>
+        Enseignant et formateur en Fédération Wallonie-Bruxelles, je travaille depuis plusieurs années
+        sur l'intégration réfléchie du numérique et de l'intelligence artificielle dans les pratiques enseignantes.
+      </p>
+      <p>
+        Je forme des enseignants à ces outils dans le cadre du
+        <strong>Pôle Liégeois d'Accompagnement vers une École Inclusive (PLAI)</strong> —
+        une structure centrée sur la réussite des élèves qui rencontrent le plus d'obstacles.
+      </p>
+      <p>
+        Les outils publiés ici sont des prolongements directs de ce travail de terrain :
+        ils répondent à des besoins réels, formulés par des enseignants réels,
+        dans des classes réelles.
+      </p>
+      <div class="about-riss" style="margin-top:1.5rem;">
+        <div class="label">🔬 Validation scientifique</div>
+        <p>Toutes les références mobilisées dans ces outils sont vérifiées dans le corpus RISS — 522 627 articles scientifiques francophones couvrant l'éducation, les neurosciences et la didactique.</p>
+      </div>
+    </div>
+    <div>
+      <div class="about-stats">
+        <div class="about-stat">
+          <div class="num">522K+</div>
+          <div class="lbl">Articles RISS consultés</div>
+        </div>
+        <div class="about-stat">
+          <div class="num">6</div>
+          <div class="lbl">Modules RetroActif</div>
+        </div>
+        <div class="about-stat">
+          <div class="num">FWB</div>
+          <div class="lbl">Contexte d'usage</div>
+        </div>
+        <div class="about-stat">
+          <div class="num">0€</div>
+          <div class="lbl">Accès gratuit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner" style="text-align:center;">
+    <div class="section-label" style="text-align:center;">Contact</div>
+    <h2 class="section-title" style="text-align:center;">Une question ? Une idée ?</h2>
+    <p class="section-sub" style="margin:0 auto 0;">
+      Ces outils se construisent avec les enseignants. Si vous avez une remarque, une demande de fonctionnalité ou si vous souhaitez les tester dans votre établissement, écrivez-moi.
+    </p>
+    <div class="contact-box">
+      <h3>Jean-François Beguin</h3>
+      <p>PLAI — Pôle Liégeois d'Accompagnement vers une École Inclusive<br />Fédération Wallonie-Bruxelles</p>
+      <a href="mailto:jf.beguin@outlook.com" class="contact-email">
+        ✉️ jf.beguin@outlook.com
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Jean-François Beguin</strong> — PLAI, Fédération Wallonie-Bruxelles<br />
+  <br />
+  <a href="https://retroactif.jfb4plai.com">RetroActif</a> ·
+  <a href="mailto:jf.beguin@outlook.com">jf.beguin@outlook.com</a> ·
+  <a href="https://github.com/jfb4plai" target="_blank">GitHub</a>
+  <br /><br />
+  <span style="color:#4b5563;">Outils libres d'accès, fondés sur la recherche scientifique francophone (RISS).</span>
+</footer>
+
+</body>
+</html>
