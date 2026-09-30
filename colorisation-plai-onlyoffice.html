@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colorisation PLAI pour OnlyOffice — JFB4PLAI</title>
+  <meta name="description" content="Plugin OnlyOffice gratuit qui colorise phonèmes, syllabes et lettres miroir pour l'aide à la lecture — phonologie belge native, aucune donnée transmise." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --noir:        #1a1a1a;
+      --noir-doux:   #2e2e2e;
+      --rose:        #FF3399;
+      --rose-dk:     #CC0070;
+      --beige:       #F5F0E8;
+      --beige-dk:    #E8E0D0;
+      --blanc:       #ffffff;
+      --gris:        #5a5a5a;
+      --gris-clair:  #909090;
+      --bordure:     #e8e8e8;
+      --bg-subtil:   #f9f9f7;
+      --vert:        #16a34a;
+      --vert-bg:     #eaf7ee;
+      --ambre:       #b45309;
+      --ambre-bg:    #fff8ed;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--noir);
+      background: var(--blanc);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--blanc);
+      border-bottom: 1px solid var(--bordure);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo img { height: 48px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--gris); transition: color .15s; }
+    .nav-links a:hover { color: var(--rose); }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 3.5rem 0; border-bottom: 1px solid var(--bordure); }
+    section:last-of-type { border-bottom: none; }
+
+    /* ── HERO ── */
+    .hero { padding: 4rem 0 3rem; text-align: center; border-bottom: 1px solid var(--bordure); }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--rose); margin-bottom: 20px;
+    }
+    .hero-tag::before { content: '▶'; font-size: 9px; }
+    .hero h1 { font-size: clamp(1.8rem, 4.5vw, 2.6rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .hero p { font-size: 16px; color: var(--gris); max-width: 520px; margin: 0 auto 28px; line-height: 1.7; }
+    .hero-stats { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+    .stat-num { font-size: 26px; font-weight: 700; display: block; }
+    .stat-label { font-size: 11px; color: var(--gris-clair); }
+
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rose); margin-bottom: 10px; }
+    .section-title { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 8px; }
+    .section-sub { font-size: 14px; color: var(--gris); margin-bottom: 24px; }
+
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 20px 0; }
+    .ref-card { background: var(--bg-subtil); border: 1px solid var(--bordure); border-left: 3px solid var(--rose); border-radius: 2px; padding: 16px 18px; }
+    .ref-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+    .ref-card p { font-size: 12.5px; color: var(--gris); line-height: 1.6; }
+
+    .box { border-radius: 2px; padding: 14px 18px; margin: 16px 0; border-left: 3px solid; }
+    .box-ok { background: var(--vert-bg); border-color: var(--vert); }
+    .box-ok .box-label { color: #0d6b30; }
+    .box-warn { background: var(--ambre-bg); border-color: #e8ab4d; }
+    .box-warn .box-label { color: var(--ambre); }
+    .box-info { background: var(--beige); border-color: var(--rose); }
+    .box-info .box-label { color: var(--rose-dk); }
+    .box-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .box p { font-size: 13.5px; color: var(--noir); line-height: 1.65; }
+
+    table.cmp { width: 100%; border-collapse: collapse; font-size: 13px; margin: 16px 0; border: 1px solid var(--bordure); }
+    table.cmp th { background: var(--noir); color: var(--blanc); font-weight: 600; padding: 8px 10px; text-align: left; }
+    table.cmp td { padding: 8px 10px; border-bottom: 1px solid var(--bordure); color: var(--gris); }
+    table.cmp tr:last-child td { border-bottom: none; }
+    table.cmp td.ok-cell { color: var(--vert); font-weight: 600; }
+
+    .steps { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+    .step { display: flex; gap: 14px; border: 1px solid var(--bordure); border-radius: 2px; padding: 16px 18px; }
+    .step-n { min-width: 26px; height: 26px; border-radius: 50%; background: var(--noir); color: var(--blanc); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+    .step-t { font-size: 14.5px; font-weight: 600; margin-bottom: 3px; }
+    .step-d { font-size: 13.5px; color: var(--gris); line-height: 1.6; }
+    .step-d code { background: var(--bg-subtil); border: 1px solid var(--bordure); padding: 1px 5px; border-radius: 2px; font-size: 12.5px; }
+
+    .btn { display: inline-block; font-size: 13px; font-weight: 600; padding: 9px 20px; border-radius: 2px; margin: 8px 4px 0 0; }
+    .btn-rose { background: var(--rose); color: var(--blanc); }
+    .btn-rose:hover { background: var(--rose-dk); }
+    .btn-outline { background: var(--blanc); color: var(--noir); border: 1.5px solid var(--bordure); }
+    .btn-outline:hover { border-color: var(--noir); }
+
+    .faq { border: 1px solid var(--bordure); border-radius: 2px; padding: 16px 18px; margin-bottom: 10px; }
+    .faq h4 { font-size: 13.5px; font-weight: 600; margin-bottom: 4px; }
+    .faq p { font-size: 13px; color: var(--gris); line-height: 1.6; }
+
+    .preview-box { background: var(--bg-subtil); border: 1px solid var(--bordure); border-radius: 2px; padding: 18px; font-size: 17px; line-height: 1.9; margin: 16px 0 6px; text-align: center; }
+    .preview-caption { font-size: 12px; color: var(--gris-clair); text-align: center; margin-bottom: 16px; }
+
+    footer { background: var(--noir); color: #555; padding: 28px 2rem; text-align: center; font-size: 12px; }
+    footer strong { color: #999; }
+    footer a { color: var(--rose); }
+    footer a:hover { text-decoration: underline; }
+    footer .sep { margin: 0 8px; color: #333; }
+
+    @media (max-width: 640px) { .nav-links { display: none; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/"><img src="logo-jfb4plai.png" alt="JFB4PLAI" /></a>
+    <div class="nav-links">
+      <a href="#pourquoi">Pourquoi</a>
+      <a href="#installation">Installation</a>
+      <a href="#mode-emploi">Mode d'emploi</a>
+      <a href="/#outils">← Tous les outils</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="container">
+    <div class="hero-tag">Fondé sur la recherche — Corpus RISS validé</div>
+    <h1>Colorisation PLAI pour OnlyOffice</h1>
+    <p>Coloriser les phonèmes, syllabes et lettres miroir directement dans vos documents Word — gratuit, hors ligne, phonologie belge native.</p>
+    <div class="hero-stats">
+      <div><span class="stat-num">0 €</span><span class="stat-label">gratuit, open source</span></div>
+      <div><span class="stat-num">0</span><span class="stat-label">donnée élève transmise</span></div>
+      <div><span class="stat-num">BE ↔ FR</span><span class="stat-label">phonologie en 1 clic</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ POURQUOI ═══ -->
+<section id="pourquoi">
+  <div class="container">
+    <div class="section-label">Pourquoi ce plugin</div>
+    <h2 class="section-title">Un outil scientifiquement fondé</h2>
+    <p class="section-sub">Le plugin colorise les phonèmes, les syllabes et propose des aides visuelles à la lecture pour les élèves présentant des difficultés d'apprentissage (dyslexie, difficultés de décodage…). Basé sur <em>Colorization.ch</em> de Pierre-Alain Etique (GPL-3.0), porté fidèlement vers OnlyOffice.</p>
+
+    <div class="card-grid">
+      <div class="ref-card"><h4>Chenouna (2021)</h4><p>La colorisation syllabique et vocalique améliore la vitesse et la précision de lecture chez les élèves dyslexiques.</p></div>
+      <div class="ref-card"><h4>Roullet, Auzimour, Cavalli &amp; Gomez (2025)</h4><p>Les adaptations graphiques individualisées (colorisation, contraste entre lignes) améliorent l'accessibilité.</p></div>
+      <div class="ref-card"><h4>Krupa, Bard &amp; Hamon (2023)</h4><p>Interface FROG : les élèves apprécient la colorisation des syllabes et le surlignage alterné des lignes.</p></div>
+      <div class="ref-card"><h4>Gala et al. (2020)</h4><p>Espacement accru, interligne élargi et usage de la couleur améliorent la lisibilité.</p></div>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:600;margin:28px 0 8px;">Adapté à la phonologie belge</h3>
+    <p class="section-sub" style="margin-bottom:8px;">En Belgique francophone, « o » ne se prononce pas comme « eau » ou « au » (distinction absente en français de France standard). Le plugin gère nativement cette phonologie via un système de « graphèmes liés » : chaque orthographe (an/am/en/em, in/im/ain/ein…) s'active ou se désactive séparément, avec un basculement BE ↔ FR en un clic.</p>
+    <div class="box box-warn">
+      <div class="box-label">⚠ Limite assumée — contraste CERAS</div>
+      <p>Les couleurs des préréglages CERAS reproduisent le code couleur officiel déjà utilisé sur les supports papier en classe — elles ne sont pas choisies pour le contraste écran. Le plugin avertit dans l'onglet Phonèmes lorsqu'une couleur personnalisée est sous le seuil WCAG recommandé.</p>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:600;margin:28px 0 8px;">RGPD — vos documents ne quittent jamais votre ordinateur</h3>
+    <p class="section-sub" style="margin-bottom:8px;">Froidevaux, Ganascia &amp; Kirchner (2024) recommandent de considérer les données pédagogiques comme sensibles.</p>
+    <div class="box box-ok">
+      <div class="box-label">✓ Ce qui reste local</div>
+      <p>Le texte de vos élèves n'est jamais transmis nulle part. La colorisation s'exécute entièrement dans votre document Word.</p>
+    </div>
+    <div class="box box-info">
+      <div class="box-label">ℹ Ce qui est en ligne</div>
+      <p>Le <em>code</em> du plugin (interface, règles phonologiques) est hébergé sur un serveur européen pour permettre des mises à jour automatiques sans réinstallation. Aucun contenu de document n'y transite.</p>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:600;margin:28px 0 8px;">OnlyOffice : une alternative européenne</h3>
+    <table class="cmp">
+      <tr><th>Caractéristique</th><th>Colorisation PLAI</th><th>Colorization.ch (Word)</th></tr>
+      <tr><td>Suite bureautique</td><td class="ok-cell">OnlyOffice — gratuite, open source</td><td>Microsoft Office (payant)</td></tr>
+      <tr><td>Documents transmis</td><td class="ok-cell">Aucun</td><td>Variable</td></tr>
+      <tr><td>Phonologie belge</td><td class="ok-cell">Native, 1 clic</td><td>Paramétrage manuel</td></tr>
+      <tr><td>Compte requis</td><td class="ok-cell">Non</td><td>Compte Microsoft</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ INSTALLATION ═══ -->
+<section id="installation">
+  <div class="container">
+    <div class="section-label">Démarrer</div>
+    <h2 class="section-title">Installer le plugin</h2>
+    <p class="section-sub">Une seule fois par ordinateur — les mises à jour arrivent ensuite toutes seules.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div>
+          <div class="step-t">Installer OnlyOffice Desktop Editors</div>
+          <div class="step-d">Suite bureautique gratuite, open source et européenne, compatible .docx/.xlsx/.pptx.</div>
+          <a class="btn btn-outline" href="https://www.onlyoffice.com/fr/download-desktop.aspx" target="_blank" rel="noopener noreferrer">Télécharger OnlyOffice Desktop</a>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div>
+          <div class="step-t">Demander le fichier du plugin</div>
+          <div class="step-d">Le fichier <code>colorisation-plai.plugin</code> n'est pas en téléchargement public — il vous est transmis directement sur simple demande.</div>
+          <a class="btn btn-rose" href="mailto:jf.beguin@outlook.com?subject=Demande%20du%20plugin%20Colorisation%20PLAI%20pour%20OnlyOffice">Demander le fichier par email</a>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div>
+          <div class="step-t">Installer dans OnlyOffice</div>
+          <div class="step-d">Ouvrir un document Word → onglet <strong>Modules complémentaires</strong> → <strong>Gestionnaire de Plugins</strong> → <strong>Installer le plugin manuellement</strong> → sélectionner le fichier reçu.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">4</div>
+        <div>
+          <div class="step-t">Vérifier</div>
+          <div class="step-d">L'icône <strong>Colorisation PLAI</strong> apparaît dans l'onglet Modules complémentaires. Ce premier chargement doit se faire en ligne.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">5</div>
+        <div>
+          <div class="step-t">Mises à jour automatiques</div>
+          <div class="step-d">Ensuite, le plugin se met à jour seul en arrière-plan dès qu'une connexion est disponible, et reste utilisable hors ligne entre-temps. Plus jamais besoin de réinstaller.</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:16px;font-weight:600;margin:28px 0 10px;">En cas de problème</h3>
+    <div class="faq"><h4>« Installer le plugin manuellement » n'apparaît pas ?</h4><p>Vérifiez la version d'OnlyOffice (Aide → À propos) et mettez-la à jour si besoin.</p></div>
+    <div class="faq"><h4>Panneau vide ou erreur au premier lancement ?</h4><p>Vérifiez la connexion internet, réessayez une fois connecté.</p></div>
+    <div class="faq"><h4>L'icône n'apparaît que sur certains documents ?</h4><p>Normal : le plugin ne s'active que sur les documents Word (.docx).</p></div>
+    <div class="faq"><h4>Besoin d'aide ?</h4><p><a href="mailto:jf.beguin@outlook.com" style="color:var(--rose);font-weight:600;">jf.beguin@outlook.com</a></p></div>
+  </div>
+</section>
+
+<!-- ═══ MODE D'EMPLOI ═══ -->
+<section id="mode-emploi">
+  <div class="container">
+    <div class="section-label">Utiliser</div>
+    <h2 class="section-title">Mode d'emploi</h2>
+    <p class="section-sub">Quatre onglets : Phonèmes · Syllabes · Lettres · Config.</p>
+
+    <div class="card-grid">
+      <div class="ref-card"><h4>🔤 Phonèmes</h4><p>Grille de sons à cocher, chacun avec sa couleur. Preset « CERAS rosé » recommandé pour démarrer. Les sons composés (an/am/en/em, in/im/ain/ein…) se déplient pour activer une orthographe précise sans les autres.</p></div>
+      <div class="ref-card"><h4>🎵 Syllabes</h4><p>Colorise les syllabes en alternance (2 à 4 couleurs), mode écrit ou oral, option pour ignorer les monosyllabes.</p></div>
+      <div class="ref-card"><h4>🔡 Lettres</h4><p>Liste éditable de lettres à discriminer — b/d/p/q par défaut, mais ajoutez ou retirez n'importe quelle lettre (v/f, t/d…) selon les besoins d'un élève.</p></div>
+      <div class="ref-card"><h4>⚙️ Config</h4><p>Région Belgique (FWB) ou France, règle « ill », comportement des lettres non colorisées, sauvegarde/export de votre configuration.</p></div>
+    </div>
+
+    <div class="preview-box">
+      L'<span style="color:#2196F3;font-weight:700">oi</span>seau b<span style="color:#2196F3;font-weight:700">oi</span>t de l'<span style="color:#E06000;font-weight:700">eau</span> d<span style="color:#ED7D31;font-weight:700">an</span>s <span style="color:#FF5722;font-weight:700">un</span> b<span style="font-weight:700">o</span>l.
+    </div>
+    <p class="preview-caption">Exemple — preset CERAS rosé, région Belgique : « eau » en orange, « oi » en bleu, « an » en orange soutenu, « un » en rouge — le « o » de « bol » reste noir (désactivé en mode BE).</p>
+
+    <h3 style="font-size:16px;font-weight:600;margin:28px 0 10px;">Workflow recommandé</h3>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><div class="step-d">Tapez ou collez votre texte dans le document.</div></div>
+      <div class="step"><div class="step-n">2</div><div class="step-d">Sélectionnez la portion à coloriser (ou rien pour tout le document).</div></div>
+      <div class="step"><div class="step-n">3</div><div class="step-d">Vérifiez le preset et la région dans l'onglet Config.</div></div>
+      <div class="step"><div class="step-n">4</div><div class="step-d">Cliquez « Coloriser les phonèmes ».</div></div>
+    </div>
+
+    <div class="box box-info">
+      <div class="box-label">💡 Conseil</div>
+      <p>Commencez avec le preset CERAS rosé (sons complexes uniquement), activez les sons progressivement au fil des leçons, et combinez avec le surlignage « 1 ligne / 2 » pour les lecteurs les plus en difficulté.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>PLAI</strong> — Pôle Liégeois d'Accompagnement vers une École Inclusive — FWB
+  <span class="sep">·</span>
+  <a href="https://colorization.ch" target="_blank" rel="noopener noreferrer">Colorization.ch (Pierre-Alain Etique, GPL-3.0)</a>
+  <span class="sep">·</span>
+  <a href="mailto:jf.beguin@outlook.com">jf.beguin@outlook.com</a>
+  <span class="sep">·</span>
+  <a href="/">← Retour à l'accueil</a>
+  <br /><br />
+  <span style="color:#3a3a3a;">✅ Références scientifiques vérifiées dans le corpus RISS (522 627 articles francophones)</span>
+</footer>
+
+</body>
+</html>
