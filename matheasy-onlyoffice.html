@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Matheasy pour OnlyOffice — JFB4PLAI</title>
+  <meta name="description" content="Plugin OnlyOffice gratuit pour écrire des mathématiques au clavier : formules, résolutions pas à pas, cases à compléter, graphiques. Équations natives, aucune donnée transmise." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --noir:        #1a1a1a;
+      --noir-doux:   #2e2e2e;
+      --rose:        #FF3399;
+      --rose-dk:     #CC0070;
+      --beige:       #F5F0E8;
+      --beige-dk:    #E8E0D0;
+      --blanc:       #ffffff;
+      --gris:        #5a5a5a;
+      --gris-clair:  #909090;
+      --bordure:     #e8e8e8;
+      --bg-subtil:   #f9f9f7;
+      --vert:        #16a34a;
+      --vert-bg:     #eaf7ee;
+      --ambre:       #b45309;
+      --ambre-bg:    #fff8ed;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--noir);
+      background: var(--blanc);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--blanc);
+      border-bottom: 1px solid var(--bordure);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo img { height: 48px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 1.75rem; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--gris); transition: color .15s; }
+    .nav-links a:hover { color: var(--rose); }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 3.5rem 0; border-bottom: 1px solid var(--bordure); }
+    section:last-of-type { border-bottom: none; }
+
+    /* ── HERO ── */
+    .hero { padding: 4rem 0 3rem; text-align: center; border-bottom: 1px solid var(--bordure); }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--rose); margin-bottom: 20px;
+    }
+    .hero-tag::before { content: '▶'; font-size: 9px; }
+    .hero h1 { font-size: clamp(1.8rem, 4.5vw, 2.6rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 16px; }
+    .hero p { font-size: 16px; color: var(--gris); max-width: 540px; margin: 0 auto 28px; line-height: 1.7; }
+    .hero-stats { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+    .stat-num { font-size: 26px; font-weight: 700; display: block; }
+    .stat-label { font-size: 11px; color: var(--gris-clair); }
+
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--rose); margin-bottom: 10px; }
+    .section-title { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 8px; }
+    .section-sub { font-size: 14px; color: var(--gris); margin-bottom: 24px; }
+    h3.sub { font-size: 16px; font-weight: 600; margin: 28px 0 10px; }
+
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 20px 0; }
+    .ref-card { background: var(--bg-subtil); border: 1px solid var(--bordure); border-left: 3px solid var(--rose); border-radius: 2px; padding: 16px 18px; }
+    .ref-card h4 { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+    .ref-card p { font-size: 12.5px; color: var(--gris); line-height: 1.6; }
+
+    .box { border-radius: 2px; padding: 14px 18px; margin: 16px 0; border-left: 3px solid; }
+    .box-ok { background: var(--vert-bg); border-color: var(--vert); }
+    .box-ok .box-label { color: #0d6b30; }
+    .box-warn { background: var(--ambre-bg); border-color: #e8ab4d; }
+    .box-warn .box-label { color: var(--ambre); }
+    .box-info { background: var(--beige); border-color: var(--rose); }
+    .box-info .box-label { color: var(--rose-dk); }
+    .box-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .box p { font-size: 13.5px; color: var(--noir); line-height: 1.65; }
+
+    .steps { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+    .step { display: flex; gap: 14px; border: 1px solid var(--bordure); border-radius: 2px; padding: 16px 18px; break-inside: avoid; }
+    .step-n { min-width: 26px; height: 26px; border-radius: 50%; background: var(--noir); color: var(--blanc); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+    .step-t { font-size: 14.5px; font-weight: 600; margin-bottom: 3px; }
+    .step-d { font-size: 13.5px; color: var(--gris); line-height: 1.6; }
+    .step-d code { background: var(--bg-subtil); border: 1px solid var(--bordure); padding: 1px 5px; border-radius: 2px; font-size: 12.5px; }
+    .step-d ul { margin: 6px 0 0 18px; }
+    .step-d li { margin: 2px 0; }
+    .step-d strong { color: var(--noir); }
+
+    .btn { display: inline-block; font-size: 13px; font-weight: 600; padding: 9px 20px; border-radius: 2px; margin: 8px 4px 0 0; }
+    .btn-rose { background: var(--rose); color: var(--blanc); }
+    .btn-rose:hover { background: var(--rose-dk); }
+    .btn-outline { background: var(--blanc); color: var(--noir); border: 1.5px solid var(--bordure); }
+    .btn-outline:hover { border-color: var(--noir); }
+
+    .faq { border: 1px solid var(--bordure); border-radius: 2px; padding: 16px 18px; margin-bottom: 10px; break-inside: avoid; }
+    .faq h4 { font-size: 13.5px; font-weight: 600; margin-bottom: 4px; }
+    .faq p { font-size: 13px; color: var(--gris); line-height: 1.6; }
+
+    .preview-box { background: var(--bg-subtil); border: 1px solid var(--bordure); border-radius: 2px; padding: 18px 22px; font-size: 17px; line-height: 2; margin: 16px 0 6px; font-family: 'Cambria Math', 'Cambria', Georgia, serif; }
+    .preview-box .note { font-family: 'Inter', system-ui, sans-serif; font-style: italic; font-size: 14px; color: var(--gris); margin-left: 2.5rem; }
+    .preview-caption { font-size: 12px; color: var(--gris-clair); margin-bottom: 16px; }
+
+    .print-only { display: none; }
+    .print-link { font-size: 12.5px; color: var(--gris); }
+    .print-link button { font: inherit; color: var(--rose-dk); background: none; border: 0; cursor: pointer; text-decoration: underline; padding: 0; }
+
+    footer { background: var(--noir); color: #555; padding: 28px 2rem; text-align: center; font-size: 12px; }
+    footer strong { color: #999; }
+    footer a { color: var(--rose); }
+    footer a:hover { text-decoration: underline; }
+    footer .sep { margin: 0 8px; color: #333; }
+
+    @media (max-width: 640px) { .nav-links { display: none; } .container { padding: 0 1rem; } }
+
+    /* Impression : la section « Installer » sert de mode d'emploi papier */
+    @media print {
+      nav, .hero, #pourquoi, #mode-emploi, footer, .print-link, .btn { display: none !important; }
+      section { padding: 0; border: 0; }
+      .step-d a::after { content: " (" attr(href) ")"; font-size: 11px; }
+      body { font-size: 13px; }
+      .print-only { display: inline; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/"><img src="logo-jfb4plai.png" alt="JFB4PLAI" /></a>
+    <div class="nav-links">
+      <a href="#pourquoi">Pourquoi</a>
+      <a href="#installation">Installation</a>
+      <a href="#mode-emploi">Mode d'emploi</a>
+      <a href="/#outils">← Tous les outils</a>
+    </div>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="container">
+    <div class="hero-tag">Fondé sur la recherche — Corpus RISS validé</div>
+    <h1>Matheasy pour OnlyOffice</h1>
+    <p>Écrire des mathématiques au clavier, directement dans un document : formules, résolutions pas à pas commentées, cases à compléter, graphiques. Les formules restent des équations OnlyOffice ordinaires, modifiables par l'élève.</p>
+    <div class="hero-stats">
+      <div><span class="stat-num">0 €</span><span class="stat-label">gratuit</span></div>
+      <div><span class="stat-num">0</span><span class="stat-label">donnée élève transmise</span></div>
+      <div><span class="stat-num">S1 → S6</span><span class="stat-label">priorité au secondaire supérieur</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ POURQUOI ═══ -->
+<section id="pourquoi">
+  <div class="container">
+    <div class="section-label">Pourquoi ce plugin</div>
+    <h2 class="section-title">Écrire les maths sans le stylo</h2>
+    <p class="section-sub">Pour un élève qui écrit difficilement à la main (dyspraxie, dysgraphie…), l'ordinateur ne suffit pas : encore faut-il pouvoir y écrire une fraction, une racine, un système ou une résolution ligne par ligne. Matheasy apporte ces outils dans OnlyOffice, gratuitement, sur le modèle de MathType.</p>
+
+    <div class="card-grid">
+      <div class="ref-card"><h4>Booms (2022)</h4><p>Un ordinateur donné à un élève présentant un trouble des coordinations ne facilite pas automatiquement l'accès aux apprentissages : l'outil doit s'articuler aux pratiques de l'enseignant. D'où un plugin qui travaille dans le document de la classe, pas à côté.</p></div>
+      <div class="ref-card"><h4>Tricot (1998), d'après Sweller</h4><p>Étudier des problèmes résolus fait mieux apprendre que résoudre des problèmes non résolus, et l'explication placée à côté de l'étape évite de diviser l'attention. D'où les résolutions pas à pas avec un commentaire à droite de chaque ligne.</p></div>
+      <div class="ref-card"><h4>Puma &amp; Tricot (2021)</h4><p>Les problèmes résolus ne sont efficaces que pour les élèves novices. D'où les cases à compléter : l'enseignant retire progressivement l'étayage.</p></div>
+      <div class="ref-card"><h4>Passaro, Saboya &amp; Venant (2023)</h4><p>Passer de la formule au graphique ne va pas de soi pour les élèves du secondaire. D'où le graphique tracé à partir de la formule, avec les zéros masqués par défaut pour que l'élève les cherche lui-même.</p></div>
+    </div>
+
+    <h3 class="sub">Des formules qui appartiennent au document</h3>
+    <p class="section-sub" style="margin-bottom:8px;">Pas d'image ni d'objet figé : chaque formule devient une équation native d'OnlyOffice. L'élève peut l'ouvrir, la compléter, la corriger ou l'annoter, même sur un ordinateur où Matheasy n'est pas installé.</p>
+
+    <h3 class="sub">RGPD — vos documents ne quittent pas votre ordinateur</h3>
+    <div class="box box-ok">
+      <div class="box-label">✓ Ce qui reste local</div>
+      <p>Le contenu des documents et des formules n'est envoyé nulle part. L'écriture, l'insertion, le graphique et son image se font sur l'ordinateur.</p>
+    </div>
+    <div class="box box-info">
+      <div class="box-label">ℹ Ce qui demande internet</div>
+      <p>À l'ouverture, Matheasy charge l'interface d'OnlyOffice pour les plugins (serveur d'OnlyOffice) et ses polices. Le bouton « Copier + ouvrir GeoGebra » ouvre le site de GeoGebra, seulement si on clique dessus. Aucun compte n'est demandé.</p>
+    </div>
+    <div class="box box-warn">
+      <div class="box-label">⚠ Ce que Matheasy ne fait pas</div>
+      <p>Pas de barré ni de couleur <em>à l'intérieur</em> du code d'une formule (le moteur d'OnlyOffice le refuse) : on colore ou on barre après coup, dans le document. Pas d'ouverture d'une formule par double-clic : on passe par le bouton « Modifier » ou le clic droit. Le traceur ne dessine que des fonctions de x ; pour un cercle ou une figure, GeoGebra.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ INSTALLATION ═══ -->
+<section id="installation">
+  <div class="container">
+    <div class="section-label">Démarrer</div>
+    <h2 class="section-title">Installer Matheasy, pas à pas</h2>
+    <p class="section-sub">Une seule fois par ordinateur, environ 10 minutes. Aucune compétence technique n'est nécessaire. <span class="print-link">Besoin d'une version papier ? <button type="button" onclick="window.print()">Imprimer ce mode d'emploi d'installation</button>.</span></p>
+
+    <div class="box box-info">
+      <div class="box-label">ℹ Avant de commencer</div>
+      <p>Il faut un ordinateur Windows, Mac ou Linux, une connexion internet, et le droit d'installer des logiciels. Sur un ordinateur de l'école géré par un technicien, demandez-lui de faire les étapes 1 et 5.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">1</div>
+        <div>
+          <div class="step-t">Installer OnlyOffice Desktop Editors</div>
+          <div class="step-d">Suite bureautique gratuite, open source et européenne, qui ouvre les fichiers Word (.docx). Version 8.2 ou plus récente. Déjà installé ? Passez à l'étape 2.<span class="print-only"> Adresse : www.onlyoffice.com/fr/download-desktop.aspx</span></div>
+          <a class="btn btn-outline" href="https://www.onlyoffice.com/fr/download-desktop.aspx" target="_blank" rel="noopener noreferrer">Télécharger OnlyOffice Desktop</a>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <div>
+          <div class="step-t">Demander le fichier du plugin</div>
+          <div class="step-d">Le fichier <code>matheasy.plugin</code> n'est pas en téléchargement public : il vous est envoyé par e-mail, sur simple demande.<span class="print-only"> Écrire à jf.beguin@outlook.com, objet « Demande du plugin Matheasy ».</span></div>
+          <a class="btn btn-rose" href="mailto:jf.beguin@outlook.com?subject=Demande%20du%20plugin%20Matheasy%20pour%20OnlyOffice" data-umami-event="matheasy-demande-fichier">Demander le fichier par e-mail</a>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <div>
+          <div class="step-t">Enregistrer le fichier reçu</div>
+          <div class="step-d">Dans l'e-mail reçu, enregistrez la pièce jointe <code>matheasy.plugin</code> dans le dossier <strong>Téléchargements</strong> de l'ordinateur.
+            <ul><li>Ne double-cliquez pas dessus : ce n'est pas un programme, Windows ne saurait pas l'ouvrir.</li><li>Si le fichier arrive sous le nom <code>matheasy.zip</code>, renommez-le en <code>matheasy.plugin</code>.</li></ul>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">4</div>
+        <div>
+          <div class="step-t">Ouvrir un document texte dans OnlyOffice</div>
+          <div class="step-d">Lancez OnlyOffice, puis ouvrez un document Word existant ou créez un nouveau <strong>Document</strong>. Matheasy ne s'installe et ne s'affiche que dans les documents texte (pas dans les tableurs ni les présentations).</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">5</div>
+        <div>
+          <div class="step-t">Installer le plugin</div>
+          <div class="step-d">
+            <ul>
+              <li>Cliquez sur l'onglet <strong>Modules complémentaires</strong> (selon la version : <strong>Plugins</strong>).</li>
+              <li>Cliquez sur <strong>Gestionnaire de plugins</strong>.</li>
+              <li>Cliquez sur <strong>Installer le plugin manuellement</strong>.</li>
+              <li>Choisissez le fichier <code>matheasy.plugin</code> dans le dossier Téléchargements, puis <strong>Ouvrir</strong>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">6</div>
+        <div>
+          <div class="step-t">Vérifier</div>
+          <div class="step-d">Une icône ronde bleue <strong>JFB4PLAI</strong>, nommée <strong>Matheasy</strong>, apparaît dans l'onglet Modules complémentaires. Cliquez dessus : le panneau Matheasy s'ouvre <strong>à droite</strong> du document. Tapez <code>2x+3=7</code> dans le grand cadre blanc, puis cliquez sur le bouton vert <strong>Insérer dans le document</strong> : la formule apparaît. C'est installé.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-n">7</div>
+        <div>
+          <div class="step-t">Plus tard : passer à une nouvelle version</div>
+          <div class="step-d">Matheasy ne se met pas à jour tout seul. Quand vous recevez un nouveau fichier : Gestionnaire de plugins, supprimez l'ancienne Matheasy, puis refaites l'étape 5 avec le nouveau fichier. Le numéro de version s'affiche en haut du panneau.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box box-warn">
+      <div class="box-label">⚠ Connexion internet à l'ouverture</div>
+      <p>Matheasy a besoin d'internet <strong>chaque fois qu'on l'ouvre</strong> : l'interface d'OnlyOffice pour les plugins se charge en ligne. Une fois le panneau ouvert, l'écriture des formules fonctionne sans connexion.</p>
+    </div>
+
+    <h3 class="sub">En cas de problème</h3>
+    <div class="faq"><h4>« Installer le plugin manuellement » n'apparaît pas ?</h4><p>Vérifiez la version d'OnlyOffice (menu Aide ou À propos). Il faut la version 8.2 ou plus récente : mettez-la à jour en réinstallant depuis l'étape 1.</p></div>
+    <div class="faq"><h4>Message rouge « Matheasy ne peut pas démarrer » ?</h4><p>Pas de connexion internet au moment de l'ouverture. Vérifiez la connexion, fermez le panneau Matheasy et rouvrez-le.</p></div>
+    <div class="faq"><h4>L'icône Matheasy n'apparaît pas ?</h4><p>Vous êtes peut-être dans un tableur ou une présentation : ouvrez un document texte. Sinon, refaites l'étape 5.</p></div>
+    <div class="faq"><h4>Mes élèves doivent-ils installer Matheasy ?</h4><p>Pour lire et compléter vos formules, non : ce sont des équations OnlyOffice ordinaires. Pour écrire eux-mêmes avec les palettes et les résolutions pas à pas, oui : même installation.</p></div>
+    <div class="faq"><h4>Besoin d'aide ?</h4><p><a href="mailto:jf.beguin@outlook.com" style="color:var(--rose);font-weight:600;">jf.beguin@outlook.com</a></p></div>
+  </div>
+</section>
+
+<!-- ═══ MODE D'EMPLOI ═══ -->
+<section id="mode-emploi">
+  <div class="container">
+    <div class="section-label">Utiliser</div>
+    <h2 class="section-title">Mode d'emploi</h2>
+    <p class="section-sub">En haut du panneau, les palettes et le champ de saisie. En dessous, trois outils repliés : Annoter, Graphique, Tableau.</p>
+
+    <div class="card-grid">
+      <div class="ref-card"><h4>✏️ Écrire</h4><p>Tapez au clavier ou cliquez dans les palettes (Structures, Symboles, Grec, Analyse, Ensembles &amp; logique, Fonctions, Probabilités). « Insérer dans le document » place la formule au curseur.</p></div>
+      <div class="ref-card"><h4>🪜 Résoudre pas à pas</h4><p>Entrée = nouvelle ligne. Chaque ligne devient un paragraphe du document. « + Commentaire » ajoute l'explication à droite de la ligne, « + Exercice » numérote les exercices.</p></div>
+      <div class="ref-card"><h4>□ Cases à compléter</h4><p>Les boutons □/□ et √□ laissent des cases vides dans le document. L'élève clique dans la case et tape : la case disparaît.</p></div>
+      <div class="ref-card"><h4>🔁 Modifier</h4><p>Sélectionnez une formule ou toute une résolution, puis « Modifier la formule sélectionnée » (ou clic droit). « Insérer » remplace, « Insérer à la suite » garde l'énoncé et ajoute la réponse dessous.</p></div>
+      <div class="ref-card"><h4>📈 Graphique</h4><p>La fonction de la 1re ligne est tracée dans le panneau, puis insérée en image. Zéros et intersections affichés seulement si vous cochez la case. Export de la commande vers GeoGebra.</p></div>
+      <div class="ref-card"><h4>🖍️ Annoter et tableaux</h4><p>Colorer ou barrer une partie de formule dans le document, colorer les lignes de l'élève (bleu, vert, rouge), insérer un tableau de signes, de variations ou de Horner.</p></div>
+    </div>
+
+    <div class="preview-box">
+      2<i>x</i> + 3 = 7<br />
+      2<i>x</i> = 4 <span class="note">on enlève 3 des deux côtés</span><br />
+      <i>x</i> = 2 <span class="note">on divise les deux membres par 2</span>
+    </div>
+    <p class="preview-caption">Exemple : une résolution de trois lignes tapée dans le champ (Entrée entre chaque ligne), commentaires ajoutés avec « + Commentaire ». Dans le document, chaque ligne est une équation modifiable.</p>
+
+    <div class="box box-info">
+      <div class="box-label">💡 Conseil</div>
+      <p>Commencez avec l'élève par une résolution entièrement écrite et commentée, puis remplacez progressivement des étapes par des cases à compléter. Gardez la case des zéros décochée quand c'est à l'élève de les trouver.</p>
+    </div>
+
+    <h3 class="sub">Guides détaillés</h3>
+    <a class="btn btn-outline" href="https://github.com/jfb4plai/Matheasy/blob/main/docs/mode-emploi-debutant.pdf" target="_blank" rel="noopener noreferrer">Pas à pas pour débuter (PDF)</a>
+    <a class="btn btn-outline" href="https://github.com/jfb4plai/Matheasy/blob/main/docs/mode-emploi.pdf" target="_blank" rel="noopener noreferrer">Mode d'emploi complet (PDF)</a>
+  </div>
+</section>
+
+<footer>
+  <strong>PLAI</strong> — Pôle Liégeois d'Accompagnement vers une École Inclusive — FWB
+  <span class="sep">·</span>
+  <a href="https://github.com/arnog/mathlive" target="_blank" rel="noopener noreferrer">Éditeur de formules : MathLive (MIT)</a>
+  <span class="sep">·</span>
+  <a href="mailto:jf.beguin@outlook.com">jf.beguin@outlook.com</a>
+  <span class="sep">·</span>
+  <a href="/">← Retour à l'accueil</a>
+  <br /><br />
+  <span style="color:#3a3a3a;">✅ Références scientifiques vérifiées dans le corpus RISS</span>
+</footer>
+
+</body>
+</html>
