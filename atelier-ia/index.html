@@ -63,6 +63,18 @@
     .texte { border: 1px solid var(--bordure); border-radius: 4px; padding: 1.25rem; margin-bottom: 1.5rem; }
     .texte p + p { margin-top: 1rem; }
 
+    .suite { background: var(--beige); border-radius: 4px; padding: 1.25rem; }
+    .suite-titre { font-weight: 700; margin-bottom: 4px; }
+    .formulaire {
+      display: inline-block; margin-top: 12px;
+      font-weight: 600; color: var(--noir);
+      border: 2px solid var(--noir); border-radius: 4px;
+      padding: 12px 20px; min-height: 48px; text-decoration: none;
+    }
+    .formulaire:hover { background: var(--noir); color: var(--blanc); }
+    .formulaire:focus-visible { outline: 3px solid var(--rose-dk); outline-offset: 3px; }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
     footer { background: var(--noir); color: #b0b0b0; padding: 24px 16px; text-align: center; font-size: 14px; }
     footer a { color: var(--rose); }
   </style>
@@ -85,6 +97,7 @@
       <li>Ouvrir l'IA de votre choix.</li>
       <li>Coller le texte tel quel, sans le modifier, puis envoyer.</li>
       <li>Lire la réponse.</li>
+      <li>Coller la réponse complète dans le formulaire (lien en bas de page).</li>
     </ol>
   </div>
 
@@ -100,6 +113,12 @@
 
   <button type="button" class="copier" data-copier>Copier le texte</button>
   <p class="statut" role="status" aria-live="polite" data-statut></p>
+
+  <div class="suite">
+    <p class="suite-titre">Étape suivante</p>
+    <p>Après avoir lu la réponse de l'IA, ouvrir le formulaire et y coller la réponse complète.</p>
+    <a class="formulaire" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=waRkYsLuKkio-TTsDGvzZlL3EZPG2K9JoXfjYVfsefRUQzkxSk9ESVpVNEFFRVpZU1FWS0hKSFhZSS4u" target="_blank" rel="noopener noreferrer">Ouvrir le formulaire<span class="sr"> (nouvel onglet)</span></a>
+  </div>
 </main>
 
 <footer>
