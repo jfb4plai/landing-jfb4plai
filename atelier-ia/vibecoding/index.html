@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<!--
+  Page générée depuis jfb4plai/idees-plai : guides/vibecoding-plai/README.md
+  Contenu : adaptation du guide de François Jourde, CC BY-SA 4.0.
+  Code de la page : Jean-François Beguin · PLAI — PolyForm Noncommercial 1.0.0.
+  Aucune ressource externe : ni police distante, ni script tiers, ni mesure d'audience.
+-->
+<html lang="fr-BE">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<title>Fabriquer un outil avec Claude — JFB4PLAI</title>
+<meta name="description" content="Fabriquer un outil pédagogique en un seul fichier HTML avec Claude : prompts prêts à copier, contexte FWB, style PLAI.">
+<style>
+  :root {
+    --bg: #faf9f7; --surface: #ffffff; --surface2: #f4f2ee;
+    --border: #e8e4dd; --border-input: #857f76;
+    --text: #1a1814; --text2: #5a564f; --text3: #6f6a62;
+    --teal: #0f6e56; --teal-bg: #e1f5ee; --teal-border: #1d9e75;
+    --error: #a32d2d; --error-bg: #fcebeb; --error-border: #e24b4a;
+    --warn-bg: #fdf4e3; --warn-border: #c98a1b;
+    --radius: 10px; --radius-sm: 6px;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --mono: ui-monospace, 'Cascadia Mono', Consolas, Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.7; }
+  a { color: var(--teal); text-underline-offset: 2px; }
+  :focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+  .skip { position: absolute; left: -9999px; top: 0; background: var(--teal); color: #fff; padding: 8px 14px; z-index: 200; }
+  .skip:focus { left: 16px; top: 8px; }
+
+  .plai-nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--border); }
+  .plai-nav .inner { max-width: 760px; margin: 0 auto; padding: 0 16px; height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .plai-nav img { height: 40px; width: auto; display: block; }
+  .plai-nav a.retour { font-size: 13px; font-weight: 500; color: var(--text2); text-decoration: none; padding: 6px 10px; border-radius: var(--radius-sm); }
+  .plai-nav a.retour:hover { background: var(--surface2); color: var(--text); }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+  header.hero { padding: 2.5rem 0 1.5rem; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); border: 1px solid var(--border-input); padding: 3px 12px; border-radius: 20px; margin-bottom: 1rem; }
+  h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 5vw, 2.4rem); line-height: 1.2; }
+  .soustitre { color: var(--text2); margin-top: .5rem; }
+
+  .sommaire { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.5rem; margin: 1rem 0 1.5rem; }
+  .sommaire h2 { font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--text2); margin: 0 0 .25rem; text-transform: uppercase; letter-spacing: .5px; }
+  .sommaire ol { columns: 2; column-gap: 2rem; padding-left: 1.2rem; font-size: 14px; }
+  .sommaire li { break-inside: avoid; }
+
+  section { padding: 2rem 0 1rem; border-top: 1px solid var(--border); }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: 24px; line-height: 1.3; margin-bottom: 1rem; scroll-margin-top: 72px; }
+  h3 { font-size: 17px; font-weight: 600; margin: 1.5rem 0 .5rem; }
+  p, ul, ol, table, .prompt, .callout { margin-bottom: 1rem; }
+  ul, ol { padding-left: 1.4rem; }
+  li + li { margin-top: .25rem; }
+  code { font-family: var(--mono); font-size: .9em; background: var(--surface2); padding: 1px 5px; border-radius: 4px; }
+
+  table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 15px; }
+  th, td { text-align: left; padding: .5rem .75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { background: var(--surface2); font-weight: 600; }
+
+  .callout { border-left: 4px solid var(--teal-border); background: var(--teal-bg); border-radius: var(--radius-sm); padding: .9rem 1.1rem; }
+  .callout.warning { border-left-color: var(--warn-border); background: var(--warn-bg); }
+  .callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+  .callout ul { margin: .5rem 0 0; }
+
+  .prompt { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: .75rem; }
+  .prompt pre { font-family: var(--mono); font-size: 13.5px; line-height: 1.6; white-space: pre-wrap; word-break: break-word; background: var(--surface2); border-radius: var(--radius-sm); padding: .9rem 1rem; max-height: 28rem; overflow: auto; }
+  .prompt-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; margin-top: .6rem; }
+  .btn { background: var(--teal); color: #fff; border: 1px solid var(--teal); border-radius: var(--radius-sm); padding: 8px 18px; min-height: 40px; font: 500 14px var(--sans); cursor: pointer; }
+  .btn:hover { opacity: .88; }
+  .statut { margin: 0; font-size: 13px; font-weight: 500; }
+  .statut.ok { color: var(--teal); }
+  .statut.erreur { color: var(--error); }
+
+  footer { margin-top: 2rem; border-top: 1px solid var(--border); padding: 2rem 0 3rem; font-size: 13px; color: var(--text2); }
+  footer p + p { margin-top: .5rem; }
+  footer a { color: var(--text2); }
+
+  @media (max-width: 600px) { .sommaire ol { columns: 1; } h2 { font-size: 21px; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  @media print { .plai-nav, .prompt-actions, .sommaire, .skip { display: none; } .prompt pre { max-height: none; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+
+<nav class="plai-nav" aria-label="Site">
+  <div class="inner">
+    <a href="/"><img src="/logo-jfb4plai.png" alt="JFB4PLAI, retour à l'accueil"></a>
+    <a class="retour" href="/">Tous les outils</a>
+  </div>
+</nav>
+
+<main id="contenu" class="container">
+  <header class="hero">
+    <p class="badge">Atelier IA</p>
+    <h1>Fabriquer un outil PLAI en un seul fichier, avec Claude</h1>
+    <p class="soustitre">Codage conversationnel · prompts prêts à copier · style PLAI</p>
+  </header>
+
+  <nav class="sommaire" aria-labelledby="t-sommaire">
+    <h2 id="t-sommaire">Sommaire</h2>
+    <ol>
+<li><a href="#le-principe">Le principe</a></li>
+<li><a href="#avec-claude-où-et-comment">Avec Claude : où et comment</a></li>
+<li><a href="#le-cadre-non-négociable">Le cadre, non négociable</a></li>
+<li><a href="#deux-règles-de-bon-sens">Deux règles de bon sens</a></li>
+<li><a href="#le-bloc-style-plai">Le bloc STYLE PLAI</a></li>
+<li><a href="#le-prompt-minimal-pour-essayer-tout-de-suite">Le prompt minimal, pour essayer tout de suite</a></li>
+<li><a href="#le-gabarit-complet">Le gabarit complet</a></li>
+<li><a href="#un-exemple-rempli">Un exemple rempli</a></li>
+<li><a href="#récupérer-le-fichier">Récupérer le fichier</a></li>
+<li><a href="#réparer">Réparer</a></li>
+<li><a href="#ajouter-une-fonction">Ajouter une fonction</a></li>
+<li><a href="#auditer-avant-de-partager">Auditer, avant de partager</a></li>
+<li><a href="#nettoyer-quand-le-fichier-grossit">Nettoyer, quand le fichier grossit</a></li>
+<li><a href="#accessibilité-constater-puis-corriger">Accessibilité : constater, puis corriger</a></li>
+<li><a href="#quelle-licence">Quelle licence ?</a></li>
+<li><a href="#annexe-notions-techniques">Annexe · Notions techniques</a></li>
+<li><a href="#pour-aller-plus-loin">Pour aller plus loin</a></li>
+    </ol>
+  </nav>
+
+<aside class="callout note"><p>Adaptation PLAI du guide de François Jourde, <a href="https://github.com/jourde/training/blob/main/ai/vibecoding.md" rel="noopener noreferrer"><em>Fabriquer un outil sur mesure, en un seul fichier</em></a>, sous licence CC BY-SA 4.0.</p><p>Ce qui change : contexte FWB, usage de Claude, charte graphique PLAI intégrée aux prompts.</p><p>Licence de cette page : <strong>CC BY-SA 4.0</strong>, imposée par la source (voir pied de page).</p></aside>
+<section aria-labelledby="le-principe"><h2 id="le-principe">Le principe</h2>
+<p>Vous n'écrivez pas de code. Vous <strong>décrivez</strong> l'outil à Claude, en français.<br>Claude produit une page HTML. Vous l'essayez, vous décrivez ce qui cloche, Claude corrige.</p>
+<p>C'est le <strong>codage conversationnel</strong> (<em>vibe coding</em>, terme d'Andrej Karpathy, 2025).</p>
+<p>Le résultat : <strong>un seul fichier <code>.html</code></strong>. Il s'ouvre hors ligne, s'envoie par mail, se dépose sur une clé USB.</p>
+</section>
+<section aria-labelledby="avec-claude-où-et-comment"><h2 id="avec-claude-où-et-comment">Avec Claude : où et comment</h2>
+<h3>Sur claude.ai (web, app Windows/Mac, iPad)</h3>
+<ul><li>Collez le prompt. Claude affiche l'outil dans un <strong>panneau latéral</strong> (Artifact) et le fait tourner.</li><li>Testez directement dans ce panneau. Puis <strong>téléchargez</strong> le fichier via le menu de l'Artifact.</li><li><strong>Testez toujours le fichier téléchargé</strong>, ouvert hors connexion. L'aperçu Claude n'est pas votre navigateur : certaines fonctions (copie dans le presse-papiers, mémoire locale) peuvent s'y comporter autrement. Comportement non vérifié pour la version actuelle de claude.ai : le contrôle sur fichier réel tranche.</li></ul>
+<h3>Un Projet Claude « Atelier outils PLAI »</h3>
+<p>Pour fabriquer plusieurs outils, créez un <strong>Projet</strong> sur claude.ai (selon votre offre).<br>Collez le bloc ci-dessous dans les <strong>instructions du projet</strong>.<br>Chaque conversation du projet hérite alors des contraintes et du style PLAI. Votre prompt se réduit au besoin.</p>
+<div class="prompt"><pre id="p1" tabindex="0">Tu fabriques des outils web pour des enseignants de la FWB (Belgique).
+
+Chaque outil :
+- tient dans UN SEUL fichier HTML autonome (HTML, CSS, JS dedans) ;
+- s'affiche en Artifact HTML ;
+- ne fait aucune requête réseau, ne charge aucune bibliothèque externe, aucune police distante ;
+- fonctionne hors ligne, ouvert directement dans un navigateur ;
+- n'envoie aucune donnée : tout reste dans le navigateur ;
+- respecte WCAG 2.2 AA : HTML sémantique, clavier complet, focus visible,
+  libellés liés aux champs, messages d'état annoncés (aria-live) ;
+- reste utilisable à 200 % de zoom et sur largeur de téléphone ;
+- est en français de Belgique (septante, nonante ; niveaux P1-P6, S1-S7) ;
+- respecte le STYLE PLAI ci-dessous ;
+- porte un commentaire d'en-tête et un pied de page :
+  « Jean-François Beguin · PLAI, [année] — licence PolyForm Noncommercial 1.0.0 ».
+
+[coller ici le bloc STYLE PLAI]
+
+Réponse attendue : le fichier complet, puis trois lignes sans jargon :
+ce que fait l'outil, ce que je dois vérifier en l'essayant.
+Pour une correction : la plus petite possible, sans rien réécrire d'autre.</pre><div class="prompt-actions"><button type="button" class="btn" data-copier="p1">Copier</button><p class="statut" role="status" aria-live="polite"></p></div></div>
+<h3>Avec Claude Code</h3>
+<p>Pour un outil qui grossit, passe en dépôt Git, ou part sur Vercel : <strong>Claude Code</strong>.<br>Même méthode, mais Claude lit et modifie le fichier directement dans le dépôt. Pas de copier-coller.</p>
+</section>
+<section aria-labelledby="le-cadre-non-négociable"><h2 id="le-cadre-non-négociable">Le cadre, non négociable</h2>
+<ul><li><strong>Données personnelles</strong> : RGPD et règles de votre pouvoir organisateur (PO). Aucune donnée réelle d'élève dans une conversation Claude grand public.</li><li><strong>Service d'IA</strong> : priorité à celui approuvé par votre PO ou votre établissement. Une offre sous contrat autorise ce qu'une offre grand public interdit.</li><li><strong>Mise en ligne sur un réseau d'école</strong> : décision de l'établissement, pas la vôtre. Hébergement, données, accessibilité, maintenance. Le <strong>prompt d'audit</strong> (plus bas) prépare exactement ces questions.</li></ul>
+<p>Interlocuteurs selon l'établissement : direction, délégué à la protection des données (DPO) du PO, service informatique.</p>
+<p><strong>Sur votre ordinateur, pour vous seul ?</strong> Rien à demander, tant qu'aucune donnée personnelle n'est traitée. Dès que l'outil traite des données ou passe à un collègue : audit.</p>
+</section>
+<section aria-labelledby="deux-règles-de-bon-sens"><h2 id="deux-règles-de-bon-sens">Deux règles de bon sens</h2>
+<ul><li><strong>Données fictives.</strong> Jamais besoin de vrais noms pour tester un outil.</li><li><strong>Un outil, une fonction.</strong> Plus facile à corriger, à partager, à refaire.</li></ul>
+</section>
+<section aria-labelledby="le-bloc-style-plai"><h2 id="le-bloc-style-plai">Le bloc STYLE PLAI</h2>
+<p>À coller dans les prompts (ou une fois dans les instructions du Projet).<br>Il reprend la charte <code>plai-style.css</code> de HubActif, avec <strong>trois corrections d'accessibilité</strong> :</p>
+<ul><li><code>--text3</code> passe de <code>#9a958c</code> à <code>#6f6a62</code> : contraste 2,8:1 → 5,1:1 sur <code>--bg</code> (seuil texte : 4,5:1) ;</li><li>nouvelle variable <code>--border-input</code> <code>#857f76</code> pour les champs : 1,5:1 → 3,8:1 (seuil composant : 3:1) ;</li><li>focus : contour plein <code>--teal</code> au lieu d'une ombre à 10 % d'opacité, peu visible.</li></ul>
+<p>Les polices DM Sans / DM Serif Display ne sont <strong>pas</strong> chargées depuis Google Fonts : ce serait une requête réseau. Elles s'appliquent si elles sont installées, sinon repli système.</p>
+<div class="prompt"><pre id="p2" tabindex="0"># STYLE PLAI — à respecter
+Variables CSS (:root) :
+--bg #faf9f7 ; --surface #ffffff ; --surface2 #f4f2ee ;
+--border #e8e4dd ; --border-input #857f76 ;
+--text #1a1814 ; --text2 #5a564f ; --text3 #6f6a62 ;
+--teal #0f6e56 ; --teal-bg #e1f5ee ; --teal-border #1d9e75 ;
+--error #a32d2d ; --error-bg #fcebeb ; --error-border #e24b4a ;
+--radius 10px ; --radius-sm 6px.
+Polices, sans aucun chargement externe :
+titres "'DM Serif Display', Georgia, serif" ;
+texte "'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif".
+Corps 15px, interligne 1.7, fond --bg, texte --text.
+Conteneur centré, largeur max 760px, marges latérales 1.5rem.
+En-tête : bandeau sobre, titre en DM Serif Display, filet bas 1px --border.
+Sections séparées par un filet 1px --border ; h2 en DM Serif Display 22px.
+Cartes : fond --surface, bordure 1px --border, rayon --radius, padding 1.25rem 1.5rem.
+Bouton principal : fond --teal, texte blanc, rayon --radius-sm, padding 9px 18px, 14px, graisse 500.
+Bouton secondaire : fond transparent, bordure 1px --border-input, texte --text2.
+Libellés : 13px, graisse 500, --text2, au-dessus du champ.
+Champs : largeur 100 %, bordure 1px --border-input, rayon --radius-sm, fond --bg, padding 9px 12px.
+Focus visible sur tout élément interactif : outline 2px solid --teal, outline-offset 2px.
+Succès : fond --teal-bg, bordure --teal-border, texte --teal.
+Erreur : fond --error-bg, bordure --error-border, texte --error.
+Pied de page : centré, 13px, --text2, filet haut 1px --border.
+Aucun logo, aucune image, aucun émoji. Transitions désactivées si prefers-reduced-motion.</pre><div class="prompt-actions"><button type="button" class="btn" data-copier="p2">Copier</button><p class="statut" role="status" aria-live="polite"></p></div></div>
+</section>
+<section aria-labelledby="le-prompt-minimal-pour-essayer-tout-de-suite"><h2 id="le-prompt-minimal-pour-essayer-tout-de-suite">Le prompt minimal, pour essayer tout de suite</h2>
+<p>Une seule zone à remplir.</p>
+<div class="prompt"><pre id="p3" tabindex="0">Crée un outil web dans UN SEUL fichier HTML autonome, en Artifact.
+Hors ligne, sans bibliothèque externe, sans police distante, sans envoyer de données.
+Style sobre : fond #faf9f7, texte #1a1814, boutons #0f6e56 texte blanc, focus visible.
+
+Besoin : [ce que l'outil doit faire, et pour qui]
+
+Donne le fichier complet, puis trois lignes : ce que je dois vérifier.</pre><div class="prompt-actions"><button type="button" class="btn" data-copier="p3">Copier</button><p class="statut" role="status" aria-live="polite"></p></div></div>
+<p>Rapide, mais sans prise sur l'accessibilité, les champs, la charte complète. Pour un outil à garder ou à partager : gabarit complet.</p>
+</section>
+<section aria-labelledby="le-gabarit-complet"><h2 id="le-gabarit-complet">Le gabarit complet</h2>
+<p>Remplacez les zones entre crochets. Ne touchez pas au reste.<br><strong>Seule la zone BESOIN est obligatoire.</strong> Pour les deux autres, écrivez <em>à toi de proposer, je corrigerai</em> si vous ne savez pas encore.</p>
+<p>Vaut pour un formulaire, un calculateur, un minuteur, une liste de vérification, un tirage au sort, un tableau de suivi.</p>
+<div class="prompt"><pre id="p4" tabindex="0">Tu es développeur web. Crée une application d'une seule page,
+dans UN SEUL fichier HTML autonome, affichée en Artifact.
+
+# BESOIN
+[Deux ou trois phrases : ce que fait l'outil, pour qui (niveau, filière),
+ce que la personne y gagne.]
+
+# CE QUE LA PERSONNE FAIT
+[Ce qu'elle saisit, choisit, coche, déplace ou déclenche
+— ou : à toi de proposer, je corrigerai]
+
+# CE QU'ELLE OBTIENT
+[Un texte à copier, un calcul, une liste, un tableau, un minuteur,
+un fichier à télécharger…
+— ou : à toi de proposer, je corrigerai]
+
+# CONTRAINTES TECHNIQUES — à ne pas modifier
+- Un seul fichier .html : HTML, CSS et JavaScript dedans. Aucun fichier séparé.
+- Aucune requête réseau, aucune bibliothèque externe, aucune police distante,
+  aucun compte utilisateur.
+- Fonctionne hors ligne, ouvert directement dans un navigateur.
+- Aucune donnée envoyée : tout reste dans le navigateur.
+- Accessible WCAG 2.2 AA : HTML sémantique, clavier complet, focus visible,
+  libellés liés aux champs, messages d'état annoncés (aria-live).
+- Adaptatif : utilisable à 200 % de zoom et sur largeur de téléphone.
+- Français de Belgique. Terminologie FWB (P1-P6, S1-S7).
+- Code court et lisible, sans framework.
+- Commentaire en tête du fichier et pied de page discret :
+  « [votre nom] · PLAI, [année] — licence [PolyForm Noncommercial 1.0.0 / EUPL-1.2 / MIT] ».
+
+[coller ici le bloc STYLE PLAI]
+
+# RÉPONSE ATTENDUE
+1. Le fichier HTML complet.
+2. Trois lignes maximum, sans jargon : ce que fait l'outil, ce que je dois vérifier.</pre><div class="prompt-actions"><button type="button" class="btn" data-copier="p4">Copier</button><p class="statut" role="status" aria-live="polite"></p></div></div>
+</section>
+<section aria-labelledby="un-exemple-rempli"><h2 id="un-exemple-rempli">Un exemple rempli</h2>
+<p>Un générateur de prompt pédagogique structuré, pour collègues peu à l'aise avec les consignes à l'IA.<br><strong>Observez le niveau de détail du besoin</strong> : quoi, pour qui, quel gain. C'est ce qui évite de tout reprendre au deuxième essai.</p>
+<p>Résultat obtenu avec ce prompt : <a href="exemple-generateur-prompt.html"><code>exemple-generateur-prompt.html</code></a>.</p>
+<div class="prompt"><pre id="p5" tabindex="0">Tu es développeur web. Crée une application d'une seule page,
+dans UN SEUL fichier HTML autonome, affichée en Artifact.
+
+# BESOIN
+Un formulaire qui rédige un prompt pédagogique structuré, pour des
+enseignants FWB qui utilisent une IA sans savoir formuler une consigne.
+Ils remplissent des champs, l'outil écrit le prompt : ils disent ce qu'ils
+veulent, sans apprendre à rédiger un prompt.
+
+# CE QUE LA PERSONNE FAIT
+Elle remplit, dans cet ordre : tâche demandée, niveau (liste P1 à P6,
+S1 à S7), discipline, durée en minutes, besoins spécifiques (cases :
+DYS, TDAH, TSA, HP, FLE), objectif, format de sortie.
+Chaque champ a un exemple court en texte d'aide.
+
+# CE QU'ELLE OBTIENT
+Le prompt structuré par champs (Contexte classe, Objectif, Activité,
+Format), affiché en permanence, mis à jour à chaque frappe.
+Un bouton « Copier le prompt » confirme la copie par un message annoncé.
+Un bouton « Effacer » vide le formulaire.
+
+# CONTRAINTES TECHNIQUES — à ne pas modifier
+- Un seul fichier .html : HTML, CSS et JavaScript dedans. Aucun fichier séparé.
+- Aucune requête réseau, aucune bibliothèque externe, aucune police distante,
+  aucun compte utilisateur.
+- Fonctionne hors ligne, ouvert directement dans un navigateur.
+- Aucune donnée envoyée : tout reste dans le navigateur.
+- Accessible WCAG 2.2 AA : HTML sémantique, clavier complet, focus visible,
+  libellés liés aux champs, messages d'état annoncés (aria-live).
+- Adaptatif : utilisable à 200 % de zoom et sur largeur de téléphone.
+- Français de Belgique. Terminologie FWB (P1-P6, S1-S7).
+- Code court et lisible, sans framework.
+- Commentaire en tête du fichier et pied de page discret :
+  « Jean-François Beguin · PLAI, 2026 — licence PolyForm Noncommercial 1.0.0 ».
+
+[coller ici le bloc STYLE PLAI]
+
+# RÉPONSE ATTENDUE
+1. Le fichier HTML complet.
+2. Trois lignes maximum, sans jargon : ce que fait l'outil, ce que je dois vérifier.</pre><div class="prompt-actions"><button type="button" class="btn" data-copier="p5">Copier</button><p class="statut" role="status" aria-live="polite"></p></div></div>
+</section>
+<section aria-labelledby="récupérer-le-fichier"><h2 id="récupérer-le-fichier">Récupérer le fichier</h2>
+<p><strong>Sur claude.ai</strong> : menu de l'Artifact → télécharger. Le fichier arrive en <code>.html</code>. Double-clic : il s'ouvre.</p>
+<p><strong>Si vous copiez le code à la main</strong> :</p>
+<ol><li>Copiez tout, de <code>&lt;!DOCTYPE html&gt;</code> à <code>&lt;/html&gt;</code>.</li><li>Collez dans un éditeur de <strong>texte brut</strong>.</li><li>Enregistrez sous un nom en <code>.html</code>, par exemple <code>generateur-prompt.html</code>.</li><li>Double-cliquez.</li></ol>
+<aside class="callout warning"><p><strong>Deux pièges</strong> qui affichent du code au lieu de l'outil :</p><ul><li><strong>Mac, TextEdit</strong> : format texte enrichi par défaut. Avant d'enregistrer : <em>Format → Convertir au format texte</em>.</li><li><strong>Windows, Bloc-notes</strong> : ajoute parfois <code>.txt</code>. À l'enregistrement : <em>Type : Tous les fichiers</em>.</li></ul></aside>
+</section>
+<section aria-labelledby="réparer"><h2 id="réparer">Réparer</h2>
+<div class="prompt"><pre id="p6" tabindex="0">Voici mon outil : [coller le fichier complet, ou : l'Artifact ci-dessus]
+
+Problème :
+- Ce que je voulais : [décrire]
+- Ce qui se passe : [décrire]
+
+Trouve l'origine. Propose la correction la plus petite possible.
+Ne modifie ni le style PLAI ni le reste du comportement.
+Renvoie le fichier complet, puis trois lignes : ce que tu as changé.</pre><div class="prompt-actions"><button type="button" class="btn" data-copier="p6">Copier</button><p class="statut" role="status" aria-live="polite"></p></div></div>
+<p><strong>« La correction la plus petite possible »</strong> : sans elle, l'IA réécrit tout et casse autre chose.</p>
+<p>Dans une même conversation Claude, inutile de recoller le fichier : Claude modifie l'Artifact en place. Recollez-le dans une <strong>nouvelle</strong> conversation.</p>
+</section>
+<section aria-labelledby="ajouter-une-fonction"><h2 id="ajouter-une-fonction">Ajouter une fonction</h2>
+<div class="prompt"><pre id="p7" tabindex="0">Voici mon outil : [coller le fichier complet, ou : l'Artifact ci-dessus]
+
+Ajoute : [la fonction, en une ou deux phrases].
+
+Ne change rien d'autre. Garde les contraintes d'origine :
+un seul fichier, aucune requête réseau, clavier complet, style PLAI.
+Renvoie le fichier complet.</pre><div class="prompt-actions"><button type="button" class="btn" data-copier="p7">Copier</button><p class="statut" role="status" aria-live="polite"></p></div></div>
+</section>
+<section aria-labelledby="auditer-avant-de-partager"><h2 id="auditer-avant-de-partager">Auditer, avant de partager</h2>
+<p>Constat seulement. Vous choisissez ensuite quoi faire corriger, avec le prompt de réparation.</p>
+<div class="prompt"><pre id="p8" tabindex="0">Analyse ce fichier. Réponds en français, sans jargon :
+1. Envoie-t-il des données quelque part ?
+2. Charge-t-il quelque chose depuis internet (script, police, image) ?
+3. Est-il utilisable entièrement au clavier, et avec un lecteur d'écran ?
+4. S'affiche-t-il correctement sur téléphone et à 200 % de zoom ?
+5. Que se passe-t-il avec un champ vide, un texte très long collé,
+   des caractères inattendus ?
+6. Respecte-t-il le style PLAI (variables, focus, pied de page) ?
+7. Qu'est-ce qui pourrait mal tourner pour la personne qui l'utilise ?
+
+Pour chaque point : constat, niveau (critique / majeur / mineur),
+correction proposée.
+
+Ne modifie rien. Pas de code : le constat seulement.
+
+Voici le fichier : [coller le fichier complet]</pre><div class="prompt-actions"><button type="button" class="btn" data-copier="p8">Copier</button><p class="statut" role="status" aria-live="polite"></p></div></div>
+</section>
+<section aria-labelledby="nettoyer-quand-le-fichier-grossit"><h2 id="nettoyer-quand-le-fichier-grossit">Nettoyer, quand le fichier grossit</h2>
+<p>Après test seulement. Retestez aussitôt après.</p>
+<div class="prompt"><pre id="p9" tabindex="0">Nettoie ce fichier sans changer son comportement ni son apparence.
+
+Autorisé : supprimer le code mort, regrouper les répétitions,
+renommer ce qui est obscur, simplifier ce qui est compliqué.
+
+Interdit : ajouter ou retirer une fonction, modifier le style PLAI,
+introduire une bibliothèque externe.
+
+Renvoie le fichier complet, puis cinq lignes maximum :
+ce que tu as changé, ce que je dois réessayer en priorité.
+
+Voici le fichier : [coller le fichier complet]</pre><div class="prompt-actions"><button type="button" class="btn" data-copier="p9">Copier</button><p class="statut" role="status" aria-live="polite"></p></div></div>
+</section>
+<section aria-labelledby="accessibilité-constater-puis-corriger"><h2 id="accessibilité-constater-puis-corriger">Accessibilité : constater, puis corriger</h2>
+<p>Le gabarit exige déjà WCAG 2.2 AA. Ces deux prompts révisent un outil existant.</p>
+<p><strong>1. Constater</strong></p>
+<div class="prompt"><pre id="p10" tabindex="0">Évalue l'accessibilité de ce fichier au regard de WCAG 2.2 niveau AA.
+Français, sans jargon, sans code.
+
+Vérifie au moins :
+- langue de la page déclarée (lang="fr-BE"), titre de page explicite
+- titres hiérarchisés, sans niveau sauté
+- chaque champ a une étiquette réellement liée ; erreurs rattachées au champ
+- tout est atteignable au clavier, ordre logique, aucun piège,
+  focus visible et jamais masqué
+- messages d'état (« copié », erreur) annoncés aux lecteurs d'écran
+- la couleur n'est jamais le seul indice
+- contrastes : 4,5:1 texte, 3:1 composants (bordures de champs comprises)
+- cibles cliquables assez grandes et espacées
+- utilisable à 200 % de zoom et sur largeur de téléphone
+- animations coupées si mouvement réduit demandé
+
+Pour chaque point : constat, niveau (critique / majeur / mineur), correction.
+
+Termine par la liste de ce que tu N'AS PAS pu vérifier en lisant le code,
+et qui demande un essai réel.
+
+Voici le fichier : [coller le fichier complet]</pre><div class="prompt-actions"><button type="button" class="btn" data-copier="p10">Copier</button><p class="statut" role="status" aria-live="polite"></p></div></div>
+<p><strong>2. Corriger</strong></p>
+<div class="prompt"><pre id="p11" tabindex="0">Corrige les points signalés, du plus grave au moins grave.
+Ne change ni le comportement ni le style PLAI au-delà de ce qu'exige la correction.
+
+Renvoie le fichier complet, puis une ligne par correction :
+ce qu'elle change pour la personne qui utilise l'outil.</pre><div class="prompt-actions"><button type="button" class="btn" data-copier="p11">Copier</button><p class="statut" role="status" aria-live="polite"></p></div></div>
+<p><strong>Quatre vérifications à faire vous-même</strong>, deux minutes, sans outil :</p>
+<ol><li>Parcourez la page à la touche Tab : vous voyez toujours où vous êtes, vous n'êtes jamais bloqué.</li><li>Zoomez à 200 %.</li><li>Réduisez la fenêtre à la largeur d'un téléphone.</li><li>Déclenchez un message (copie, erreur) : il se voit.</li></ol>
+<p>Une relecture par Claude ne remplace pas cet essai. Elle ne permet pas de déclarer l'outil conforme.</p>
+</section>
+<section aria-labelledby="quelle-licence"><h2 id="quelle-licence">Quelle licence ?</h2>
+<p>Une licence dit ce que les autres peuvent faire de votre outil.</p>
+<ul><li><strong>PolyForm Noncommercial 1.0.0</strong> : choix des dépôts PLAI. Réutilisation libre, <strong>usage commercial interdit</strong>. Ce n'est pas une licence open source au sens strict. Texte en anglais uniquement, à ma connaissance. <a href="https://polyformproject.org/licenses/noncommercial/1.0.0/" rel="noopener noreferrer">Texte officiel</a>.</li><li><strong>EUPL-1.2</strong> : licence de l'Union européenne, texte officiel en français. Partage à l'identique : qui reprend l'outil le laisse aussi libre. <a href="https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12" rel="noopener noreferrer">Texte officiel</a>.</li><li><strong>MIT</strong> : toute liberté, à condition de garder votre nom. <a href="https://opensource.org/licenses/MIT" rel="noopener noreferrer">Texte officiel</a>.</li></ul>
+<p>Pour un outil déjà fabriqué :</p>
+<div class="prompt"><pre id="p12" tabindex="0">Ajoute la licence [PolyForm Noncommercial 1.0.0 / EUPL-1.2 / MIT] à cet outil,
+sans rien changer d'autre :
+- avis de licence en commentaire en tête du fichier, avec [votre nom] et [année] ;
+- pied de page discret : « [votre nom] · PLAI, [année] — licence [nom] »,
+  le nom de la licence étant un lien vers son texte officiel.
+
+Ne modifie ni le comportement, ni le style, ni le contenu.
+Renvoie le fichier complet.
+
+Voici le fichier : [coller le fichier complet]</pre><div class="prompt-actions"><button type="button" class="btn" data-copier="p12">Copier</button><p class="statut" role="status" aria-live="polite"></p></div></div>
+<p>Sur GitHub, ajoutez aussi un fichier <code>LICENSE</code> avec le texte officiel.</p>
+<aside class="callout warning"><p>Le statut juridique du code produit par une IA reste incertain et varie selon les pays. Sans apport créatif humain, il n'est pas toujours protégeable. La mention de licence vaut alors surtout <strong>déclaration d'intention</strong>. Suffisant entre collègues. Pour un usage à enjeu : votre PO.</p></aside>
+</section>
+<section aria-labelledby="annexe-notions-techniques"><h2 id="annexe-notions-techniques">Annexe · Notions techniques</h2>
+<h3>Un fichier, trois couches</h3>
+<table><thead><tr><th scope="col">Couche</th><th scope="col">Rôle</th></tr></thead><tbody><tr><td><strong>HTML</strong></td><td>structure et contenu</td></tr><tr><td><strong>CSS</strong></td><td>mise en forme (ici : le style PLAI)</td></tr><tr><td><strong>JavaScript</strong></td><td>comportement, interactivité</td></tr></tbody></table>
+<h3>Pourquoi un seul fichier</h3>
+<table><thead><tr><th scope="col">Avantage</th><th scope="col">Effet</th></tr></thead><tbody><tr><td><strong>Autonome</strong></td><td>rien à installer</td></tr><tr><td><strong>Portable</strong></td><td>un fichier à envoyer, sauvegarder, déposer</td></tr><tr><td><strong>Modifiable par Claude</strong></td><td>« voici mon outil, ajoute ceci » suffit</td></tr><tr><td><strong>Durable</strong></td><td>rien à mettre à jour quand l'écosystème change</td></tr></tbody></table>
+<h3>Dépendances, CDN, polices distantes</h3>
+<p>Une <strong>dépendance</strong> est une bibliothèque externe : graphiques, calendrier, rendu Markdown. Un <strong>CDN</strong> la charge depuis le web à l'ouverture. Une <strong>police Google Fonts</strong> fonctionne de la même façon.</p>
+<p>Claude en propose spontanément. Conséquence : l'outil <strong>ne marche plus hors ligne</strong>, <strong>émet une requête vers un tiers</strong> à chaque ouverture, et <strong>cessera de fonctionner</strong> si l'adresse change. D'où la contrainte. Accepter une dépendance, c'est renoncer à ces trois propriétés.</p>
+<h3>Rester petit</h3>
+<p>Un petit outil se comprend, se corrige et se refait facilement. Avec Claude, une raison de plus : <strong>le fichier entier tient dans sa fenêtre de contexte</strong>. Claude le lit en entier et peut le régénérer d'un bloc. Au-delà d'une certaine taille, il travaille par fragments, et les corrections cassent autre chose.</p>
+<h3>Versionner</h3>
+<p>Déposer le fichier sur GitHub (comme les outils PLAI) :</p>
+<ul><li><strong>sauvegarder sans écraser</strong> : chaque version reste récupérable ;</li><li><strong>revenir en arrière</strong> si une modification casse l'outil ;</li><li><strong>partager</strong> par un lien ;</li><li><strong>publier</strong> : GitHub Pages ou Vercel sert le fichier tel quel ;</li><li><strong>documenter</strong> : l'historique garde la trace des décisions.</li></ul>
+</section>
+<section aria-labelledby="pour-aller-plus-loin"><h2 id="pour-aller-plus-loin">Pour aller plus loin</h2>
+<ul><li>Guide d'origine : <a href="https://github.com/jourde/training/blob/main/ai/vibecoding.md" rel="noopener noreferrer"><em>Fabriquer un outil sur mesure, en un seul fichier</em></a>, François Jourde</li><li><a href="https://github.com/jourde/prompt-builder" rel="noopener noreferrer">Constructeur d'instructions</a>, François Jourde</li><li><strong>CréeIAppli</strong>, Arnaud Champollion — formulaire qui rédige le prompt de création d'une application web — <a href="https://bidouiage.forge.apps.education.fr/creiappli/" rel="noopener noreferrer">bidouiage.forge.apps.education.fr/creiappli</a></li><li><strong>EDUVAIBE</strong>, Marie-Charlotte Hoyer — parcours en sept étapes vers le prompt d'une application pédagogique — <a href="https://mchoyer.forge.apps.education.fr/eduvibe/" rel="noopener noreferrer">mchoyer.forge.apps.education.fr/eduvibe</a></li><li><strong>La Ressourcerie</strong> de la Forge des communs numériques éducatifs (France) — <a href="https://ressourcerie.forge.apps.education.fr/" rel="noopener noreferrer">ressourcerie.forge.apps.education.fr</a></li><li>Outils PLAI — <a href="https://jfb4plai.com" rel="noopener noreferrer">jfb4plai.com</a></li></ul>
+</section>
+</main>
+
+<footer>
+  <div class="container">
+    <p>Cette page est une adaptation, par Jean-François Beguin (PLAI), du guide de <strong>François Jourde</strong> <a href="https://github.com/jourde/training/blob/main/ai/vibecoding.md" rel="noopener noreferrer"><em>Fabriquer un outil sur mesure, en un seul fichier</em></a>, publié sous licence CC BY-SA 4.0.<br>Modifications : contexte FWB, usage de Claude (Artifacts, Projets, Claude Code), bloc de style PLAI, exemple rempli, choix de licence.<br>L'adaptation est publiée sous la même licence : <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.fr" rel="noopener noreferrer">Creative Commons Attribution – Partage dans les Mêmes Conditions 4.0 International (CC BY-SA 4.0)</a>.<br>Elle déroge donc, pour ce dossier seulement, à la licence CC BY-NC-SA 4.0 des autres contenus du dépôt.</p>
+    <p>PLAI — Pôle Liégeois d'Accompagnement vers une École Inclusive — FWB · <a href="/">jfb4plai.com</a></p>
+  </div>
+</footer>
+
+<script>
+  // Le bouton « Copier » d'un gabarit remplace la mention
+  // « [coller ici le bloc STYLE PLAI] » par le bloc lui-même : un seul collage suffit.
+  const REPERE = '[coller ici le bloc STYLE PLAI]';
+  const blocStyle = [...document.querySelectorAll('.prompt pre')]
+    .map(p => p.textContent).find(t => t.startsWith('# STYLE PLAI'));
+
+  function copierSecours(texte) {
+    const zone = document.createElement('textarea');
+    zone.value = texte;
+    zone.setAttribute('readonly', '');
+    zone.setAttribute('aria-hidden', 'true');
+    zone.style.cssText = 'position:fixed;top:0;left:-9999px;opacity:0;';
+    document.body.appendChild(zone);
+    zone.select();
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    zone.remove();
+    return ok;
+  }
+
+  document.querySelectorAll('[data-copier]').forEach(bouton => bouton.addEventListener('click', async () => {
+    let texte = document.getElementById(bouton.dataset.copier).textContent;
+    const avecStyle = blocStyle && texte.includes(REPERE);
+    if (avecStyle) texte = texte.replace(REPERE, blocStyle);
+    let ok = false;
+    if (navigator.clipboard && window.isSecureContext) {
+      try { await navigator.clipboard.writeText(texte); ok = true; } catch (e) { ok = false; }
+    }
+    if (!ok) ok = copierSecours(texte);
+    document.querySelectorAll('.statut').forEach(s => { s.textContent = ''; });
+    const statut = bouton.nextElementSibling;
+    statut.className = 'statut ' + (ok ? 'ok' : 'erreur');
+    statut.textContent = ok
+      ? (avecStyle ? 'Copié, bloc STYLE PLAI inclus. Collez dans Claude.' : 'Copié. Collez dans Claude.')
+      : 'Copie impossible : sélectionnez le texte, puis Ctrl+C (Cmd+C sur Mac).';
+  }));
+</script>
+</body>
+</html>
