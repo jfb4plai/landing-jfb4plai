@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>L'IA en une formule : f(x) = y</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf9f7; --surface: #ffffff; --surface2: #f4f2ee;
+  --border: #e8e4dd; --border2: #d4cfc6;
+  --text: #1a1814; --text2: #5a564f; --text3: #6b665e;
+  --teal: #0f6e56; --teal-bg: #e1f5ee; --teal-border: #1d9e75;
+  --orange: #f97316; --orange-bg: #fff4ea;
+  --radius: 10px; --radius-sm: 6px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', Arial, sans-serif; background: var(--bg); color: var(--text); font-size: 17px; line-height: 1.7; }
+.plai-nav { background: rgba(250,249,247,0.95); border-bottom: 1px solid var(--border); padding: 0 1.5rem; display: flex; align-items: center; gap: 12px; height: 56px; }
+.plai-nav img { height: 32px; width: auto; }
+.plai-nav span { font-family: 'DM Serif Display', serif; font-size: 18px; }
+.plai-container { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+.plai-badge { display: inline-block; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--text3); border: 1px solid var(--border2); padding: 4px 14px; border-radius: 20px; margin: 2rem 0 1rem; }
+h1 { font-family: 'DM Serif Display', serif; font-size: 36px; line-height: 1.2; font-weight: 400; margin-bottom: 0.5rem; }
+.lead { font-size: 19px; color: var(--text2); margin-bottom: 1.5rem; }
+.plai-section { padding: 2.25rem 0 1.5rem; border-top: 1px solid var(--border); }
+.plai-section h2 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: 26px; margin-bottom: 1rem; }
+p + p { margin-top: 0.85rem; }
+.plai-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; }
+.plai-card + .plai-card { margin-top: 0.75rem; }
+.formula { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 1rem 0; }
+.formula .box { background: var(--surface); border: 2px solid var(--teal-border); border-radius: var(--radius); padding: 1rem 1.1rem; }
+.formula .letter { font-family: 'DM Serif Display', serif; font-size: 38px; color: var(--teal); line-height: 1; display: block; margin-bottom: 0.4rem; }
+.formula .name { font-weight: 700; display: block; margin-bottom: 0.25rem; }
+.formula .box p { font-size: 16px; line-height: 1.55; margin: 0; color: var(--text2); }
+.key { background: var(--teal-bg); border: 1px solid var(--teal-border); color: var(--teal); border-radius: var(--radius-sm); padding: 0.8rem 1rem; font-weight: 500; margin-top: 1rem; }
+.warn { background: var(--orange-bg); border: 1px solid var(--orange); border-radius: var(--radius-sm); padding: 0.8rem 1rem; margin-top: 1rem; }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1rem 0; }
+.compare .card-title { font-weight: 700; margin-bottom: 0.4rem; display: block; }
+.compare .bad .card-title { color: #a32d2d; }
+.compare .good .card-title { color: var(--teal); }
+.compare .plai-card { font-size: 16px; line-height: 1.6; }
+.quote { font-style: italic; }
+ol.habits { list-style: none; counter-reset: h; }
+ol.habits li { counter-increment: h; position: relative; padding-left: 3rem; margin-bottom: 1.25rem; }
+ol.habits li::before { content: counter(h); position: absolute; left: 0; top: 0; width: 2.1rem; height: 2.1rem; border-radius: 50%; background: var(--teal); color: #fff; font-weight: 700; text-align: center; line-height: 2.1rem; }
+ol.habits strong { display: block; }
+.say { background: var(--surface2); border-left: 4px solid var(--teal); border-radius: var(--radius-sm); padding: 0.6rem 0.9rem; margin-top: 0.5rem; font-size: 16px; }
+.link { font-size: 15px; color: var(--text3); margin-top: 0.4rem; display: block; }
+ul.plain { padding-left: 1.3rem; }
+ul.plain li { margin-bottom: 0.5rem; }
+.sources { font-size: 15px; color: var(--text2); line-height: 1.6; }
+.sources li { margin-bottom: 0.7rem; }
+.plai-footer { text-align: center; padding: 2.5rem 0 2.5rem; font-size: 14px; color: var(--text3); border-top: 1px solid var(--border); margin-top: 1.5rem; }
+.plai-footer a { color: var(--text2); }
+.plai-footer p + p { margin-top: 6px; }
+@media (max-width: 640px) {
+  h1 { font-size: 29px; }
+  .formula, .compare { grid-template-columns: 1fr; }
+}
+@media print {
+  body { background: #fff; font-size: 12pt; }
+  .plai-nav { display: none; }
+  .plai-section { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<header class="plai-nav">
+  <img src="https://portail-plai.vercel.app/plai-logo.jpg" alt="PLAI">
+  <span>PLAI</span>
+</header>
+
+<main class="plai-container">
+
+  <span class="plai-badge">Formation IA et inclusion · Mode d'emploi</span>
+  <h1>L'IA en une formule : f(x) = y</h1>
+  <p class="lead">Pourquoi ce que vous écrivez change tout ce que l'IA vous répond, et ce que vous pouvez faire de simple pour que la réponse vous serve vraiment.</p>
+
+  <section class="plai-section" aria-labelledby="formule">
+    <h2 id="formule">La formule</h2>
+    <div class="formula">
+      <div class="box"><span class="letter">f</span><span class="name">L'IA</span><p>Un modèle de langage. Il a « lu » énormément de textes. Il ne connaît ni votre classe, ni vos élèves, ni votre manière d'enseigner.</p></div>
+      <div class="box"><span class="letter">x</span><span class="name">Ce que vous lui donnez</span><p>Votre question, les documents que vous collez, ce qui a déjà été dit dans la conversation. Rien d'autre.</p></div>
+      <div class="box"><span class="letter">y</span><span class="name">Sa réponse</span><p>Elle est construite à partir de x, et seulement de x.</p></div>
+    </div>
+    <p class="key">Ce qui n'est pas dans x n'existe pas pour l'IA. Elle ne lit pas dans vos pensées.</p>
+    <p>x contient parfois plus que ce que vous croyez : lors du test du texte caché, une consigne invisible à l'écran était pourtant dans le texte copié. L'IA l'a lue. Vous, non.</p>
+  </section>
+
+  <section class="plai-section" aria-labelledby="remplacant">
+    <h2 id="remplacant">Le remplaçant du lundi matin</h2>
+    <p>Un remplaçant arrive dans votre classe. Si vous lui laissez un mot, « faire de la lecture », il fera de son mieux, avec une activité qui pourrait convenir à n'importe quelle classe. Si vous lui expliquez qui sont vos élèves, ce qui coince, ce que vous avez déjà essayé, il peut être utile.</p>
+    <p>L'IA est ce remplaçant. Mais elle ne peut pas vous rattraper dans le couloir pour poser une question. <strong>C'est à vous de construire x.</strong></p>
+
+    <div class="compare">
+      <div class="plai-card bad"><span class="card-title">x trop pauvre</span>« Propose une activité de lecture. »<br><br>Résultat : une activité qui irait à n'importe quelle classe.</div>
+      <div class="plai-card good"><span class="card-title">x construit</span>« Classe de P4, 24 élèves, mi-octobre, 50 minutes. Nous travaillons le récit d'aventure. E03 lit lentement et perd le fil des phrases longues. Propose-moi trois variantes, de la plus guidée à la plus autonome. »<br><br>Résultat : une base de travail pour votre classe.</div>
+    </div>
+  </section>
+
+  <section class="plai-section" aria-labelledby="habitudes">
+    <h2 id="habitudes">Trois habitudes simples</h2>
+    <p style="margin-bottom:1.25rem">Rien de nouveau à apprendre : <strong>MAGIC+ et S</strong> mettent déjà ces idées en pratique.</p>
+    <ol class="habits">
+      <li>
+        <strong>Donnez le contexte.</strong>
+        Niveau, moment de l'année, difficultés observées (pas l'étiquette), ce que vous avez déjà essayé, ce que vous voulez éviter. Élèves en codes (E01), jamais en noms.
+        <span class="link">Dans MAGIC+ : M, A, I, C.</span>
+      </li>
+      <li>
+        <strong>Laissez l'IA vous poser ses questions.</strong>
+        Vous ne pensez pas à tout. Autorisez-la à vous demander ce qui manque.
+        <div class="say">« Si une information manque, pose-moi la question. Avant de produire, pose-moi des questions sur ma classe. »</div>
+        <span class="link">Dans MAGIC+ : G et S.</span>
+        <span class="link">Option quand l'enjeu est important : demander à l'IA de reformuler votre demande avant de répondre. Cela montre si x est bien passé. Cela ne prouve pas que la réponse sera juste.</span>
+      </li>
+      <li>
+        <strong>Demandez des pistes, pas des sources.</strong>
+        Pour compléter votre savoir, posez une question ouverte, puis cherchez vous-même ce qu'elle propose.
+        <div class="say">« Que devrais-je savoir ou vérifier avant de décider ? Marque [à vérifier] ce dont tu n'es pas sûre. »</div>
+        <span class="link">Dans MAGIC+ : G (aucune référence de mémoire).</span>
+      </li>
+    </ol>
+  </section>
+
+  <section class="plai-section" aria-labelledby="sources-ia">
+    <h2 id="sources-ia">Pourquoi pas de références demandées à l'IA ?</h2>
+    <p>Des chercheurs ont testé exactement cela, et l'ont publié.</p>
+    <div class="plai-card">
+      <p>Dans un dialogue analysé en 2023, un chatbot affirme que « les recherches ont montré » un résultat. Interrogé, il fournit trois études, avec titres, auteurs, revues et numéros de pages. Les chercheurs ne trouvent aucune des trois. Le chatbot finit par reconnaître qu'il n'est pas sûr de ce qu'il avançait. <span class="link" style="display:inline">(Las Vergnas et Rio-Jouet, 2023)</span></p>
+    </div>
+    <div class="plai-card">
+      <p>En 2024, le même auteur demande à une version plus récente de ChatGPT des références vérifiées en français. Elles se révèlent fictives. Le chatbot admet ensuite les avoir produites comme de simples suggestions plausibles. <span class="link" style="display:inline">(Las Vergnas, 2024)</span></p>
+    </div>
+    <p class="warn">Ce sont deux échanges documentés, pas une mesure sur un grand nombre de cas. Ils montrent que ça peut arriver, avec aplomb. Une réponse bien rédigée n'est pas une réponse exacte.</p>
+  </section>
+
+  <section class="plai-section" aria-labelledby="limites">
+    <h2 id="limites">Ce que cet outil ne fait pas bien</h2>
+    <ul class="plain">
+      <li>Avec le même x, la réponse peut changer d'un essai à l'autre. Relancer est normal.</li>
+      <li>L'IA peut dire « je comprends » et se tromper. Dans l'échange de 2023, elle écrit qu'elle comprend la confusion de son interlocuteur, puis maintient la contradiction relevée.</li>
+      <li>Elle ne vous dit pas toujours ce qu'elle ignore. C'est à vous de relire en entier.</li>
+    </ul>
+  </section>
+
+  <section class="plai-section" aria-labelledby="part">
+    <h2 id="part">Votre part, que personne ne remplace</h2>
+    <p>Vous seul·e savez si la réponse convient à votre classe. Lisez-la, modifiez-la, écartez-la si besoin.</p>
+    <p class="key">La question qui sauve : un collègue d'un autre établissement pourrait-il utiliser ce résultat sans rien changer ? Si oui, vous n'avez pas encore apporté votre singularité.</p>
+  </section>
+
+  <section class="plai-section" aria-labelledby="sources">
+    <h2 id="sources">Sources</h2>
+    <ul class="sources plain">
+      <li><strong>Vérifié dans le corpus RISS.</strong> Las Vergnas O., Rio-Jouet A. (2023). <em>Une IA peut-elle remplacer un professeur ? Un exemple de dialogue avec Bard-Google, entre hallucinations et illusions réflexives.</em> L'esprit d'Archimède, n° 10, pp. 27-34. HAL : hal-04273617.</li>
+      <li><strong>Vérifié dans le corpus RISS.</strong> Las Vergnas O. (2024). <em>Rédaction automatique d'article par une intelligence artificielle : points de vigilance.</em> Les Nouvelles d'Archimède, n° 12, pp. 31-35. HAL : hal-04819902.</li>
+      <li><strong>Pour aller plus loin (présent au RISS, non détaillé ici).</strong> Las Vergnas O. (2023-2024). <em>Les androïdes rêvent-ils de références fictives ?</em> HAL : hal-04192213, hal-04416800.</li>
+      <li><strong>Hors corpus RISS.</strong> La formule f(x) = y est une simplification pédagogique de l'auteur : elle décrit ce que l'IA reçoit et le fait que les réponses varient, sans prétendre décrire le fonctionnement interne des modèles. Le poids de la manière d'interroger par rapport au choix de l'IA reste une hypothèse de travail.</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="plai-footer">
+  <div class="plai-container">
+    <p>PLAI · Pôle Liégeois d'Accompagnement vers une École Inclusive · Pôle Territorial de la Ville de Liège</p>
+    <p>Jean-François Beguin · <a href="mailto:jf.beguin@outlook.com">jf.beguin@outlook.com</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
