@@ -26,3 +26,6 @@ th{background:var(--bg-subtil)}
 .toc{background:var(--bg-subtil);padding:1rem 1.4rem;border-radius:4px;margin:1.5rem 0}.toc ul{margin:0}
 footer{border-top:1px solid var(--bordure);padding:1.5rem;text-align:center;font-size:13px;color:var(--gris-clair)}
 @media(max-width:560px){body{font-size:16px}th,td{padding:6px}}
+ .btn-sec{background:#fff;color:var(--noir)!important;border:1.5px solid var(--bordure);margin-left:8px}
+.btn-sec:hover{background:var(--beige);border-color:var(--rose)}
+@media(max-width:560px){.btn{display:block;margin:0 0 10px;text-align:center}.btn-sec{margin-left:0}}
