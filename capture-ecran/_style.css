@@ -1,0 +1,28 @@
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--noir:#1a1a1a;--rose:#FF3399;--rose-dk:#CC0070;--beige:#F5F0E8;--blanc:#fff;--gris:#5a5a5a;--gris-clair:#909090;--bordure:#e8e8e8;--bg-subtil:#f9f9f7}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--noir);background:var(--blanc);line-height:1.7;font-size:17px}
+a{color:var(--rose-dk)}a:hover{color:var(--rose)}
+nav{border-bottom:1px solid var(--bordure);padding:0 1.5rem}
+.nav-inner{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;gap:1rem}
+.nav-inner a{text-decoration:none;font-size:14px;font-weight:500;color:var(--gris)}
+.nav-inner img{height:48px;width:auto;display:block}
+main{max-width:860px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+h1{font-size:clamp(1.8rem,4vw,2.4rem);line-height:1.2;margin-bottom:.8rem}
+h2{font-size:1.4rem;margin:2.4rem 0 .8rem;padding-top:1rem;border-top:1px solid var(--bordure)}
+h3{font-size:1.1rem;margin:1.4rem 0 .4rem}
+p,ul,ol{margin-bottom:1rem}ul,ol{padding-left:1.4rem}li{margin-bottom:.35rem}
+.lead{font-size:1.1rem;color:var(--gris)}
+.badge{display:inline-block;font-size:12px;font-weight:600;padding:3px 10px;border-radius:2px;background:var(--bg-subtil);color:var(--gris);border:1px solid var(--bordure);margin-bottom:.8rem}
+.dl{background:var(--beige);border-radius:4px;padding:1.5rem;margin:1.5rem 0}
+.btn{display:inline-block;background:var(--noir);color:#fff!important;padding:12px 24px;border-radius:2px;font-weight:600;text-decoration:none}
+.btn:hover{background:var(--rose-dk)}
+.small{font-size:14px;color:var(--gris)}
+code,kbd{font-family:ui-monospace,Consolas,monospace;font-size:.92em;background:var(--bg-subtil);border:1px solid var(--bordure);border-radius:3px;padding:1px 6px}
+table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:15px}
+th,td{border:1px solid var(--bordure);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--bg-subtil)}
+.note{border-left:4px solid var(--rose);background:var(--bg-subtil);padding:.8rem 1rem;margin:1rem 0}
+.toc{background:var(--bg-subtil);padding:1rem 1.4rem;border-radius:4px;margin:1.5rem 0}.toc ul{margin:0}
+footer{border-top:1px solid var(--bordure);padding:1.5rem;text-align:center;font-size:13px;color:var(--gris-clair)}
+@media(max-width:560px){body{font-size:16px}th,td{padding:6px}}

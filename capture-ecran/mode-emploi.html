@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mode d'emploi — Capture d'écran PLAI · jfb4plai</title>
+  <meta name="description" content="Mode d'emploi de Capture d'écran PLAI : photographier un menu déroulant, annoter, enregistrer les clics, créer une fiche, un document Word ou une vidéo sous-titrée." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="_style.css" />
+</head>
+<body>
+<nav><div class="nav-inner">
+  <a href="/"><img src="/logo-jfb4plai.png" alt="jfb4plai — accueil" /></a>
+  <a href="./">← Télécharger le programme</a>
+</div></nav>
+<main>
+  <h1>Mode d'emploi — Capture d'écran PLAI</h1>
+  <p class="lead">Pour photographier un <strong>menu déroulant</strong>, l'annoter, puis en faire une <strong>fiche</strong> ou une <strong>vidéo sous-titrée</strong>.</p>
+
+  <div class="toc"><strong>Sur cette page</strong>
+    <ul>
+      <li><a href="#installer">1. Installer</a></li>
+      <li><a href="#capturer">2. Photographier un menu déroulant</a></li>
+      <li><a href="#clics">3. La série de clics</a></li>
+      <li><a href="#annoter">4. Annoter, légender, enregistrer sa voix</a></li>
+      <li><a href="#exports">5. Fiche, Word ou vidéo</a></li>
+      <li><a href="#video">6. Détails de la vidéo</a></li>
+      <li><a href="#problemes">7. Problèmes fréquents</a></li>
+    </ul></div>
+
+  <h2 id="installer">1. Installer (une seule fois)</h2>
+  <ol>
+    <li>Téléchargez le <code>.zip</code> depuis la <a href="./">page de téléchargement</a>.</li>
+    <li>Clic droit › <strong>Extraire tout…</strong> puis double-clic sur <code>Capture-ecran-PLAI.exe</code> dans le dossier extrait.</li>
+    <li>Si Windows affiche « Windows a protégé votre ordinateur » : <strong>Informations complémentaires</strong> › <strong>Exécuter quand même</strong> (le programme n'est pas signé).</li>
+  </ol>
+  <p>Rien n'est envoyé sur Internet. Les captures restent dans <code>Images\Captures PLAI</code>.</p>
+
+  <h2 id="capturer">2. Photographier un menu déroulant</h2>
+  <ol>
+    <li>Lancez le programme (une petite fenêtre s'ouvre ; vous pouvez la réduire).</li>
+    <li>Ouvrez votre menu comme d'habitude (clic sur <em>Fichier</em>, clic droit…).</li>
+    <li><strong>Sans cliquer ailleurs</strong>, appuyez sur le raccourci :</li>
+  </ol>
+  <table>
+    <tr><th>Raccourci</th><th>Effet</th></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>F9</kbd></td><td>tout l'écran</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>F10</kbd></td><td>vous choisissez une zone (le menu est déjà « figé »)</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>F11</kbd></td><td>la fenêtre active seulement</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>F12</kbd></td><td>démarre / arrête la série de clics</td></tr>
+  </table>
+  <p>Un bip confirme la capture. Sur un portable, ajoutez la touche <kbd>Fn</kbd> si besoin. Les raccourcis se changent via <em>Réglages…</em> (évitez Ctrl+Alt : c'est la touche AltGr du clavier belge).</p>
+  <p><strong>Si le raccourci ne marche pas</strong> : bouton <strong>« Dans 3 secondes »</strong>, puis ouvrez votre menu pendant le décompte. Le pointeur est dessiné avec un halo jaune pour montrer où vous avez cliqué (désactivable).</p>
+
+  <h2 id="clics">3. La série de clics (une capture numérotée par clic)</h2>
+  <p>Idéal pour expliquer une manipulation : faites-la <strong>une fois</strong>, le programme prend une image à chaque clic.</p>
+  <ol>
+    <li>Cliquez sur <strong>● Enregistrer mes clics</strong> (ou <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>F12</kbd>). La fenêtre se réduit.</li>
+    <li>Faites votre manipulation normalement. <strong>Un bip = une étape enregistrée.</strong> Chaque image reçoit un cercle rouge autour du clic, une pastille numérotée et la légende « Cliquez ici ».</li>
+    <li>Arrêtez avec <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>F12</kbd>. Évitez de cliquer sur la barre des tâches pour rouvrir la fenêtre : ce clic serait enregistré.</li>
+    <li>Améliorez chaque étape (double-clic sur la ligne) : légende, flèche, voix.</li>
+  </ol>
+  <p><strong>Moment de l'image</strong> : <em>juste avant le clic</em> (recommandé : on voit le menu ouvert et le pointeur sur l'élément à cliquer) ou <em>0,5 s après</em> (on voit le résultat). Un double-clic est fusionné en une seule étape. Seuls les clics gauche et droit sont enregistrés (ni glisser-déposer, ni clavier). Après avoir supprimé ou déplacé des étapes : bouton <strong>↻ Renuméroter</strong>.</p>
+
+  <h2 id="annoter">4. Annoter, légender, enregistrer sa voix</h2>
+  <p>L'éditeur s'ouvre tout seul après chaque capture. Choisissez un outil, une couleur, une taille, puis glissez sur l'image.</p>
+  <table>
+    <tr><th>Outil</th><th>Usage</th></tr>
+    <tr><td>➚ Flèche</td><td>montrer un bouton (<kbd>Maj</kbd> = flèche bien droite)</td></tr>
+    <tr><td>▭ Cadre · ◯ Ovale · ▮ Surligner</td><td>entourer, mettre en évidence</td></tr>
+    <tr><td>T Texte</td><td>cliquer puis écrire</td></tr>
+    <tr><td>① Numéro</td><td>poser 1, 2, 3… pour les étapes</td></tr>
+    <tr><td>✎ Crayon</td><td>dessin libre</td></tr>
+    <tr><td>▦ <strong>Masquer</strong></td><td>pixelliser un prénom, un nom d'élève, une adresse (<strong>RGPD</strong>)</td></tr>
+    <tr><td>✂ Recadrer</td><td>garder seulement une zone</td></tr>
+    <tr><td>☝ Déplacer</td><td>déplacer un objet (<kbd>Suppr</kbd> pour l'effacer)</td></tr>
+  </table>
+  <p><kbd>Ctrl</kbd>+<kbd>Z</kbd> annule, <kbd>Ctrl</kbd>+<kbd>Y</kbd> rétablit. <strong>Copier l'image</strong> puis <kbd>Ctrl</kbd>+<kbd>V</kbd> dans Word, Teams ou un courriel. <strong>Ouvrir dans Paint</strong> fixe les annotations dans l'image puis ouvre Paint (vous ne pourrez plus les déplacer dans notre éditeur).</p>
+  <div class="note"><strong>Masquer</strong> ne protège que l'image enregistrée : relisez toujours avant de partager.</div>
+  <p><strong>La légende</strong> (en bas de l'éditeur) devient le <strong>sous-titre</strong> de la vidéo : une phrase courte par étape, à l'impératif (« Cliquez sur <em>Fichier</em> »).</p>
+  <p><strong>Ma voix</strong> : <em>🎙 Enregistrer ma voix</em>, lisez la légende, <em>⏹ Arrêter</em>, <em>▶ Écouter</em> pour vérifier, <em>✖ Effacer</em> pour recommencer. Il faut un micro autorisé dans <em>Paramètres Windows › Confidentialité › Microphone</em>. Parlez dans une pièce calme, à 20 cm du micro.</p>
+
+  <h2 id="exports">5. Fabriquer une fiche, un document Word ou une vidéo</h2>
+  <p>Dans la fenêtre principale, réorganisez les captures avec ▲ ▼, puis :</p>
+  <ul>
+    <li><strong>📝 Document Word</strong> : <code>document.docx</code> (A4), un titre « Étape n », la légende et l'image. Police Verdana 12, vrais titres Word (navigation, lecteurs d'écran) et <strong>texte alternatif</strong> sur chaque image.</li>
+    <li><strong>📄 Fiche HTML/PDF</strong> : page web numérotée, imprimable ou « Enregistrer au format PDF ».</li>
+    <li><strong>🎬 Vidéo</strong> : crée le dossier <code>video</code> dans la série.</li>
+  </ul>
+  <p>Option : dans <em>Réglages…</em>, cochez l'ajout du logo jfb4plai en haut des fiches et documents.</p>
+
+  <h2 id="video">6. Créer la vidéo sous-titrée</h2>
+  <p class="small">Dernière vérification des informations sur Clipchamp : 16/10/2026, par recherche web (sources secondaires). À contrôler dans l'application, les menus évoluent.</p>
+  <h3>Voie 1 — directe, un seul clic</h3>
+  <p>Le dossier <code>video</code> contient : <code>image_001.png</code>… (1920×1080, <strong>sous-titre incrusté</strong>), <code>soustitres.srt</code>, <code>durees.txt</code>, <code>voixoff.wav</code> si vous avez enregistré votre voix, et <strong><code>video.mp4</code></strong> si le programme <code>ffmpeg</code> est présent. La durée de chaque image suit la longueur de la légende (3 à 15 s) ; avec une voix, l'image reste au moins aussi longtemps que la parole (+ 0,6 s) : elle n'est jamais coupée.</p>
+  <h3>Voie 2 — sans ffmpeg : assembler dans Clipchamp (Windows 11)</h3>
+  <ol>
+    <li>Ouvrez <strong>Clipchamp</strong> › <em>Créer une vidéo</em>.</li>
+    <li>Glissez les <code>image_001.png</code>… sur la ligne de temps, dans l'ordre, et réglez leur durée (voir <code>durees.txt</code>).</li>
+    <li>Glissez <code>voixoff.wav</code> sous les images : elle est déjà synchronisée si vous gardez les durées par défaut.</li>
+    <li><strong>Exporter › 1080p</strong> : fichier MP4 (l'export 1080p sans filigrane de la version gratuite est indiqué par des sources secondaires ; à vérifier).</li>
+  </ol>
+  <p>Les sous-titres sont <strong>déjà dans les images</strong> : inutile d'importer le <code>.srt</code> (je n'ai pas pu confirmer que Clipchamp accepte cet import).</p>
+  <h3>Voie 3 — obtenir le MP4 automatiquement</h3>
+  <p>Dans une invite de commande : <code>winget install Gyan.FFmpeg</code>, puis fermez et rouvrez le programme. Ou placez <code>ffmpeg.exe</code> à côté de <code>Capture-ecran-PLAI.exe</code>. Faites valider l'installation par votre service informatique.</p>
+  <h3>Conseils pour de bonnes vidéos</h3>
+  <ul>
+    <li>Une idée par écran, 6 à 12 mots de légende, verbes d'action.</li>
+    <li>8 à 10 écrans au plus ; plusieurs courtes vidéos plutôt qu'une longue.</li>
+    <li>Masquez (▦) toute donnée d'élève avant de partager.</li>
+    <li>Pour des élèves à besoins spécifiques : texte blanc sur bande noire (contraste élevé), phrases courtes, et proposez aussi la fiche imprimée. Votre voix double l'information écrite.</li>
+  </ul>
+
+  <h2 id="problemes">7. Problèmes fréquents</h2>
+  <table>
+    <tr><th>Problème</th><th>Solution</th></tr>
+    <tr><td>« Raccourci déjà utilisé »</td><td>changer le raccourci dans <em>Réglages…</em></td></tr>
+    <tr><td>Le menu se ferme avant la capture</td><td>utiliser « Dans 3 secondes »</td></tr>
+    <tr><td>« Impossible d'utiliser le micro »</td><td>autoriser le micro dans Windows et vérifier qu'il est le micro par défaut</td></tr>
+    <tr><td>Aucune étape enregistrée avec la série de clics</td><td>un antivirus ou une règle d'école peut bloquer l'écoute des clics : utilisez les captures par raccourci</td></tr>
+    <tr><td>Rien dans le presse-papiers</td><td>cocher « Copier aussi dans le presse-papiers »</td></tr>
+    <tr><td>Image décalée ou floue avec le zoom d'écran à 125 %</td><td>signalez-le avec votre version de Windows</td></tr>
+  </table>
+  <p class="small"><em>Limites connues</em> : écrit pour Windows ; non testé sur Mac ou Linux. Une fenêtre exécutée « en administrateur » peut ne pas laisser passer les raccourcis.</p>
+</main>
+<footer>Jean-François Beguin · <a href="/">jfb4plai.com</a> · <a href="mailto:jf.beguin@outlook.com">Retours d'essai</a></footer>
+</body>
+</html>

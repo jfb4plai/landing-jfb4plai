@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capture d'écran PLAI — télécharger · jfb4plai</title>
+  <meta name="description" content="Programme gratuit pour Windows : photographier un menu déroulant par raccourci clavier, annoter, puis créer une fiche, un document Word ou une vidéo sous-titrée." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="_style.css" />
+</head>
+<body>
+<nav><div class="nav-inner">
+  <a href="/"><img src="/logo-jfb4plai.png" alt="jfb4plai — accueil" /></a>
+  <a href="/#outils">← Tous les outils</a>
+</div></nav>
+<main>
+  <span class="badge">Version d'essai · Windows 10 et 11</span>
+  <h1>Capture d'écran PLAI</h1>
+  <p class="lead">Photographier un <strong>menu déroulant</strong> (celui qui se ferme dès qu'on clique ailleurs), l'annoter de flèches et de numéros, puis en faire une fiche pas à pas, un document Word ou une petite vidéo sous-titrée avec votre voix.</p>
+
+  <div class="dl">
+    <p><a class="btn" data-umami-event="telecharger-capture-ecran"
+       href="https://github.com/jfb4plai/capture-ecrans/releases/latest/download/Capture-ecran-PLAI-windows.zip">⬇ Télécharger pour Windows (.zip)</a></p>
+    <p class="small">Gratuit, sans compte. Le programme fonctionne sur votre ordinateur : aucune capture n'est envoyée sur Internet.
+    Toutes les versions, avec l'empreinte SHA-256 de chaque fichier :
+    <a href="https://github.com/jfb4plai/capture-ecrans/releases">page des versions</a>.</p>
+  </div>
+
+  <h2>Installer en 3 gestes</h2>
+  <ol>
+    <li>Téléchargez le fichier <code>.zip</code>, puis faites un clic droit › <strong>Extraire tout…</strong> (ne lancez pas le programme depuis l'intérieur du zip).</li>
+    <li>Ouvrez le dossier extrait et double-cliquez sur <code>Capture-ecran-PLAI.exe</code>.</li>
+    <li>Si Windows affiche « Windows a protégé votre ordinateur » : <strong>Informations complémentaires</strong> › <strong>Exécuter quand même</strong>.</li>
+  </ol>
+  <div class="note"><strong>Pourquoi cet avertissement ?</strong> Le programme n'est pas encore signé numériquement (une signature coûte environ 110 à 440 $ par an selon les offres consultées en 2026). Il est donc inconnu de Windows. Vous pouvez vérifier que votre fichier est intact en comparant son empreinte SHA-256 (commande <code>Get-FileHash</code> dans PowerShell) avec celle de la page des versions. Si votre école bloque les programmes inconnus, demandez à votre service informatique de l'autoriser.</div>
+
+  <h2>Ce que fait le programme</h2>
+  <ul>
+    <li><strong>Capture par raccourci</strong> (<kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>F9</kbd>) : le menu reste ouvert pendant la prise de vue.</li>
+    <li><strong>Série de clics</strong> : une capture numérotée à chaque clic, avec cercle rouge et légende.</li>
+    <li><strong>Annotation</strong> : flèches, cadres, textes, numéros, surlignage, et <strong>masquage</strong> des prénoms ou données d'élèves.</li>
+    <li><strong>Voix off</strong> et sous-titres pour une vidéo MP4.</li>
+    <li><strong>Exports</strong> : document Word accessible, fiche HTML/PDF, vidéo.</li>
+  </ul>
+  <p><a href="mode-emploi.html" data-umami-event="mode-emploi-capture-ecran"><strong>Lire le mode d'emploi complet →</strong></a></p>
+
+  <h2>Limites annoncées</h2>
+  <ul>
+    <li><strong>Windows uniquement</strong> (pas de Mac, de Chromebook ni de tablette).</li>
+    <li><strong>Version d'essai</strong> : écrite et testée par simulation ; les raccourcis globaux, l'écoute des clics et le micro sont à confirmer sur de vrais ordinateurs d'école. Dites-moi ce qui ne fonctionne pas.</li>
+    <li>La série de clics peut être bloquée par un antivirus ou une règle de l'école. Les captures par raccourci fonctionnent alors toujours.</li>
+    <li>Relisez toujours vos captures avant de les partager : le masquage ne protège que l'image enregistrée.</li>
+  </ul>
+
+  <h2>Contact et licence</h2>
+  <p>Questions, retours d'essai : <a href="mailto:jf.beguin@outlook.com">jf.beguin@outlook.com</a>. Code source : <a href="https://github.com/jfb4plai/capture-ecrans">github.com/jfb4plai/capture-ecrans</a> (licence PolyForm Noncommercial 1.0.0 : usage non commercial).</p>
+</main>
+<footer>Jean-François Beguin · <a href="/">jfb4plai.com</a></footer>
+</body>
+</html>
