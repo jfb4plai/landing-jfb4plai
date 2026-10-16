@@ -28,13 +28,21 @@
     <a href="https://github.com/jfb4plai/capture-ecrans/releases">page des versions</a>.</p>
   </div>
 
-  <h2>Installer en 3 gestes</h2>
+  <h2>Installer</h2>
   <ol>
-    <li>Téléchargez le fichier <code>.zip</code>, puis faites un clic droit › <strong>Extraire tout…</strong> (ne lancez pas le programme depuis l'intérieur du zip).</li>
+    <li>Téléchargez le fichier <code>.zip</code>.</li>
+    <li><strong>Avant d'extraire</strong> : clic droit sur le zip › <strong>Propriétés</strong> › cochez <strong>« Débloquer »</strong> (en bas de l'onglet Général) › OK. La case n'apparaît que si Windows a marqué le fichier comme venant d'Internet. Cela évite en général l'avertissement décrit plus bas.</li>
+    <li>Clic droit › <strong>Extraire tout…</strong> (ne lancez pas le programme depuis l'intérieur du zip).</li>
     <li>Ouvrez le dossier extrait et double-cliquez sur <code>Capture-ecran-PLAI.exe</code>.</li>
-    <li>Si Windows affiche « Windows a protégé votre ordinateur » : <strong>Informations complémentaires</strong> › <strong>Exécuter quand même</strong>.</li>
+    <li>Si Windows affiche quand même « Windows a protégé votre ordinateur » : <strong>Informations complémentaires</strong> › <strong>Exécuter quand même</strong>.</li>
   </ol>
-  <div class="note"><strong>Pourquoi cet avertissement ?</strong> Le programme n'est pas encore signé numériquement (une signature coûte environ 110 à 440 $ par an selon les offres consultées en 2026). Il est donc inconnu de Windows. Vous pouvez vérifier que votre fichier est intact en comparant son empreinte SHA-256 (commande <code>Get-FileHash</code> dans PowerShell) avec celle de la page des versions. Si votre école bloque les programmes inconnus, demandez à votre service informatique de l'autoriser.</div>
+  <div class="note"><strong>Pourquoi cet avertissement ?</strong> Le programme n'est pas encore signé numériquement (une signature coûte environ 110 à 440 $ par an selon les offres consultées en 2026). Il est donc inconnu de Windows. Cela ne veut pas dire qu'il est dangereux.</div>
+  <h3>Est-il sûr ? Ce qui est vérifié, et ce qui ne l'est pas</h3>
+  <ul>
+    <li><strong>Analysé à chaque version</strong> par Microsoft Defender et par ClamAV pendant sa fabrication. Le rapport d'analyse et l'<strong>empreinte SHA-256</strong> du fichier sont publiés avec la version, sur la <a href="https://github.com/jfb4plai/capture-ecrans/releases">page des versions</a>. Vous pouvez recalculer l'empreinte avec <code>Get-FileHash</code> (PowerShell) et la comparer.</li>
+    <li><strong>Code source ouvert</strong> : <a href="https://github.com/jfb4plai/capture-ecrans">github.com/jfb4plai/capture-ecrans</a>. Le programme est construit automatiquement à partir de ce code.</li>
+    <li><strong>Ce que cela ne change pas</strong> : un résultat propre ne fait pas disparaître l'avertissement de Windows, qui dépend de la signature et de la notoriété du fichier, pas de la présence d'un virus. Si votre école bloque les programmes inconnus, remettez le rapport d'analyse à votre service informatique.</li>
+  </ul>
 
   <h2>Ce que fait le programme</h2>
   <ul>
