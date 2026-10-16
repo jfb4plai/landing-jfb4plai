@@ -106,7 +106,7 @@
   </ol>
   <p>Les sous-titres sont <strong>déjà dans les images</strong> : inutile d'importer le <code>.srt</code> (je n'ai pas pu confirmer que Clipchamp accepte cet import).</p>
   <h3>Voie 3 — obtenir le MP4 automatiquement</h3>
-  <p>Dans une invite de commande : <code>winget install Gyan.FFmpeg</code>, puis fermez et rouvrez le programme. Ou placez <code>ffmpeg.exe</code> à côté de <code>Capture-ecran-PLAI.exe</code>. Faites valider l'installation par votre service informatique.</p>
+  <p>Le programme cherche ffmpeg tout seul (PATH de Windows, installations winget, Chocolatey, Scoop, <code>C:\ffmpeg</code>). S'il ne le trouve pas alors qu'il est installé : <em>Réglages… › ffmpeg.exe › Parcourir…</em> ; pour savoir où il se trouve, tapez <code>where ffmpeg</code> dans une invite de commande. S'il n'est pas installé : <code>winget install Gyan.FFmpeg</code>, puis fermez et rouvrez le programme. Ou placez <code>ffmpeg.exe</code> à côté de <code>Capture-ecran-PLAI.exe</code>. Faites valider l'installation par votre service informatique.</p>
   <h3>Conseils pour de bonnes vidéos</h3>
   <ul>
     <li>Une idée par écran, 6 à 12 mots de légende, verbes d'action.</li>
