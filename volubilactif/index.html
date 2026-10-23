@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VolubilActif : télécharger · jfb4plai</title>
+  <meta name="description" content="Programme gratuit pour Windows et Mac : dicter à la voix dans n'importe quelle application, en local, sans compte. Adaptation PLAI pour l'école." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/volubilactif/_style.css" />
+</head>
+<body>
+<nav><div class="nav-inner">
+  <a href="/"><img src="/volubilactif/logo-jfb4plai-recadre.png" alt="jfb4plai, accueil" /></a>
+  <a href="/#outils">← Tous les outils</a>
+</div></nav>
+<main>
+  <span class="badge">Windows 10 et 11 · Mac Apple Silicon</span>
+  <h1>VolubilActif</h1>
+  <p class="lead">Remplacer la frappe au clavier par la <strong>dictée vocale</strong>, dans n'importe quelle application ouverte : navigateur, traitement de texte, messagerie. Un raccourci, on parle, le texte s'insère là où se trouve le curseur. Pour les élèves pour qui écrire est un obstacle (dysgraphie, dyslexie, fatigue motrice), et pour toute personne qui préfère dicter.</p>
+
+  <div class="dl">
+    <p>
+      <a class="btn" data-umami-event="telecharger-volubilactif-windows"
+         href="https://github.com/jfb4plai/VolubilActif/releases/latest/download/VolubilActif-Windows-installateur.exe">⬇ Télécharger l'installateur (Windows)</a>
+      <a class="btn btn-sec" data-umami-event="telecharger-volubilactif-mac"
+         href="https://github.com/jfb4plai/VolubilActif/releases/latest">⬇ Version Mac (page des versions)</a>
+    </p>
+    <p class="small">Gratuit, sans compte, sans abonnement. Tout se passe sur votre ordinateur : la voix n'est jamais envoyée sur Internet. La seule exception : le tout premier téléchargement du modèle de transcription (environ 574 Mo pour le modèle Turbo). Toutes les versions, avec l'empreinte SHA-256 de chacune : <a href="https://github.com/jfb4plai/VolubilActif/releases">page des versions</a>.</p>
+  </div>
+
+  <h2>Installer</h2>
+  <ol>
+    <li>Téléchargez <code>VolubilActif-Windows-installateur.exe</code> et double-cliquez dessus. Aucun droit d'administrateur n'est nécessaire pour une installation « pour moi seul ».</li>
+    <li>Si le navigateur bloque le fichier (« pas fréquemment téléchargé ») : ouvrez les téléchargements (Ctrl+J), cliquez sur les trois points puis <strong>Conserver</strong>.</li>
+    <li>Si Windows affiche « Windows a protégé votre ordinateur » : <strong>Informations complémentaires</strong> › <strong>Exécuter quand même</strong>.</li>
+    <li>Suivez l'assistant. Une case propose de lancer VolubilActif à l'ouverture de Windows (conseillé : la dictée par raccourci ne marche que si le programme tourne). Lancez ensuite le programme.</li>
+  </ol>
+  <p><strong>Mettre à jour</strong> : VolubilActif vérifie lui-même s'il existe une nouvelle version, la télécharge en arrière-plan et vous propose de redémarrer pour l'appliquer (jamais sans votre accord). <strong>Désinstaller</strong> : Paramètres de Windows › Applications.</p>
+  <p class="small">Mac : ouvrez le fichier <code>.dmg</code>, glissez VolubilActif dans Applications. Au premier lancement, clic droit sur l'application puis <strong>Ouvrir</strong> (programme non signé). Les autorisations Microphone et Accessibilité sont demandées à l'usage. Détails dans le <a href="https://github.com/jfb4plai/VolubilActif#readme">mode d'emploi du dépôt</a>.</p>
+  <div class="note"><strong>Pourquoi cet avertissement ?</strong> Le programme n'est pas signé numériquement. Il est donc inconnu de Windows et de macOS. Cela ne veut pas dire qu'il est dangereux.</div>
+
+  <h3>Est-il sûr ? Ce qui est vérifié, et ce qui ne l'est pas</h3>
+  <ul>
+    <li><strong>Code source ouvert</strong> : <a href="https://github.com/jfb4plai/VolubilActif">github.com/jfb4plai/VolubilActif</a>. Les installateurs sont construits automatiquement à partir de ce code.</li>
+    <li><strong>Analyse antivirus</strong> : à partir de la prochaine version, chaque version est analysée par Microsoft Defender et par ClamAV pendant sa fabrication, et n'est publiée que si aucune menace n'est signalée. Le rapport est publié avec la version, sur la <a href="https://github.com/jfb4plai/VolubilActif/releases">page des versions</a>, avec l'<strong>empreinte SHA-256</strong> du fichier (à recalculer avec <code>Get-FileHash</code> dans PowerShell).</li>
+    <li><strong>Ce que cela ne change pas</strong> : un résultat propre ne fait pas disparaître l'avertissement de Windows, qui dépend de la signature et de la notoriété du fichier. Si votre école bloque les programmes inconnus, remettez le rapport d'analyse à votre service informatique.</li>
+    <li><strong>Mode « maintenir les touches »</strong> (optionnel) : il utilise une écoute clavier du système, capable de voir toutes les frappes (le programme ne réagit qu'au raccourci choisi et n'enregistre rien d'autre). Certains antivirus la signalent au premier lancement. Le mode par défaut (un appui pour démarrer, un autre pour arrêter) ne l'utilise pas.</li>
+  </ul>
+
+  <h2>Ce que fait le programme</h2>
+  <ul>
+    <li><strong>Dictée par raccourci</strong>, dans n'importe quelle application. Avec « Maintenir les touches enfoncées », l'enregistrement dure tant que les touches restent enfoncées. Choisissez un raccourci sans lettre (par exemple Ctrl+Maj+Espace) : une lettre peut réagir sur une autre touche selon le clavier.</li>
+    <li><strong>Ponctuation dictée</strong> sans IA : dire « virgule », « point d'interrogation », « à la ligne » insère le signe.</li>
+    <li><strong>Mode examen</strong> : la voix est transcrite telle quelle, sans passage par un modèle d'IA qui pourrait reformuler.</li>
+    <li><strong>Mode privé</strong> : sur un ordinateur partagé, aucune dictée n'est conservée sur la machine.</li>
+    <li><strong>Dictionnaire partageable</strong> : l'enseignant prépare le vocabulaire de son cours et le distribue à ses élèves.</li>
+    <li><strong>Mode amélioré</strong> (facultatif) : ponctuation automatique et gestion des « en fait non… » grâce à Ollama, un petit modèle de langage installé sur l'ordinateur (8 Go de RAM ou plus conseillés). Sans Ollama, le programme revient au nettoyage simple.</li>
+  </ul>
+
+  <h2>Limites annoncées</h2>
+  <ul>
+    <li>C'est un outil de <strong>compensation</strong>, pas de remédiation : il ne corrige pas l'orthographe de l'élève, il l'évite. À utiliser après diagnostic, en accord avec l'équipe.</li>
+    <li>Il ne convient pas pendant l'apprentissage du geste d'écriture (début du primaire).</li>
+    <li>Les modèles de reconnaissance vocale sont entraînés surtout sur des voix d'adultes : la précision baisse avec les voix jeunes et le bruit de classe. À tester avec l'élève avant d'en faire un outil du quotidien.</li>
+    <li>Dicter à voix haute expose son texte : prévoir un endroit calme ou un micro-casque.</li>
+    <li>Sur un parc informatique géré, l'installation peut demander l'accord du technicien.</li>
+  </ul>
+
+  <h2>Contact, crédits et licence</h2>
+  <p>Questions, retours d'essai : <a href="mailto:jf.beguin@outlook.com">jf.beguin@outlook.com</a>. VolubilActif est l'adaptation PLAI de <a href="https://github.com/annece29-netizen/Volubil-IA">Volubil-IA</a>, créé par Anne-Cécile Le Dain (licence MIT) : l'essentiel de ce qui fonctionne vient de son travail. Code source : <a href="https://github.com/jfb4plai/VolubilActif">github.com/jfb4plai/VolubilActif</a>.</p>
+</main>
+<footer>Jean-François Beguin · <a href="/">jfb4plai.com</a></footer>
+</body>
+</html>
