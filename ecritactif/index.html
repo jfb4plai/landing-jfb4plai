@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcritActif : mode d'emploi et appuis scientifiques · jfb4plai</title>
+  <meta name="description" content="Application gratuite pour P1 à P3 (Fédération Wallonie-Bruxelles) : apprendre les réflexes d'écriture (réfléchir, écrire, relire, corriger) en semi-autonomie. Version d'essai, sans IA." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="_style.css" />
+</head>
+<body>
+<nav><div class="nav-inner">
+  <a href="../"><img src="logo-jfb4plai-recadre.png" alt="jfb4plai, accueil" /></a>
+  <a href="../#outils">← Tous les outils</a>
+</div></nav>
+<main>
+  <span class="badge">Version d'essai · P1 à P3 · français, écrire · gratuit, sans IA</span>
+  <h1>EcritActif</h1>
+  <p class="lead">Aider chaque élève de P1 à P3 à prendre les <strong>réflexes de l'écriture</strong> : <strong>réfléchir</strong> avant d'écrire, <strong>écrire</strong>, <strong>relire</strong>, <strong>corriger</strong>. L'élève travaille seul, à son rythme, avec des aides qu'il (ou vous) choisit. L'enseignant pose la consigne et lit les traces.</p>
+
+  <div class="dl">
+    <p><a class="btn" data-umami-event="ouvrir-ecritactif" href="https://ecritactif.vercel.app">Ouvrir l'application</a></p>
+    <p class="small">Le nom « EcritActif » est provisoire. L'application est en essai : elle a été parcourue de bout en bout par son concepteur (enseignant, puis élèves P1 et P2 de démonstration), mais <strong>pas encore avec de vrais élèves</strong>. Vos retours servent à la corriger.</p>
+  </div>
+
+  <div class="toc"><ul>
+    <li><a href="#sert">À quoi elle sert, et ce qu'elle ne fait pas</a></li>
+    <li><a href="#enseignant">Mode d'emploi : enseignant</a></li>
+    <li><a href="#eleve">Mode d'emploi : élève</a></li>
+    <li><a href="#programme">Ancrage dans le programme de la FWB</a></li>
+    <li><a href="#riss">Appuis scientifiques (RISS)</a></li>
+    <li><a href="#limites">Limites, et ce qui n'est pas vérifié</a></li>
+    <li><a href="#essai">Vous la testez : ce qui nous aiderait</a></li>
+  </ul></div>
+
+  <h2 id="sert">À quoi elle sert, et ce qu'elle ne fait pas</h2>
+  <ul>
+    <li><strong>Elle apprend une manière de travailler</strong> : planifier, mettre en texte, relire, corriger. Elle n'écrit rien à la place de l'élève et ne corrige pas son texte.</li>
+    <li><strong>Elle signale, elle ne corrige pas.</strong> Elle indique par exemple « Regarde la première lettre de cette phrase » et surligne l'endroit. L'élève décide quoi changer.</li>
+    <li><strong>Elle ne note pas.</strong> À la fin, l'élève dit ce qui est réussi et ce qu'il voudrait améliorer (« deux étoiles et un souhait »).</li>
+    <li><strong>Elle n'utilise pas d'IA.</strong> Les signaux viennent de règles simples (majuscule, point, mot répété). Elles ne comprennent pas le sens du texte.</li>
+    <li><strong>Elle s'adapte aux difficultés, pas aux diagnostics.</strong> Les aides sont rattachées à une gêne (« Écrire est lent ou fatigant », « Je ne vois pas mes erreurs quand je relis »…), pas à une étiquette. L'élève ou vous les activez, quel que soit le niveau.</li>
+    <li><strong>Elle ne remplace pas votre enseignement de l'écriture.</strong> Les recherches lues (voir plus bas) montrent que la modélisation par l'enseignant, à voix haute, compte beaucoup. EcritActif est un complément pour s'entraîner, pas un substitut.</li>
+  </ul>
+
+  <h2 id="enseignant">Mode d'emploi : enseignant</h2>
+  <ol>
+    <li><strong>Créer votre compte</strong> sur <a href="https://ecritactif.vercel.app/enseignant">ecritactif.vercel.app/enseignant</a> : adresse e-mail et mot de passe d'au moins 8 caractères. Confirmez l'adresse par le message reçu. L'adresse n'est jamais visible des élèves.</li>
+    <li><strong>Créer une classe</strong> : un nom que vous seul voyez. L'application donne un <strong>code de classe</strong> (6 caractères) à communiquer aux élèves.</li>
+    <li><strong>Choisir l'année</strong> (P1, P2 ou P3). Elle règle les items du programme proposés, le vocabulaire des explications et le nombre de temps : <strong>3 temps en P1</strong> (Réfléchir, Écrire, Relire), <strong>4 temps en P2 et P3</strong> (Corriger s'ajoute).</li>
+    <li><strong>Ajouter des élèves</strong> : « Ajouter 5 élèves » crée 5 <strong>codes personnels sans nom</strong>. Notez vous-même, sur une feuille que vous gardez, quel code correspond à quel élève.</li>
+    <li><strong>Créer une activité</strong> (« Nouvelle activité ») :
+      <ul>
+        <li><strong>Consigne</strong> : écrivez-la avec vos mots, elle est lue telle quelle aux élèves.</li>
+        <li><strong>Nombre minimum et maximum de mots</strong> (facultatif) : l'élève voit « Ton texte est-il assez long ? » avec les chiffres.</li>
+        <li><strong>Items du programme</strong> : vous cochez ceux que l'activité travaille. Ils alimentent la carte du programme.</li>
+        <li><strong>Principes</strong> : questions fixes, une à la fois, par temps. Les principes « en brouillon » n'ont pas été validés : à utiliser sous votre responsabilité.</li>
+        <li><strong>Vos propres questions</strong> pour réfléchir, relire, corriger : votre voix, vos formulations.</li>
+        <li><strong>Mots utiles</strong> : une liste que l'élève peut insérer d'un clic.</li>
+        <li><strong>Signaler à la correction</strong> : choisissez peu de catégories à la fois (par exemple majuscule, point). Si vous n'en cochez aucune, l'élève verra « Rien à signaler ».</li>
+        <li><strong>Aides retirées</strong> : si une aide ne convient pas à l'activité, retirez-la.</li>
+      </ul>
+    </li>
+    <li><strong>Donner les codes</strong> aux élèves : code de classe + code personnel, à saisir sur <a href="https://ecritactif.vercel.app/eleve">ecritactif.vercel.app/eleve</a>.</li>
+    <li><strong>Lire le tableau de la classe</strong> : pour chaque code, où il en est (pas commencé, en cours, rendu, nombre de versions), les aides utilisées, les demandes d'aide (« Je ne comprends pas »), l'auto-évaluation (étoiles et souhait), et la carte du programme. <strong>L'application présente des traces ; vous seul décidez qu'un item est acquis.</strong></li>
+  </ol>
+
+  <h2 id="eleve">Mode d'emploi : élève</h2>
+  <p>À lire avec les élèves la première fois, ou à afficher au tableau.</p>
+  <ol>
+    <li>Ouvrir la page des élèves.</li>
+    <li>Écrire le code de la classe.</li>
+    <li>Écrire son code personnel.</li>
+    <li>Cliquer sur l'activité.</li>
+    <li><strong>Réfléchir</strong> : lire la consigne, écouter la consigne si besoin, répondre aux questions dans sa tête.</li>
+    <li><strong>Écrire</strong> : taper son texte. Le texte s'enregistre tout seul.</li>
+    <li><strong>Relire</strong> : lire son texte, répondre aux questions une par une.</li>
+    <li><strong>Corriger</strong> (à partir de P2) : regarder les endroits montrés, changer ce qu'on veut.</li>
+    <li>Cliquer sur « Je ne comprends pas » quand une phrase n'est pas claire. Demander de l'aide, c'est apprendre.</li>
+    <li>Dire deux choses réussies et un souhait (on peut laisser vide).</li>
+    <li>Choisir : continuer à écrire, essayer autrement (nouvelle version, l'ancienne reste visible), ou rendre son texte.</li>
+  </ol>
+  <p class="small">En P1, relire et corriger forment un seul temps : le référentiel de la FWB nomme trois composantes en P1 (planification, mise en texte, révision) et ajoute la correction à partir de P2.</p>
+
+  <h2 id="programme">Ancrage dans le programme de la FWB</h2>
+  <p>L'application combine deux textes officiels (cités tels quels, jamais reformulés) :</p>
+  <ul>
+    <li>le <strong>référentiel de français et langues anciennes du tronc commun</strong> (Fédération Wallonie-Bruxelles), partie « écrire » de P1 à P3 : composantes de la production d'écrit, palier de scripteur attendu ;</li>
+    <li>le <strong>programme d'études de l'enseignement primaire (CECP, Wallonie-Bruxelles Enseignement)</strong> : 82 items « écrire » avec leurs codes (F…).</li>
+  </ul>
+  <p>Chaque question fixe cite les codes du programme dont elle vient. Les explications utilisent le vocabulaire de l'année (par exemple « une majuscule, une grande lettre »). Un test automatique refuse tout repère de l'école française dans ce que lisent l'élève et l'enseignant.</p>
+
+  <h2 id="riss">Appuis scientifiques (corpus RISS)</h2>
+  <p>Chaque référence ci-dessous a été retrouvée et lue dans le corpus RISS (articles francophones) le 26 octobre 2026. « Lu » signifie que j'ai lu l'article récupéré ; quand le texte est tronqué, je le dis.</p>
+  <table>
+    <tr><th>Référence (identifiant RISS)</th><th>Ce que l'article établit</th><th>Ce qu'on en fait, et ses limites</th></tr>
+    <tr>
+      <td>Fernandez, J., Guilbert, J. &amp; Letanneux, A. (2019). Entraîner l'autorégulation pour améliorer la rédaction. <em>A.N.A.E.</em>, 163, 759-768. <code>hal-04120344</code></td>
+      <td>Les experts planifient et révisent plus que les novices. Les entraînements les plus efficaces enseignent explicitement des stratégies métacognitives, modélisées par l'enseignant, puis étayées. Seulement inciter à utiliser une stratégie peut faire baisser la qualité des textes des plus jeunes (méta-analyse de Graham et al., 2012, citée dans l'article).</td>
+      <td>Fonde les temps (planifier, mettre en texte, réviser) et l'idée d'un guidage. <strong>Limite :</strong> l'article insiste sur l'enseignement explicite par l'enseignant. L'application ne le remplace pas ; elle propose des questions, pas un enseignement. Le texte lu a été tronqué à 4000 mots (la fin n'a pas été lue).</td>
+    </tr>
+    <tr>
+      <td>Hausman, M., Leduc, L., Malay, L., Delvaux, S. &amp; Detroz, P. Analyse des émotions et des compétences émotionnelles d'étudiants universitaires dans le traitement d'un feedback formatif à distance. <em>Mesure et évaluation en éducation</em>, 2023, 46 (numéro de traduction ; date 2025 dans le RISS). <code>1118375ar</code></td>
+      <td>Quatre compétences pour tirer parti d'un retour : le comprendre, porter un jugement, gérer ses émotions, agir (modèle de Carless et Boud, 2018, résumé par les auteurs). Le retour suscite des émotions agréables et désagréables ; chercher à les éviter ou à les réprimer n'aide pas, mieux vaut les comprendre et s'en servir.</td>
+      <td>Fonde le cadre en quatre compétences (« Je ne comprends pas », étoiles et souhait, mot sur l'erreur, « Essayer autrement »). <strong>Limite :</strong> étude auprès de 52 étudiants universitaires ; le passage à des élèves de 6 à 9 ans n'est pas démontré. Texte tronqué à 4000 mots.</td>
+    </tr>
+    <tr>
+      <td>Virouleau, A., Peyroche, G. &amp; Lopo, T. (2025). La rétroaction audio, une modalité d'évaluation plus efficace ? <em>Colloque QPES 2025</em>. <code>hal-05348650</code></td>
+      <td>Une note seule n'améliore pas l'apprentissage, peut renforcer la peur de l'échec et diminuer la motivation. La rétroaction descriptive (sur la tâche, les processus, l'autorégulation) a le plus de potentiel.</td>
+      <td>Fonde le choix de ne pas noter et de décrire plutôt que juger. <strong>Limite :</strong> 15 étudiants, questionnaire auto-rapporté, mathématiques à l'université. Rien sur l'écriture à l'école primaire.</td>
+    </tr>
+    <tr>
+      <td>Davodeau, C. (2023). Apports et limites de l'outil informatique comme moyen de compensation pour les élèves de 8 à 14 ans présentant un trouble spécifique du langage écrit. Mémoire d'orthophonie. <code>dumas-05497857</code></td>
+      <td>Panorama des outils : synthèse vocale et retour vocal (aide à la relecture et au repérage d'erreurs), dictée vocale, prédicteurs de mots, correcteurs. Apports, mais aussi limites : nouvel apprentissage à prévoir, stigmatisation possible, effets variables ; le traitement de texte facilite la révision sans améliorer à lui seul la qualité du texte.</td>
+      <td>Appuie les aides « Écouter mon texte » et « Dire mon texte à voix haute ». <strong>Limite :</strong> mémoire d'étudiante, élèves de 8 à 14 ans ; seule la partie théorique a été lue (texte tronqué), pas les résultats de l'expérience.</td>
+    </tr>
+    <tr>
+      <td>Lemaire, T. (2025). La cohérence cardiaque et les émotions en contexte scolaire. Mémoire de M2 MEEF. <code>dumas-05337696</code></td>
+      <td>Sur des classes de CP et CM1 : baisse de l'agitation observée après des séances de respiration, mais « aucune conclusion définitive » sur l'effet direct sur les apprentissages.</td>
+      <td><strong>Ce texte n'étaye pas la respiration en cours d'écriture.</strong> L'application propose seulement un court temps calme avant de lire les retours, facultatif : c'est une hypothèse à tester, pas un fait établi.</td>
+    </tr>
+  </table>
+
+  <h3>Ce qui n'est pas dans le RISS, ou pas relu directement</h3>
+  <ul>
+    <li><strong>Modèle de Hayes et Flower (1980)</strong> (planifier, formuler, réviser), <strong>Carless et Boud (2018)</strong>, <strong>Hattie et Timperley (2007)</strong> : réels, cités dans les articles ci-dessus ; non lus directement.</li>
+    <li><strong>Articles co-écrits par Jean-François Beguin sur la littératie à la rétroaction</strong> et critères de qualité de la rétroaction (précis, actionnable, sans louange vide, sans note) : hors corpus RISS. Les critères sont appliqués par des règles de forme dans le code ; elles détectent des formulations, pas le sens.</li>
+    <li><strong>Colorisation des syllabes ou des sons</strong> : la source RISS retenue porte sur la <em>lecture</em>. Son effet sur l'<em>écriture</em> n'est pas étayé ; c'est une aide facultative.</li>
+    <li><strong>Pictogrammes</strong> (aide « Voir des images pour les mots ») : usage non étayé par une source RISS.</li>
+    <li><strong>Écouter la consigne</strong> et <strong>Chercher des mots dans une liste</strong> : références inscrites dans le code (<code>hal-03194300</code>, <code>dumas-03246050</code>), non relues pour cette page.</li>
+    <li><strong>Police</strong> : Arial par défaut, sans police « spéciale dyslexie », en cohérence avec les épreuves externes de la FWB.</li>
+  </ul>
+
+  <h2 id="limites">Limites, et ce qui n'est pas vérifié</h2>
+  <ul>
+    <li><strong>Aucun élève n'a utilisé l'application.</strong> La lisibilité des explications « Je ne comprends pas » en P1 à P3, le mot sur l'erreur et le temps calme n'ont pas été vus par des enfants.</li>
+    <li><strong>Voix de synthèse (français de Belgique) et dictée vocale : non testées sur tablette.</strong> La dictée exige une connexion sécurisée et un micro autorisé.</li>
+    <li>Les signaux sont de simples règles : un « Rien à signaler » ne veut pas dire « le texte est correct ».</li>
+    <li>Un seul type de signal est montré à la fois, pour éviter la surcharge. À confirmer en classe.</li>
+    <li>Pas d'application pour les niveaux P4 à P6, ni pour d'autres disciplines que le français.</li>
+    <li>Pas de réinitialisation de mot de passe testée. Version pour tablette et téléphone non testée.</li>
+    <li><strong>Données :</strong> les élèves n'ont ni compte ni nom, seulement un code. Leurs textes sont conservés sur un service d'hébergement en ligne (Supabase, Vercel). La région d'hébergement et la conformité RGPD pour un usage en école n'ont pas été vérifiées : n'y mettez pas de texte qui identifie un élève avant de l'avoir fait.</li>
+  </ul>
+
+  <h2 id="essai">Vous la testez : ce qui nous aiderait</h2>
+  <p>Un essai de 20 à 30 minutes avec 2 ou 3 élèves suffit. Notez, sans chercher à être exhaustif :</p>
+  <ul>
+    <li>Un élève a-t-il su entrer et commencer <strong>sans vous poser de question</strong> ? Où a-t-il hésité ?</li>
+    <li>Les phrases de l'application (« Regarde la première lettre de cette phrase », les explications) sont-elles comprises ? Lesquelles faut-il changer ?</li>
+    <li>Une aide a-t-elle gêné ou aidé ? Lesquelles avez-vous activées, pour quelle difficulté ?</li>
+    <li>Ce que vous avez écrit dans vos propres questions et ce que les élèves en ont fait : votre voix s'entend-elle dans l'outil ?</li>
+    <li>Le tableau de classe vous dit-il quelque chose que vous ne saviez pas déjà ? Que manque-t-il ?</li>
+    <li>Ce que l'outil <strong>ne fait pas bien</strong>, selon vous.</li>
+  </ul>
+  <div class="note"><strong>Merci de ne pas utiliser de vrais prénoms ni de texte identifiant un élève</strong> pendant l'essai. Utilisez des codes.</div>
+
+  <h2>Contact, crédits et licences</h2>
+  <p>Retours d'essai, questions : <a href="mailto:jf.beguin@outlook.com?subject=EcritActif%20-%20retour%20d%27essai">jf.beguin@outlook.com</a>.</p>
+  <ul>
+    <li><strong>Colorisation</strong> : port JavaScript de Jean-François Beguin du projet <a href="https://github.com/paColor/Colorization">Colorization</a> de Pierre-Alain Etique, licence GPL-3.0, lui-même très inspiré de <a href="https://lirecouleur.arkaline.fr/">LireCouleur</a>.</li>
+    <li><strong>Pictogrammes</strong> : auteur des pictogrammes Sergio Palao ; origine ARASAAC (<a href="http://www.arasaac.org">arasaac.org</a>) ; licence CC (BY-NC-SA) ; propriétaire Gouvernement d'Aragon (Espagne).</li>
+    <li><strong>Textes officiels cités</strong> : référentiel de français et langues anciennes du tronc commun (Fédération Wallonie-Bruxelles) ; programme d'études de l'enseignement primaire (Wallonie-Bruxelles Enseignement).</li>
+    <li><strong>Code</strong> : <a href="https://github.com/jfb4plai/EcritActif">github.com/jfb4plai/EcritActif</a>.</li>
+  </ul>
+</main>
+<footer>Jean-François Beguin · <a href="../">jfb4plai.com</a></footer>
+</body>
+</html>
