@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EcritActif : mode d'emploi et appuis scientifiques · jfb4plai</title>
-  <meta name="description" content="Application gratuite pour P1 à P3 (Fédération Wallonie-Bruxelles) : apprendre les réflexes d'écriture (réfléchir, écrire, relire, corriger) en semi-autonomie. Version d'essai, sans IA." />
+  <meta name="description" content="Application gratuite pour P1 à P6 (Fédération Wallonie-Bruxelles) : apprendre les réflexes d'écriture (réfléchir, écrire, relire, corriger) en semi-autonomie. Version d'essai, sans IA." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -16,21 +16,23 @@
   <a href="../#outils">← Tous les outils</a>
 </div></nav>
 <main>
-  <span class="badge">Version d'essai · P1 à P3 · français, écrire · gratuit, sans IA</span>
+  <span class="badge">Version d'essai · P1 à P6 · français, écrire · gratuit, sans IA</span>
   <h1>EcritActif</h1>
-  <p class="lead">Aider chaque élève de P1 à P3 à prendre les <strong>réflexes de l'écriture</strong> : <strong>réfléchir</strong> avant d'écrire, <strong>écrire</strong>, <strong>relire</strong>, <strong>corriger</strong>. L'élève travaille seul, à son rythme, avec des aides qu'il (ou vous) choisit. L'enseignant pose la consigne et lit les traces.</p>
+  <p class="lead">Aider chaque élève de P1 à P6 à prendre les <strong>réflexes de l'écriture</strong> : <strong>réfléchir</strong> avant d'écrire, <strong>écrire</strong>, <strong>relire</strong>, <strong>corriger</strong>. L'élève travaille seul, à son rythme, avec des aides qu'il (ou vous) choisit. L'enseignant pose la consigne et lit les traces.</p>
 
   <div class="dl">
     <p><a class="btn" data-umami-event="ouvrir-ecritactif" href="https://ecritactif.vercel.app">Ouvrir l'application</a></p>
-    <p class="small">Le nom « EcritActif » est provisoire. L'application est en essai : elle a été parcourue de bout en bout par son concepteur (enseignant, puis élèves P1 et P2 de démonstration), mais <strong>pas encore avec de vrais élèves</strong>. Vos retours servent à la corriger.</p>
+    <p class="small">Le nom « EcritActif » est provisoire. L'application est en essai. Elle a été parcourue en ligne de bout en bout par son concepteur pour P1 et P2 (enseignant, puis élèves de démonstration). Les fonctions de P4 à P6 (atelier de grammaire, chasse aux erreurs, formulation de l'enseignant, Grammaire 3D) ont été ouvertes le 27 octobre 2026 : elles sont vérifiées par des tests automatiques, mais <strong>aucun élève ne les a encore utilisées</strong>. Vos retours servent à la corriger.</p>
   </div>
 
   <div class="toc"><ul>
     <li><a href="#sert">À quoi elle sert, et ce qu'elle ne fait pas</a></li>
     <li><a href="#enseignant">Mode d'emploi : enseignant</a></li>
     <li><a href="#eleve">Mode d'emploi : élève</a></li>
+    <li><a href="#grammaire">Grammaire de P4 à P6 : l'atelier et la chasse aux erreurs</a></li>
     <li><a href="#programme">Ancrage dans le programme de la FWB</a></li>
     <li><a href="#riss">Appuis scientifiques (RISS)</a></li>
+    <li><a href="#donnees">Données, surnoms et RGPD</a></li>
     <li><a href="#limites">Limites, et ce qui n'est pas vérifié</a></li>
     <li><a href="#essai">Vous la testez : ce qui nous aiderait</a></li>
   </ul></div>
@@ -40,7 +42,7 @@
     <li><strong>Elle apprend une manière de travailler</strong> : planifier, mettre en texte, relire, corriger. Elle n'écrit rien à la place de l'élève et ne corrige pas son texte.</li>
     <li><strong>Elle signale, elle ne corrige pas.</strong> Elle indique par exemple « Regarde la première lettre de cette phrase » et surligne l'endroit. L'élève décide quoi changer.</li>
     <li><strong>Elle ne note pas.</strong> À la fin, l'élève dit ce qui est réussi et ce qu'il voudrait améliorer (« deux étoiles et un souhait »).</li>
-    <li><strong>Elle n'utilise pas d'IA.</strong> Les signaux viennent de règles simples (majuscule, point, mot répété). Elles ne comprennent pas le sens du texte.</li>
+    <li><strong>Elle n'utilise pas d'IA.</strong> Les signaux viennent de règles simples (majuscule, point, mot répété). Elles ne comprennent pas le sens du texte. L'atelier de grammaire ne dit jamais si les choix de l'élève sont bons (voir plus bas).</li>
     <li><strong>Elle s'adapte aux difficultés, pas aux diagnostics.</strong> Les aides sont rattachées à une gêne (« Écrire est lent ou fatigant », « Je ne vois pas mes erreurs quand je relis »…), pas à une étiquette. L'élève ou vous les activez, quel que soit le niveau.</li>
     <li><strong>Elle ne remplace pas votre enseignement de l'écriture.</strong> Les recherches lues (voir plus bas) montrent que la modélisation par l'enseignant, à voix haute, compte beaucoup. EcritActif est un complément pour s'entraîner, pas un substitut.</li>
   </ul>
@@ -48,11 +50,11 @@
   <h2 id="enseignant">Mode d'emploi : enseignant</h2>
   <ol>
     <li><strong>Créer votre compte</strong> sur <a href="https://ecritactif.vercel.app/enseignant">ecritactif.vercel.app/enseignant</a> : adresse e-mail et mot de passe d'au moins 8 caractères. Confirmez l'adresse par le message reçu. L'adresse n'est jamais visible des élèves.</li>
-    <li><strong>Créer une classe</strong> : un nom que vous seul voyez. L'application donne un <strong>code de classe</strong> (6 caractères) à communiquer aux élèves.</li>
-    <li><strong>Choisir l'année</strong> (P1, P2 ou P3). Elle règle les items du programme proposés, le vocabulaire des explications et le nombre de temps : <strong>3 temps en P1</strong> (Réfléchir, Écrire, Relire), <strong>4 temps en P2 et P3</strong> (Corriger s'ajoute).</li>
-    <li><strong>Ajouter des élèves</strong> : « Ajouter 5 élèves » crée 5 <strong>codes personnels sans nom</strong>. Notez vous-même, sur une feuille que vous gardez, quel code correspond à quel élève.</li>
+    <li><strong>Créer une classe</strong> : un nom que vous seul voyez et l'<strong>année scolaire de la classe</strong> (P1 à P6, obligatoire). L'application donne un <strong>code de classe</strong> (6 caractères) à communiquer aux élèves, puis vous ouvre la classe. Plus tard, le bouton vert « Ouvrir la classe » de la liste « Mes classes créées » y ramène.</li>
+    <li><strong>Ajouter des élèves</strong> : « Ajouter 5 élèves » crée 5 <strong>codes personnels sans nom</strong>. Notez vous-même, sur une feuille que vous gardez, quel code correspond à quel élève. Si vous le souhaitez, vous pouvez écrire un surnom à côté de chaque code : lisez d'abord la section « Données, surnoms et RGPD ».</li>
     <li><strong>Créer une activité</strong> (« Nouvelle activité ») :
       <ul>
+        <li><strong>Année du programme de cette activité</strong> : préremplie avec l'année de la classe ; changez-la si votre classe travaille le programme d'une autre année. Elle règle les items du programme proposés, le vocabulaire des explications, le nombre de temps (<strong>3 temps en P1</strong> : Réfléchir, Écrire, Relire ; <strong>4 temps à partir de P2</strong> : Corriger s'ajoute) et les outils de grammaire (à partir de P4). Une activité s'adresse à toute la classe.</li>
         <li><strong>Consigne</strong> : écrivez-la avec vos mots, elle est lue telle quelle aux élèves.</li>
         <li><strong>Nombre minimum et maximum de mots</strong> (facultatif) : l'élève voit « Ton texte est-il assez long ? » avec les chiffres.</li>
         <li><strong>Items du programme</strong> : vous cochez ceux que l'activité travaille. Ils alimentent la carte du programme.</li>
@@ -61,10 +63,12 @@
         <li><strong>Mots utiles</strong> : une liste que l'élève peut insérer d'un clic.</li>
         <li><strong>Signaler à la correction</strong> : choisissez peu de catégories à la fois (par exemple majuscule, point). Si vous n'en cochez aucune, l'élève verra « Rien à signaler ».</li>
         <li><strong>Aides retirées</strong> : si une aide ne convient pas à l'activité, retirez-la.</li>
+        <li><strong>Grammaire (P4 à P6)</strong> : cochez « Atelier de raisonnement grammatical » pour proposer l'atelier ; « Grammaire 3D » (option) adapte les noms des fonctions ; « Ma formulation » remplace les consignes de l'application par les vôtres. Voir la section Grammaire.</li>
+        <li><strong>Chasse aux erreurs (P4 à P6)</strong> : vous écrivez un court texte avec des erreurs que vous avez placées, et la forme attendue pour chacune. Voir la section Grammaire.</li>
       </ul>
     </li>
     <li><strong>Donner les codes</strong> aux élèves : code de classe + code personnel, à saisir sur <a href="https://ecritactif.vercel.app/eleve">ecritactif.vercel.app/eleve</a>.</li>
-    <li><strong>Lire le tableau de la classe</strong> : pour chaque code, où il en est (pas commencé, en cours, rendu, nombre de versions), les aides utilisées, les demandes d'aide (« Je ne comprends pas »), l'auto-évaluation (étoiles et souhait), et la carte du programme. <strong>L'application présente des traces ; vous seul décidez qu'un item est acquis.</strong></li>
+    <li><strong>Lire le tableau de la classe</strong> : pour chaque code (avec son surnom si vous en avez écrit un), où il en est (pas commencé, en cours, rendu, nombre de versions), les aides utilisées, les demandes d'aide (« Je ne comprends pas »), l'auto-évaluation (étoiles et souhait), le travail dans l'atelier de grammaire et dans la chasse aux erreurs, et la carte du programme (avec son propre choix d'année). <strong>L'application présente des traces ; vous seul décidez qu'un item est acquis.</strong></li>
   </ol>
 
   <h2 id="eleve">Mode d'emploi : élève</h2>
@@ -80,20 +84,50 @@
     <li><strong>Corriger</strong> (à partir de P2) : regarder les endroits montrés, changer ce qu'on veut.</li>
     <li>Cliquer sur « Je ne comprends pas » quand une phrase n'est pas claire. Demander de l'aide, c'est apprendre.</li>
     <li>Dire deux choses réussies et un souhait (on peut laisser vide).</li>
+    <li>À partir de P4, si l'enseignant l'a prévu : cliquer sur « Raisonner sur une phrase » ou sur « Chasse aux erreurs » (voir la section Grammaire).</li>
     <li>Choisir : continuer à écrire, essayer autrement (nouvelle version, l'ancienne reste visible), ou rendre son texte.</li>
   </ol>
   <p class="small">En P1, relire et corriger forment un seul temps : le référentiel de la FWB nomme trois composantes en P1 (planification, mise en texte, révision) et ajoute la correction à partir de P2.</p>
 
+  <h2 id="grammaire">Grammaire de P4 à P6 : l'atelier et la chasse aux erreurs</h2>
+  <p>Le programme demande d'accorder le verbe avec le sujet, d'accorder déterminants et adjectifs, d'appliquer les règles d'accord du participe passé et d'identifier la fonction d'un groupe. L'application aide l'élève à <strong>raisonner</strong>, avec les termes du programme de l'année (par exemple « groupe sujet »). Les deux outils sont des options de l'enseignant, activité par activité, à partir de P4.</p>
+
+  <h3>L'atelier « Raisonner sur une phrase »</h3>
+  <p>À « Corriger », l'élève choisit une phrase de son texte, puis une démarche. Il <strong>marque lui-même les mots</strong> en cliquant dessus, fait des choix, justifie avec des phrases à compléter, puis décide : garder la phrase, modifier son texte, ou dire « Je ne suis pas sûr ». <strong>L'application ne dit jamais si ses choix sont bons</strong> : vous voyez, dans le tableau de classe, les étapes faites, sa justification et ses « Je ne suis pas sûr ».</p>
+  <ul>
+    <li><strong>Le verbe et son sujet</strong> (P4 à P6) : changer le temps de la phrase pour trouver le verbe, trouver le groupe sujet en le remplaçant par il, elle, ils ou elles, regarder la terminaison.</li>
+    <li><strong>Le nom et les mots qui l'accompagnent</strong> (P4 à P6) : le nom, le déterminant, l'adjectif, le genre et le nombre.</li>
+    <li><strong>Le participe passé</strong> (P5 et P6) : trois cas, employé seul, avec « être », avec « avoir » (accord avec le complément direct seulement s'il est placé avant le verbe). <strong>Les verbes pronominaux n'y figurent pas</strong> : le programme exclut l'accord de leur participe passé de l'attendu (F627, F834).</li>
+    <li><strong>La fonction d'un groupe</strong> (P4 à P6) : cinq fonctions en P4, huit en P5 et P6, avec les manipulations (déplacer, effacer, remplacer par un pronom, encadrer par « c'est … qui » ou « c'est … que »).</li>
+  </ul>
+  <p>Cette démarche s'appuie sur ce que dit la recherche lue : la grammaire se travaille surtout quand l'élève <strong>justifie</strong> sa réponse, par l'identification du groupe ou par une manipulation (voir le tableau plus bas).</p>
+
+  <h3>Les options de l'enseignant</h3>
+  <ul>
+    <li><strong>Grammaire 3D</strong> : pour les fonctions, l'élève voit les noms de Grammaire 3D (par exemple « complément de phrase ») et les pronoms utiles pour chaque fonction. <strong>Le programme reste la référence</strong> : aucune fonction du programme n'est retirée, et sans cette option l'atelier emploie les noms du programme.</li>
+    <li><strong>Ma formulation</strong> : pour chaque étape, vous écrivez vos propres consignes (une par ligne, six au plus). L'élève voit les vôtres à la place de celles de l'application. Les rappels de règle de l'application restent affichés, et le contrôle de vocabulaire ne s'applique pas à votre texte.</li>
+  </ul>
+
+  <h3>La chasse aux erreurs</h3>
+  <p>Vous écrivez un texte de 80 mots au plus, avec des erreurs que vous avez placées, la forme attendue de chacune, leur type (accord du verbe, groupe nominal, pluriel ou féminin, homophone) et, si vous voulez, un indice. L'élève clique sur un mot qui ne va pas, écrit la forme corrigée, justifie s'il le souhaite, puis clique sur « Vérifier ».</p>
+  <ul>
+    <li>Réponses : « Tu as trouvé une erreur », un indice <strong>sans la forme</strong>, ou « Ce n'est pas un des mots à corriger ». L'application dit combien d'erreurs il reste. <strong>Pas de note, pas de score.</strong></li>
+    <li>Après trois indices sur la même erreur : « Demande de l'aide à ton enseignant ».</li>
+    <li>Le corrigé reste sur le serveur : il n'est jamais envoyé au navigateur de l'élève.</li>
+    <li><strong>Limite :</strong> l'application ne connaît que les erreurs que vous avez placées ; elle ne peut pas affirmer qu'un autre mot est correct.</li>
+  </ul>
+  <div class="note"><strong>À relire par vous.</strong> Les rappels de règle du participe passé et la liste des manipulations sont des rédactions du concepteur : le programme ne les énonce pas et aucune source RISS lue ne les valide. Vérifiez-les avec votre manuel avant de les proposer à vos élèves.</div>
+
   <h2 id="programme">Ancrage dans le programme de la FWB</h2>
   <p>L'application combine deux textes officiels (cités tels quels, jamais reformulés) :</p>
   <ul>
-    <li>le <strong>référentiel de français et langues anciennes du tronc commun</strong> (Fédération Wallonie-Bruxelles), partie « écrire » de P1 à P3 : composantes de la production d'écrit, palier de scripteur attendu ;</li>
-    <li>le <strong>programme d'études de l'enseignement primaire (CECP, Wallonie-Bruxelles Enseignement)</strong> : 82 items « écrire » avec leurs codes (F…).</li>
+    <li>le <strong>référentiel de français et langues anciennes du tronc commun</strong> (Fédération Wallonie-Bruxelles), partie « écrire » de P1 à P6 : composantes de la production d'écrit, palier de scripteur attendu ;</li>
+    <li>le <strong>programme d'études de l'enseignement primaire (CECP, Wallonie-Bruxelles Enseignement)</strong> : 181 items « écrire » de P1 à P6 avec leurs codes (F…).</li>
   </ul>
   <p>Chaque question fixe cite les codes du programme dont elle vient. Les explications utilisent le vocabulaire de l'année (par exemple « une majuscule, une grande lettre »). Un test automatique refuse tout repère de l'école française dans ce que lisent l'élève et l'enseignant.</p>
 
   <h2 id="riss">Appuis scientifiques (corpus RISS)</h2>
-  <p>Chaque référence ci-dessous a été retrouvée et lue dans le corpus RISS (articles francophones) le 26 octobre 2026. « Lu » signifie que j'ai lu l'article récupéré ; quand le texte est tronqué, je le dis.</p>
+  <p>Chaque référence ci-dessous a été retrouvée et lue dans le corpus RISS (articles francophones) les 26 et 27 octobre 2026. « Lu » signifie que j'ai lu l'article récupéré ; quand le texte est tronqué, je le dis.</p>
   <table>
     <tr><th>Référence (identifiant RISS)</th><th>Ce que l'article établit</th><th>Ce qu'on en fait, et ses limites</th></tr>
     <tr>
@@ -121,6 +155,11 @@
       <td>Sur des classes de CP et CM1 : baisse de l'agitation observée après des séances de respiration, mais « aucune conclusion définitive » sur l'effet direct sur les apprentissages.</td>
       <td><strong>Ce texte n'étaye pas la respiration en cours d'écriture.</strong> L'application propose seulement un court temps calme avant de lire les retours, facultatif : c'est une hypothèse à tester, pas un fait établi.</td>
     </tr>
+    <tr>
+      <td>Arseneau, R. &amp; Geoffre, T. (2023). Quel potentiel des outils numériques pour le raisonnement grammatical des élèves ? <code>halshs-04327552</code></td>
+      <td>Le raisonnement grammatical se déploie surtout quand l'élève justifie sa réponse, par l'identification de l'unité grammaticale ou par une manipulation syntaxique (par exemple remplacer un groupe par un pronom pour trouver le sujet). Détecter et corriger des erreurs prépare à réviser ses propres textes. Corriger son propre texte est plus exigeant que corriger celui d'un autre. Sur 590 outils numériques recensés, 0,5 % seulement travaillent les manipulations syntaxiques.</td>
+      <td>Fonde l'atelier (justifier, manipulations) et la chasse aux erreurs (texte d'un autre). <strong>Limite :</strong> revue d'outils, pas une mesure de progrès d'élèves ; texte lu jusqu'à la troncature de 4000 mots. L'efficacité de l'atelier sur les accords des élèves de la FWB n'est pas démontrée.</td>
+    </tr>
   </table>
 
   <h3>Ce qui n'est pas dans le RISS, ou pas relu directement</h3>
@@ -131,18 +170,31 @@
     <li><strong>Pictogrammes</strong> (aide « Voir des images pour les mots ») : usage non étayé par une source RISS.</li>
     <li><strong>Écouter la consigne</strong> (élèves dont le français est la deuxième langue) : l'article RISS <code>hal-03194300</code> (Ivanova-Fournier, 2021, brouillons d'étudiants chinois en français) rapporte, d'après Gaonac'h, que l'écriture en langue seconde coûte plus cher en mémoire de travail qu'en langue première. Il étaye la <em>difficulté</em>, pas l'<em>efficacité</em> de l'aide ; étude sur 3 brouillons d'étudiants universitaires.</li>
     <li><strong>Chercher des mots dans une liste</strong> : aucune source RISS lue n'étaye cette aide. Une référence qui y était attachée (<code>dumas-03246050</code>, karaoké et trouble du langage oral) a été relue le 26 octobre 2026 : elle ne la concerne pas, elle a été retirée.</li>
+    <li><strong>Rappels de règle du participe passé, liste des manipulations, démarches de l'atelier</strong> : rédigés par le concepteur à partir de l'usage scolaire ; le programme ne les énonce pas et aucune source RISS lue ne les valide (voir plus haut).</li>
+    <li><strong>Grammaire 3D</strong> : noms et pronoms des fonctions repris de l'application Grammaire 3D du même auteur ; option pédagogique, non évaluée.</li>
     <li><strong>Police</strong> : Arial par défaut, sans police « spéciale dyslexie », en cohérence avec les épreuves externes de la FWB.</li>
+  </ul>
+
+  <h2 id="donnees">Données, surnoms et RGPD</h2>
+  <ul>
+    <li>Les élèves n'ont <strong>ni compte ni nom</strong>, seulement un code. Leurs textes sont conservés sur un service d'hébergement en ligne (Supabase, Vercel). <strong>La région d'hébergement et la conformité RGPD pour un usage en école n'ont pas été vérifiées</strong> : n'y mettez pas de texte qui identifie un élève avant de l'avoir fait.</li>
+    <li><strong>Surnoms (facultatif).</strong> Vous pouvez écrire un surnom à côté de chaque code pour reconnaître un élève dans le tableau (« KMNPQR (Léa) »). Le surnom <strong>reste dans votre navigateur, sur cet appareil</strong> : l'application ne l'envoie pas et ne le conserve pas, elle ne connaît pas le nom de vos élèves.</li>
+    <li><strong>Si vous changez de navigateur ou d'appareil, ou si vous videz les données du navigateur, les surnoms disparaissent.</strong> Notez donc aussi sur papier qui a quel code, et gardez cette feuille en lieu sûr.</li>
+    <li>Une liste qui relie un code à un enfant est une <strong>donnée personnelle (RGPD)</strong> : vous restez responsable de sa protection. Écrivez un prénom ou des initiales, pas un nom complet, et rien sur la santé ou les difficultés de l'enfant.</li>
+    <li>Ce texte d'information n'est pas un avis juridique. Le cadre RGPD de l'application (information des familles, durée de conservation des textes, rôle de l'école ou du pouvoir organisateur) n'a pas été examiné par un délégué à la protection des données.</li>
   </ul>
 
   <h2 id="limites">Limites, et ce qui n'est pas vérifié</h2>
   <ul>
-    <li><strong>Aucun élève n'a utilisé l'application.</strong> La lisibilité des explications « Je ne comprends pas » en P1 à P3, le mot sur l'erreur et le temps calme n'ont pas été vus par des enfants.</li>
+    <li><strong>Aucun élève n'a utilisé l'application.</strong> La lisibilité des explications « Je ne comprends pas » de P1 à P6, le mot sur l'erreur, le temps calme, l'atelier de grammaire et la chasse aux erreurs n'ont pas été vus par des enfants.</li>
+    <li>L'atelier et la chasse n'ont pas été parcourus en ligne par un enseignant ; ils sont vérifiés par des tests automatiques et par un contrôle visuel de leurs écrans par le concepteur.</li>
+    <li>Les verbes pronominaux ne sont pas dans l'atelier, car hors programme.</li>
+    <li>Une activité s'adresse à toute la classe : il n'y a pas d'activité propre à un élève.</li>
     <li><strong>Voix de synthèse (français de Belgique) et dictée vocale : non testées sur tablette.</strong> La dictée exige une connexion sécurisée et un micro autorisé.</li>
     <li>Les signaux sont de simples règles : un « Rien à signaler » ne veut pas dire « le texte est correct ».</li>
     <li>Un seul type de signal est montré à la fois, pour éviter la surcharge. À confirmer en classe.</li>
-    <li>Pas d'application pour les niveaux P4 à P6, ni pour d'autres disciplines que le français.</li>
+    <li>Pas d'autres disciplines que le français, et pas encore de secondaire.</li>
     <li>Pas de réinitialisation de mot de passe testée. Version pour tablette et téléphone non testée.</li>
-    <li><strong>Données :</strong> les élèves n'ont ni compte ni nom, seulement un code. Leurs textes sont conservés sur un service d'hébergement en ligne (Supabase, Vercel). La région d'hébergement et la conformité RGPD pour un usage en école n'ont pas été vérifiées : n'y mettez pas de texte qui identifie un élève avant de l'avoir fait.</li>
   </ul>
 
   <h2 id="essai">Vous la testez : ce qui nous aiderait</h2>
@@ -153,6 +205,9 @@
     <li>Une aide a-t-elle gêné ou aidé ? Lesquelles avez-vous activées, pour quelle difficulté ?</li>
     <li>Ce que vous avez écrit dans vos propres questions et ce que les élèves en ont fait : votre voix s'entend-elle dans l'outil ?</li>
     <li>Le tableau de classe vous dit-il quelque chose que vous ne saviez pas déjà ? Que manque-t-il ?</li>
+    <li>À partir de P4 : l'atelier de grammaire est-il compris par les élèves <strong>sans aide</strong> ? Vos propres consignes (« Ma formulation ») ont-elles mieux fonctionné que celles de l'application ?</li>
+    <li>La chasse aux erreurs : les indices aident-ils sans donner la réponse ? Les erreurs que vous avez placées étaient-elles bien celles que les élèves ont cherchées ?</li>
+    <li>Les surnoms dans le tableau vous ont-ils servi ? Qu'avez-vous noté sur papier ?</li>
     <li>Ce que l'outil <strong>ne fait pas bien</strong>, selon vous.</li>
   </ul>
   <div class="note"><strong>Merci de ne pas utiliser de vrais prénoms ni de texte identifiant un élève</strong> pendant l'essai. Utilisez des codes.</div>
@@ -161,6 +216,7 @@
   <p>Retours d'essai, questions : <a href="mailto:jf.beguin@outlook.com?subject=EcritActif%20-%20retour%20d%27essai">jf.beguin@outlook.com</a>.</p>
   <ul>
     <li><strong>Colorisation</strong> : port JavaScript de Jean-François Beguin du projet <a href="https://github.com/paColor/Colorization">Colorization</a> de Pierre-Alain Etique, licence GPL-3.0, lui-même très inspiré de <a href="https://lirecouleur.arkaline.fr/">LireCouleur</a>.</li>
+    <li><strong>Grammaire 3D</strong> : noms et pronoms des fonctions repris de l'application <em>Grammaire 3D</em> de Jean-François Beguin (code PolyForm Noncommercial, contenus CC BY-NC-SA).</li>
     <li><strong>Pictogrammes</strong> : auteur des pictogrammes Sergio Palao ; origine ARASAAC (<a href="http://www.arasaac.org">arasaac.org</a>) ; licence CC (BY-NC-SA) ; propriétaire Gouvernement d'Aragon (Espagne).</li>
     <li><strong>Textes officiels cités</strong> : référentiel de français et langues anciennes du tronc commun (Fédération Wallonie-Bruxelles) ; programme d'études de l'enseignement primaire (Wallonie-Bruxelles Enseignement).</li>
     <li><strong>Code</strong> : <a href="https://github.com/jfb4plai/EcritActif">github.com/jfb4plai/EcritActif</a>.</li>
