@@ -22,11 +22,12 @@
 
   <div class="dl">
     <p><a class="btn" data-umami-event="ouvrir-ecritactif" href="https://ecritactif.vercel.app">Ouvrir l'application</a></p>
-    <p class="small">Le nom « EcritActif » est provisoire. L'application est en essai. Elle a été parcourue en ligne de bout en bout par son concepteur pour P1 et P2 (enseignant, puis élèves de démonstration). Les fonctions de P4 à P6 (atelier de grammaire, chasse aux erreurs, formulation de l'enseignant, Grammaire 3D) ont été ouvertes le 27 octobre 2026 : elles sont vérifiées par des tests automatiques, mais <strong>aucun élève ne les a encore utilisées</strong>. Vos retours servent à la corriger.</p>
+    <p class="small">Le nom « EcritActif » est provisoire. L'application est en essai. Elle a été parcourue en ligne de bout en bout par son concepteur pour P1 et P2 (enseignant, puis élèves de démonstration). Les fonctions de P4 à P6 (atelier de grammaire, chasse aux erreurs, formulation de l'enseignant, Grammaire 3D) ont été ouvertes le 27 octobre 2026 : elles sont vérifiées par des tests automatiques, mais <strong>aucun élève ne les a encore utilisées</strong>. Le 28 octobre 2026 se sont ajoutés : l'encadré « ce que l'application regarde », les mots dont l'élève doute, le signal « mot absent de la liste » et les mots acceptés par l'enseignant (par activité, puis par classe) ; ils sont vérifiés par des tests automatiques, pas encore parcourus en ligne par un enseignant. Vos retours servent à la corriger.</p>
   </div>
 
   <div class="toc"><ul>
-    <li><a href="#sert">À quoi elle sert, et ce qu'elle ne fait pas</a></li>
+    <li><a href="#sert">Ce que l'application fait, et ce qu'elle ne fait pas</a></li>
+    <li><a href="#suggerer">Ce que vous pouvez nous suggérer</a></li>
     <li><a href="#enseignant">Mode d'emploi : enseignant</a></li>
     <li><a href="#eleve">Mode d'emploi : élève</a></li>
     <li><a href="#grammaire">Grammaire de P4 à P6 : l'atelier et la chasse aux erreurs</a></li>
@@ -37,14 +38,58 @@
     <li><a href="#essai">Vous la testez : ce qui nous aiderait</a></li>
   </ul></div>
 
-  <h2 id="sert">À quoi elle sert, et ce qu'elle ne fait pas</h2>
+  <h2 id="sert">Ce que l'application fait, et ce qu'elle ne fait pas</h2>
+  <p>Cette section sert deux usages : savoir ce que vous pouvez en attendre, et repérer ce qui manque pour <a href="#suggerer">nous le suggérer</a>. Les affirmations viennent du code de l'application et de ses tests automatiques ; ce qui n'a pas été vérifié par des élèves ou en ligne est dit dans la section « Limites ».</p>
+
+  <h3>Ce qu'elle fait</h3>
   <ul>
-    <li><strong>Elle apprend une manière de travailler</strong> : planifier, mettre en texte, relire, corriger. Elle n'écrit rien à la place de l'élève et ne corrige pas son texte.</li>
-    <li><strong>Elle signale, elle ne corrige pas.</strong> Elle indique par exemple « Regarde la première lettre de cette phrase » et surligne l'endroit. L'élève décide quoi changer.</li>
-    <li><strong>Elle ne note pas.</strong> À la fin, l'élève dit ce qui est réussi et ce qu'il voudrait améliorer (« deux étoiles et un souhait »).</li>
-    <li><strong>Elle n'utilise pas d'IA.</strong> Les signaux viennent de règles simples (majuscule, point, mot répété). Elles ne comprennent pas le sens du texte. L'atelier de grammaire ne dit jamais si les choix de l'élève sont bons (voir plus bas).</li>
-    <li><strong>Elle s'adapte aux difficultés, pas aux diagnostics.</strong> Les aides sont rattachées à une gêne (« Écrire est lent ou fatigant », « Je ne vois pas mes erreurs quand je relis »…), pas à une étiquette. L'élève ou vous les activez, quel que soit le niveau.</li>
-    <li><strong>Elle ne remplace pas votre enseignement de l'écriture.</strong> Les recherches lues (voir plus bas) montrent que la modélisation par l'enseignant, à voix haute, compte beaucoup. EcritActif est un complément pour s'entraîner, pas un substitut.</li>
+    <li><strong>Elle guide la démarche d'écriture</strong> en trois temps en P1 (réfléchir, écrire, relire) et quatre à partir de P2 (corriger s'ajoute). Elle pose une question à la fois, tirée du programme de l'année ou écrite par vous.</li>
+    <li><strong>Elle signale des endroits du texte, sans donner la forme correcte.</strong> Elle surligne et dit par exemple « Regarde la première lettre de cette phrase ». L'élève décide quoi changer.</li>
+    <li><strong>Elle dit ce qu'elle a regardé et ce qu'elle ne voit pas</strong>, à chaque correction. Un encadré rappelle que « aucun signal » ne veut pas dire « texte sans erreur ».</li>
+    <li><strong>Elle laisse l'élève marquer les mots dont il doute.</strong> L'élève touche un mot dont il n'est pas sûr de l'écriture. L'application ne dit pas si le mot est juste. Vous voyez ces mots dans le tableau.</li>
+    <li><strong>Elle garde des traces pour vous</strong> : premier jet (jamais écrasé) et version finale avec les mots changés, aides utilisées, demandes d'aide, mots douteux, auto-évaluation, travail dans l'atelier de grammaire et dans la chasse aux erreurs. Vous seul décidez qu'un item du programme est acquis.</li>
+    <li><strong>Elle propose des aides au choix, rattachées à une gêne</strong> (« Écrire est lent ou fatigant », « Je ne vois pas mes erreurs quand je relis ») : écouter la consigne ou son texte, dire son texte à voix haute, colorer les sons ou les syllabes, images pour les mots, liste de mots, schéma pour ranger ses idées.</li>
+    <li><strong>Elle laisse passer votre voix</strong> : votre consigne telle quelle, vos questions, vos mots utiles, vos mots locaux acceptés, vos consignes de grammaire (« Ma formulation »), le texte de la chasse aux erreurs, et le choix des signaux à activer.</li>
+  </ul>
+
+  <h3>Ce qu'elle ne fait pas</h3>
+  <ul>
+    <li><strong>Elle n'écrit rien à la place de l'élève et ne corrige pas son texte.</strong> Aucune forme correcte n'est jamais proposée : ni pour un accord, ni pour un mot, ni pour une contrainte de lettre.</li>
+    <li><strong>Elle ne note pas.</strong> Pas de score, pas de pourcentage, pas de comparaison entre élèves.</li>
+    <li><strong>Elle n'utilise pas d'intelligence artificielle.</strong> Les signaux viennent de règles simples et d'une liste de mots du français. Ni les unes ni l'autre ne comprennent le sens du texte.</li>
+    <li><strong>Elle ne juge pas les choix de l'élève en grammaire.</strong> Dans l'atelier, elle pose des questions et garde la trace de la justification ; elle ne dit jamais si le verbe, le sujet ou l'accord choisis sont bons.</li>
+    <li><strong>Elle ne voit pas</strong> les fautes d'accord dans le texte de l'élève, les homophones (a ou à, et ou est) dans son propre texte, les mots qui existent mais ne sont pas les bons, la conjugaison, la cohérence des temps, les connecteurs, les reprises d'information, le plan du texte ni le respect de l'intention. Le tableau ci-dessous détaille.</li>
+    <li><strong>Elle ne remplace pas votre enseignement de l'écriture.</strong> Les recherches lues montrent que la modélisation par l'enseignant, à voix haute, compte beaucoup. EcritActif est un complément pour s'entraîner.</li>
+    <li><strong>Elle ne dit pas si un item du programme est acquis.</strong> Elle présente des traces.</li>
+    <li><strong>Elle ne propose pas d'activité propre à un élève</strong> : une activité s'adresse à toute la classe (les aides et la colorisation, elles, se règlent par élève).</li>
+  </ul>
+
+  <h3>Ce qu'elle regarde dans le texte de l'élève, compétence par compétence</h3>
+  <p>Les codes (F…) sont ceux du programme d'études de l'enseignement primaire ; les exemples sont ceux de P3, lus dans les items « écrire » de P3 chargés dans l'application.</p>
+  <table>
+    <tr><th>Compétence du programme</th><th>Ce que l'application fait</th><th>Ce qui passe sans signal</th></tr>
+    <tr><td>Ponctuation (F295)</td><td>Signale l'absence de point (ou point d'interrogation, d'exclamation, points de suspension) à la fin du texte.</td><td>Virgule d'énumération, deux points, guillemets, tirets, signes oubliés au milieu du texte.</td></tr>
+    <tr><td>Majuscule</td><td>Signale une phrase qui commence par une minuscule (après un point, ? ! … ou en début de texte).</td><td>Majuscule des noms propres.</td></tr>
+    <tr><td>Orthographe lexicale, encodage de mots (F293, F294, F354 à F356)</td><td>Option « mot absent de la liste » : signale un mot que la liste de mots du français ne connaît pas. L'élève peut aussi marquer ses doutes. Vous pouvez ajouter les mots locaux (noms de quartiers, mots de chez vous), par activité ou pour toute la classe.</td><td>Une faute qui donne un autre mot existant. La liste peut signaler à tort un prénom ou un mot rare : c'est un dictionnaire, pas une compréhension du texte.</td></tr>
+    <tr><td>Accords : verbe avec le sujet, déterminants, adjectifs (F375 à F377)</td><td>À partir de P4, l'atelier fait raisonner l'élève et garde sa justification ; la chasse aux erreurs travaille sur un texte que vous avez préparé.</td><td>Toute faute d'accord dans le propre texte de l'élève. Une réponse fausse dans l'atelier n'est pas détectée.</td></tr>
+    <tr><td>Homophones (F357, F358)</td><td>Seulement dans la chasse aux erreurs, sur votre texte.</td><td>a ou à, et ou est, etc., dans le propre texte de l'élève.</td></tr>
+    <tr><td>Conjugaison et cohérence des temps (F378, F379)</td><td>Rien.</td><td>Terminaisons, mélange de présent et de passé.</td></tr>
+    <tr><td>Connecteurs, reprises d'information, structure du texte (F340 à F347)</td><td>Pose la question de relecture (la vôtre, ou une question du programme). Signale un mot écrit deux fois de suite.</td><td>Texte sans lien entre ses phrases, reprises maladroites.</td></tr>
+    <tr><td>Intention, idées, plan (F288 à F292, F411, F412)</td><td>Pose la question ; l'élève répond dans sa tête.</td><td>Hors sujet, idées pauvres. L'application ne lit pas le sens.</td></tr>
+    <tr><td>Longueur</td><td>Compare au minimum ou au maximum de mots que vous avez fixé.</td><td>Un texte long mais vide.</td></tr>
+  </table>
+  <div class="note"><strong>Conséquence pratique.</strong> Pour l'orthographe et les accords, la détection, c'est vous : lisez le premier jet et la version finale dans le tableau (« Lire le texte »). Choisissez l'atelier, la chasse aux erreurs ou la liste de mots selon la compétence que vous voulez travailler.</div>
+
+  <h3 id="suggerer">Ce que vous pouvez nous suggérer</h3>
+  <p>Ces pistes ne sont pas promises. Elles montrent ce qui manque aujourd'hui. Dites-nous lesquelles vous seraient utiles, et lesquelles vous gêneraient.</p>
+  <ul>
+    <li><strong>Ponctuation à l'intérieur du texte</strong> (virgule d'énumération, guillemets) : faisable par règles simples, avec le risque de signaler à tort.</li>
+    <li><strong>Majuscule des noms propres</strong> : difficile, car l'application ne sait pas distinguer un nom propre d'un mot commun.</li>
+    <li><strong>Un signal pour les homophones les plus fréquents</strong> : une règle simple se tromperait souvent sans comprendre la phrase.</li>
+    <li><strong>Plusieurs types de signaux montrés ensemble</strong> : aujourd'hui un seul à la fois (celui du premier signal dans le texte), pour éviter la surcharge. À tester en classe.</li>
+    <li><strong>Activité propre à un élève</strong> (consigne, contrainte ou liste de mots différentes) : demande une évolution de la base de données.</li>
+    <li><strong>Autres disciplines et secondaire</strong> : demande de charger d'autres programmes.</li>
+    <li><strong>Aide par intelligence artificielle côté enseignant</strong> (par exemple reformuler une consigne) : non construite ; elle exigerait votre relecture avant tout usage.</li>
   </ul>
 
   <h2 id="enseignant">Mode d'emploi : enseignant</h2>
@@ -61,14 +106,22 @@
         <li><strong>Principes</strong> : questions fixes, une à la fois, par temps. Les principes « en brouillon » n'ont pas été validés : à utiliser sous votre responsabilité.</li>
         <li><strong>Vos propres questions</strong> pour réfléchir, relire, corriger : votre voix, vos formulations.</li>
         <li><strong>Mots utiles</strong> : une liste que l'élève peut insérer d'un clic.</li>
-        <li><strong>Signaler à la correction</strong> : choisissez peu de catégories à la fois (par exemple majuscule, point). Si vous n'en cochez aucune, l'élève verra « Rien à signaler ».</li>
+        <li><strong>Signaler à la correction</strong> : choisissez peu de catégories à la fois : majuscule au début des phrases, point à la fin du texte, mot écrit deux fois de suite, mot absent de la liste de mots du français. L'élève voit toujours, dans un encadré, ce que l'application a regardé et ce qu'elle ne voit pas. Si vous n'en cochez aucune, l'encadré dit « Ici, l'application ne vérifie rien dans ton texte ».
+          <ul>
+            <li><strong>Mot absent de la liste</strong> : la liste est le dictionnaire Grammalecte (licence MPL 2.0), chargé à l'ouverture de l'activité (1,4 Mo). Elle signale les mots mal écrits qui n'existent pas. Elle laisse passer un mot qui existe mais n'est pas le bon (a ou à), et peut signaler à tort un prénom ou un mot rare.</li>
+            <li><strong>Mots que vous acceptez</strong> : vous ajoutez les mots locaux (noms de quartiers, mots de chez vous), par activité dans le formulaire, ou pour toute la classe sur la page de la classe (ils valent alors pour les activités déjà créées aussi). <strong>L'application accepte ces mots tels que vous les écrivez : une faute de votre part sera acceptée chez l'élève.</strong> Les « mots utiles » sont aussi acceptés. Les élèves voient la liste de ces mots.</li>
+          </ul>
+        </li>
+        <li><strong>Contrainte d'écriture</strong> (facultatif) : tous les mots commencent par une lettre, ou une lettre est interdite. L'élève voit les mots qui ne la respectent pas et décide seul comment les changer. L'application ne propose aucun remplaçant. Ce n'est pas un item du programme : à vous de juger.</li>
+        <li><strong>Recopier à la main</strong> (facultatif) : après le rendu, l'élève voit deux consignes (prendre une feuille, recopier la version finale à la main). L'effet sur l'apprentissage n'est pas démontré ici, et recopier coûte cher aux élèves dysgraphiques ou dyspraxiques : décidez activité par activité.</li>
         <li><strong>Aides retirées</strong> : si une aide ne convient pas à l'activité, retirez-la.</li>
         <li><strong>Grammaire (P4 à P6)</strong> : cochez « Atelier de raisonnement grammatical » pour proposer l'atelier ; « Grammaire 3D » (option) adapte les noms des fonctions ; « Ma formulation » remplace les consignes de l'application par les vôtres. Voir la section Grammaire.</li>
         <li><strong>Chasse aux erreurs (P4 à P6)</strong> : vous écrivez un court texte avec des erreurs que vous avez placées, et la forme attendue pour chacune. Voir la section Grammaire.</li>
       </ul>
     </li>
     <li><strong>Donner les codes</strong> aux élèves : code de classe + code personnel, à saisir sur <a href="https://ecritactif.vercel.app/eleve">ecritactif.vercel.app/eleve</a>.</li>
-    <li><strong>Lire le tableau de la classe</strong> : pour chaque code (avec son surnom si vous en avez écrit un), où il en est (pas commencé, en cours, rendu, nombre de versions), les aides utilisées, les demandes d'aide (« Je ne comprends pas »), l'auto-évaluation (étoiles et souhait), le travail dans l'atelier de grammaire et dans la chasse aux erreurs, et la carte du programme (avec son propre choix d'année). <strong>L'application présente des traces ; vous seul décidez qu'un item est acquis.</strong></li>
+    <li><strong>Lire le tableau de la classe</strong> : pour chaque code (avec son surnom si vous en avez écrit un), où il en est (pas commencé, en cours, rendu, nombre de versions), les aides utilisées, les demandes d'aide (« Je ne comprends pas »), les mots dont l'élève a douté, l'auto-évaluation (étoiles et souhait), le travail dans l'atelier de grammaire et dans la chasse aux erreurs, et la carte du programme (avec son propre choix d'année). <strong>L'application présente des traces ; vous seul décidez qu'un item est acquis.</strong> Sous « Lire le texte », vous lisez le premier jet et la version finale avec les mots changés. Le bouton « Actualiser » recharge les textes si un élève écrit pendant que vous regardez.</li>
+    <li><strong>Régler les aides par élève</strong> (page de la classe, « Aides activées pour cet élève ») : par exemple la colorisation (les sons, les syllabes, b p d q, voyelles et consonnes), avec le mode affiché au départ et les modes permis. Peu de modes, c'est moins de choix à faire.</li>
   </ol>
 
   <h2 id="eleve">Mode d'emploi : élève</h2>
@@ -83,6 +136,8 @@
     <li><strong>Relire</strong> : lire son texte, répondre aux questions une par une.</li>
     <li><strong>Corriger</strong> (à partir de P2) : regarder les endroits montrés, changer ce qu'on veut.</li>
     <li>Cliquer sur « Je ne comprends pas » quand une phrase n'est pas claire. Demander de l'aide, c'est apprendre.</li>
+    <li>Lire l'encadré : il dit ce que l'application regarde et ce qu'elle ne voit pas. Relire soi-même, même quand elle ne signale rien.</li>
+    <li>Cliquer sur « Marquer un mot dont je doute » et toucher les mots dont on n'est pas sûr. L'enseignant les verra.</li>
     <li>Dire deux choses réussies et un souhait (on peut laisser vide).</li>
     <li>À partir de P4, si l'enseignant l'a prévu : cliquer sur « Raisonner sur une phrase » ou sur « Chasse aux erreurs » (voir la section Grammaire).</li>
     <li>Choisir : continuer à écrire, essayer autrement (nouvelle version, l'ancienne reste visible), ou rendre son texte.</li>
@@ -191,8 +246,11 @@
     <li>Les verbes pronominaux ne sont pas dans l'atelier, car hors programme.</li>
     <li>Une activité s'adresse à toute la classe : il n'y a pas d'activité propre à un élève.</li>
     <li><strong>Voix de synthèse (français de Belgique) et dictée vocale : non testées sur tablette.</strong> La dictée exige une connexion sécurisée et un micro autorisé.</li>
-    <li>Les signaux sont de simples règles : un « Rien à signaler » ne veut pas dire « le texte est correct ».</li>
-    <li>Un seul type de signal est montré à la fois, pour éviter la surcharge. À confirmer en classe.</li>
+    <li>Les signaux sont de simples règles et une liste de mots : l'absence de signal ne veut pas dire « le texte est correct ». L'application le dit à l'élève dans un encadré à chaque correction.</li>
+    <li>Un seul type de signal est montré à la fois (celui du premier signal dans le texte), pour éviter la surcharge. À confirmer en classe.</li>
+    <li>Le signal « mot absent de la liste », les mots que vous acceptez (par activité et par classe) et les mots dont l'élève doute sont vérifiés par des tests automatiques ; <strong>le parcours complet en ligne par un enseignant puis par un élève n'a pas été fait</strong>. Le temps de chargement de la liste de mots sur tablette n'a pas été mesuré.</li>
+    <li>Après leur création, une activité et ses mots acceptés ne se modifient pas (seules les aides retirées se modifient) ; la liste de mots de la classe, elle, se modifie à tout moment.</li>
+    <li>La dictée vocale utilise la reconnaissance vocale du navigateur. Où va l'enregistrement dépend du navigateur : cela n'a pas été vérifié ici.</li>
     <li>Pas d'autres disciplines que le français, et pas encore de secondaire.</li>
     <li>Pas de réinitialisation de mot de passe testée. Version pour tablette et téléphone non testée.</li>
   </ul>
